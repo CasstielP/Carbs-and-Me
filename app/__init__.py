@@ -3,12 +3,18 @@ from flask import Flask, render_template, request, session, redirect
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
-from flask_login import LoginManager
-from .models import db, User
+from flask_login import LoginManager, current_user, login_required
+from .models import db, User, Video
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
+from .api.video_route import video_routes
 from .seeds import seed_commands
 from .config import Config
+from .aws import (
+    upload_file_to_s3, allowed_file, get_unique_filename)
+
+
+
 
 app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
 
@@ -28,6 +34,7 @@ app.cli.add_command(seed_commands)
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
+app.register_blueprint(video_routes, url_prefix='/api/videos')
 db.init_app(app)
 Migrate(app, db)
 
@@ -89,3 +96,36 @@ def react_root(path):
 @app.errorhandler(404)
 def not_found(e):
     return app.send_static_file('index.html')
+
+
+@app.route('/testing/upload', methods=['POST'])
+def upload_video():
+    if "video" not in request.files:
+        return {"errors": "video required"}, 400
+    video = request.files["video"]
+
+    if not allowed_file(video.filename):
+        return {"errors": "file type not permitted"}, 400
+
+    video.filename = get_unique_filename(video.filename)
+
+    upload = upload_file_to_s3(video)
+
+
+    if "url" not in upload:
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message
+        return upload, 400
+
+    url = upload["url"]
+
+    new_video = Video(
+        user_id=1,
+        url=url,
+        title='testing title',
+        description='testing description',
+        )
+    db.session.add(new_video)
+    db.session.commit()
+    return 'successful'
