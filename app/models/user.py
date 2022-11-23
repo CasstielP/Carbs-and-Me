@@ -66,7 +66,7 @@ class Video(db.Model):
             'url': self.url,
             'title': self.title,
             'description': self.description,
-            'createdAt': self.createdAt
+            'created_at': self.created_at
         }
 
 
@@ -94,6 +94,6 @@ class Comment(db.Model):
             'id': self.id,
             'user_id': self.user_id,
             'video_id': self.video_id,
-            'cotent': self.content,
-            'createdAt': self.created_at
+            'content': self.content,
+            'created_at': self.created_at
         }

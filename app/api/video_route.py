@@ -24,6 +24,9 @@ def get_one_video(id):
     return data
 
 
+
+
+# ------------------------CREATE NEW VIDEO---------------------------------
 @video_routes.route('', methods=['POST'])
 def upload_video():
     if "video" not in request.files:
@@ -47,7 +50,7 @@ def upload_video():
     url = upload["url"]
 
     new_video = Video(
-        user_id=1,
+        user_id=2,
         url=url,
         title='testing title',
         description='testing description',
@@ -55,3 +58,31 @@ def upload_video():
     db.session.add(new_video)
     db.session.commit()
     return 'successful'
+
+
+
+
+# ------------------------UPDATE A VIDEO---------------------------------
+@video_routes.route('/<int:id>', methods=['PUT'])
+def update_video(id):
+    video = Video.query.get(id)
+    if not video:
+        return {
+            "message": "Watchlist not found",
+            "statusCode": 404,
+        }
+    data = request.get_json()
+    video.title = data['title']
+    video.description = data['description']
+    db.session.commit()
+    return data
+
+
+
+# ------------------------DELETE A VIDEO---------------------------------
+@video_routes.route('/<int:id>', methods=['DELETE'])
+def delete_video(id):
+    video = Video.query.get(id)
+    db.session.delete(video)
+    db.session.commit()
+    return 'successfully deleted video'
