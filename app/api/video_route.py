@@ -1,10 +1,27 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify, session, redirect
 from app.models import db, Video
 from flask_login import current_user, login_required
 from app.aws import (
     upload_file_to_s3, allowed_file, get_unique_filename)
 
 video_routes = Blueprint("videos", __name__)
+
+
+# ------------------------GET ALL VIDEOS---------------------------------
+@video_routes.route('/')
+def get_all_videos():
+    all_videos = []
+    data = Video.query.all()
+    for video in data:
+        all_videos.append(video.to_dict())
+    return jsonify(all_videos)
+
+
+# ------------------------GET SINGLE VIDEOS---------------------------------
+@video_routes.route('/<int:id>')
+def get_one_video(id):
+    data = Video.query.get(id).to_dict()
+    return data
 
 
 @video_routes.route('', methods=['POST'])
