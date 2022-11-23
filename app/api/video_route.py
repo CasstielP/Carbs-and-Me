@@ -68,7 +68,7 @@ def update_video(id):
     video = Video.query.get(id)
     if not video:
         return {
-            "message": "Watchlist not found",
+            "message": "Video not found",
             "statusCode": 404,
         }
     data = request.get_json()
