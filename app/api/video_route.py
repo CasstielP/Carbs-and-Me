@@ -7,6 +7,8 @@ from app.aws import (
 video_routes = Blueprint("videos", __name__)
 
 
+
+
 # ------------------------GET ALL VIDEOS---------------------------------
 @video_routes.route('/')
 def get_all_videos():
@@ -15,6 +17,20 @@ def get_all_videos():
     for video in data:
         all_videos.append(video.to_dict())
     return jsonify(all_videos)
+
+
+
+
+# ------------------------GET USER VIDEOS---------------------------------
+@video_routes.route('/users/<int:user_id>')
+def get_user_videos(user_id):
+    all_user_videos = []
+    data = Video.query.filter(Video.user_id == user_id).all()
+    for video in data:
+        all_user_videos.append(video.to_dict())
+    return jsonify(all_user_videos)
+
+
 
 
 # ------------------------GET SINGLE VIDEOS---------------------------------
