@@ -80,9 +80,11 @@ export const fetchUserVideos = (userId) => async(dispatch) => {
 
 export const fetchSingleVideo = (videoId) => async (dispatch) => {
     const res = await fetch(`/api/videos/${videoId}`)
-    const data = res.json()
+    const data = await res.json()
+    console.log(data)
     if (res.ok){
         dispatch(getSingleVideo(data))
+        return res
     }
 }
 
@@ -137,7 +139,10 @@ const videoReducer  = (state = initialState, action) => {
             return newState
 
         case GET_SINGLE_VIDEO:
-            newState = {...state, singleVideo:{...action.singleVideo}}
+            newState = {allVideos:{}, singleVideo:{...state.singleVideo}}
+            newState.singleVideo = action.video
+            return newState
+
 
         case EDIT_VIDEO:
             newState = {...state}
@@ -156,3 +161,6 @@ const videoReducer  = (state = initialState, action) => {
             return state
         }
 }
+
+
+export default videoReducer

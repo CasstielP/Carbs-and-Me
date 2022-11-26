@@ -9,6 +9,8 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import UploadVideo from './components/UploadPage';
+import VideoList from './components/videos';
+import VideoDetailPage from './components/videos/videoDetailPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -43,9 +45,13 @@ function App() {
         </ProtectedRoute>
         <Route path='/' exact={true} >
           <h1>My Home Page</h1>
+          <VideoList />
         </Route>
         <Route path='/upload' exact={true}>
           <UploadVideo />
+        </Route>
+        <Route path='/videos/:videoId' exact={true}>
+          <VideoDetailPage />
         </Route>
       </Switch>
     </BrowserRouter>

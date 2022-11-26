@@ -1,0 +1,12 @@
+.video-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.video-card-container{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
