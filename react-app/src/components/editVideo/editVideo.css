@@ -1,0 +1,11 @@
+.edit-video-modal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.edit-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

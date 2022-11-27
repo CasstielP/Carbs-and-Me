@@ -11,6 +11,7 @@ video_routes = Blueprint("videos", __name__)
 
 # ------------------------GET ALL VIDEOS---------------------------------
 @video_routes.route('/')
+# @login_required
 def get_all_videos():
     all_videos = []
     data = Video.query.all()
@@ -42,12 +43,13 @@ def get_one_video(id):
 
 
 
-# ------------------------CREATE NEW VIDEO---------------------------------
+# ------------------------CREATE NEW VIDEO URL ---------------------------------
 @video_routes.route('', methods=['POST'])
 def upload_video():
-    if "video" not in request.files:
-        return {"errors": "video required"}, 400
+    # if "video" not in request.files:
+    #     return {"errors": "video required"}, 400
     video = request.files["video"]
+    title = request.get_data()
 
     if not allowed_file(video.filename):
         return {"errors": "file type not permitted"}, 400
@@ -64,17 +66,37 @@ def upload_video():
         return upload, 400
 
     url = upload["url"]
+    # title = videoInfo['title']
+    # user_id = videoInfo['user_id']
+    # description = videoInfo['description']
 
+    # new_video = Video(
+    #     user_id=user_id,
+    #     url=url,
+    #     title=title,
+    #     description=description
+    #     )
+    # db.session.add(new_video)
+    # db.session.commit()
+    print('==============================================',url)
+    return url
+
+
+
+
+# ------------------------CREATE NEW VIDEO  ---------------------------------
+@video_routes.route('/new', methods=['POST'])
+def upload_video_info():
+    data = request.get_json()
     new_video = Video(
-        user_id=2,
-        url=url,
-        title='testing title',
-        description='testing description',
+        url= data['url'],
+        user_id=data['user_id'],
+        title=data['title'],
+        description=data['description']
         )
     db.session.add(new_video)
     db.session.commit()
-    return 'successful'
-
+    return new_video.to_dict()
 
 
 

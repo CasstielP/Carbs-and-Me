@@ -8,27 +8,30 @@ const VideoDetailPage = () => {
   const { videoId } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
-  const video = useSelector((state) => state.video.singleVideo);
-  const [singleVid, setSingleVid] = useState('')
+  const video = useSelector(state=> state.video.singleVideo);
+  const [isLoaded, setIsLoaded] = useState(false)
   useEffect(() => {
     dispatch(videoActions.fetchSingleVideo(videoId))
-    .then((res)=>{
-      setSingleVid(res)
+    .then(()=>{
+      setIsLoaded(true)
     })
-  }, []);
+  }, [dispatch, videoId]);
 
-  return (
-    <>
-      <h1>video detail page</h1>
-      <div>
-      <video controls width="1000">
-        <source src={singleVid.url}></source>
-      </video>
-      <div>{singleVid.title}</div>
-      </div>
-
-    </>
-  );
+  if(isLoaded) {
+    return (
+      <>
+        <h1>video detail page</h1>
+        <div>
+        <video controls width="1000">
+          <source src={video.url}></source>
+        </video>
+        <div>{video.title}</div>
+        </div>
+      </>
+    );
+  } else {
+    return 'loading...'
+  }
 };
 
 export default VideoDetailPage;

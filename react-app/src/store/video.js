@@ -61,7 +61,7 @@ const deleteVideo = (videoId) => {
 
 // thunks
 export const fetchAllVideos = () => async (dispatch) => {
-    const res = await fetch('/api/videos')
+    const res = await fetch('/api/videos/')
     const data = await res.json()
     if(res.ok) {
         dispatch(getVideos(data))
@@ -81,7 +81,7 @@ export const fetchUserVideos = (userId) => async(dispatch) => {
 export const fetchSingleVideo = (videoId) => async (dispatch) => {
     const res = await fetch(`/api/videos/${videoId}`)
     const data = await res.json()
-    console.log(data)
+    // console.log(data)
     if (res.ok){
         dispatch(getSingleVideo(data))
         return res
@@ -135,12 +135,13 @@ const videoReducer  = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case GET_ALL_VIDEOS:
-            newState = {...state, allVideos:{...action.videos}, singleVideo: {}}
+            newState = {...state, allVideos:{}, singleVideo: {}}
+            action.videos.forEach(video=>(newState.allVideos[video.id] = video))
             return newState
 
         case GET_SINGLE_VIDEO:
-            newState = {allVideos:{}, singleVideo:{...state.singleVideo}}
-            newState.singleVideo = action.video
+            newState = {...state, singleVideo: action.video}
+            // newState.singleVideo = action.video
             return newState
 
 
@@ -154,7 +155,7 @@ const videoReducer  = (state = initialState, action) => {
                 allVideos:{...state.allVideos},
                 singleVideo:{}
             }
-            delete newState.allVideos[action.videoId]
+            delete newState.allVideos[action.videoId-1]
             return newState
 
         default:

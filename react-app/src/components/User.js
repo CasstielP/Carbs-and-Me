@@ -2,31 +2,25 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as videoActions from "../store/video";
+import UserVideoCard from "./videos/userVideoCard";
 import VideoCard from "./videos/videoCard";
 function User() {
-  const [user, setUser] = useState({});
+  // const [user, setUser] = useState({});
   const dispatch = useDispatch();
   const { userId } = useParams();
-  const allVideos = useSelector((state) =>
-    Object.values(state.video.allVideos)
-  );
-  const userVideos = allVideos.filter((video) => video.userId === userId);
-  console.log("fasdfasfdasdfasdfasdf", allVideos);
-  useEffect(() => {
-    dispatch(videoActions.fetchAllVideos());
-    if (!userId) {
-      return;
-    }
-    (async () => {
-      const response = await fetch(`/api/users/${userId}`);
-      const user = await response.json();
-      setUser(user);
-    })();
-  }, [dispatch, userId]);
+  const user = useSelector(state=>state.session.user)
+  const allVideos = useSelector((state) =>(state.video.allVideos));
+  const allVidArr = Object.values(allVideos)
+  const [isLoaded, setIsLoaded] = useState(false)
+  const userVideos = allVidArr.filter(video => video.user_id == userId);
 
-  if (!user) {
-    return null;
-  }
+  useEffect(() => {
+    dispatch(videoActions.fetchAllVideos())
+  }, [dispatch]);
+
+
+
+
 
   return (
     <>
@@ -44,7 +38,7 @@ function User() {
 
       <div className="video-container">
         {userVideos.map((video) => (
-          <VideoCard key={video.id} video={video} />
+          <UserVideoCard key={video.id} video={video} />
         ))}
       </div>
     </>

@@ -16,29 +16,34 @@ const UploadVideo = () => {
         e.preventDefault();
         const formData = new FormData();
         formData.append("video", video);
-        formData.append('user_id', user.id)
-        formData.append('title', title)
-        formData.append('description', description)
-
-        // aws uploads can be a bit slow—displaying
-        // some sort of loading message is a good idea
+        console.log('adfasfdasdfasdfasdfasdf', formData)
         setVideoLoading(true);
-
         const res = await fetch('/api/videos', {
             method: "POST",
-            body: formData,
-        });
-        if (res.ok) {
-            await res.json();
+            body: formData
+        })
+        .then(async (res)=> {
+
+        let url = await res.text()
+          const payload = {
+          url: url,
+          user_id: user.id,
+          title: title,
+          description: description
+        }
+        const response = fetch('/api/videos/new', {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body:JSON.stringify(payload)
+        })
+        if (response.ok) {
+            await response.json();
             setVideoLoading(false);
             history.push("/");
         }
-        else {
-            setVideoLoading(false);
-            // a real app would probably use more advanced
-            // error handling
-            console.log("error");
-        }
+        })
     }
 
     const updateVideo = (e) => {
@@ -48,6 +53,22 @@ const UploadVideo = () => {
 
     return (
         <form onSubmit={handleSubmit}>
+            <label>
+                Title
+                <input
+                  type="text"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+              </label>
+              <label>
+                Description
+                <input
+                  type="text"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </label>
             <input
               type="file"
               accept="video/*"

@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
-
-const VideoCard = ({ video }) => {
+import React, { useState } from 'react';
+import EditVideoModal from '../editVideo/EditVideoModal'
+import DeleteVideoModal from "../deleteVideo/deleteVideoModal";
+const UserVideoCard = ({ video }) => {
   let end = new Date();
   let start = new Date(video.created_at);
   let elapsed = (end - start) / 1000 / 60 / 60 / 24;
+  const [showModal, setShowModal] = useState(false)
 
   return (
     <>
@@ -22,8 +25,9 @@ const VideoCard = ({ video }) => {
           <div>{video.title}</div>
           <div>{elapsed.toFixed()} days ago</div>
           <div className="auth-button">
-          {/* <button>Edit</button>
-          <button>Delete</button> */}
+           <EditVideoModal  videoId={video.id}/>
+          {/* <button>Delete</button> */}
+          <DeleteVideoModal  videoId={video.id}/>
           </div>
         </div>
       </div>
@@ -31,4 +35,4 @@ const VideoCard = ({ video }) => {
   );
 };
 
-export default VideoCard;
+export default UserVideoCard;

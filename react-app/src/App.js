@@ -11,6 +11,7 @@ import { authenticate } from './store/session';
 import UploadVideo from './components/UploadPage';
 import VideoList from './components/videos';
 import VideoDetailPage from './components/videos/videoDetailPage';
+import EditVideoPage from './components/editVideo';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -53,6 +54,9 @@ function App() {
         <Route path='/videos/:videoId' exact={true}>
           <VideoDetailPage />
         </Route>
+        {/* <Route path='/edit/videos/:videoId'>
+          <EditVideoPage />
+        </Route> */}
       </Switch>
     </BrowserRouter>
   );
