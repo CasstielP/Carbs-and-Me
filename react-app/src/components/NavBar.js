@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
@@ -25,16 +25,16 @@ const NavBar = () => {
             Sign Up
           </NavLink>
         </li>
-        <li>
+       {user && <li>
           <NavLink to={`/users/${user.id}`} exact={true} activeClassName='active'>
             User Profile
           </NavLink>
-        </li>
-        <li>
+        </li>}
+       {user && <li>
           <NavLink to='/upload' exact={true} activeClassName='active'>
             Upload Video
           </NavLink>
-        </li>
+        </li>}
         <li>
           <LogoutButton />
         </li>
