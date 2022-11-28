@@ -155,7 +155,7 @@ const videoReducer  = (state = initialState, action) => {
                 allVideos:{...state.allVideos},
                 singleVideo:{}
             }
-            delete newState.allVideos[action.videoId-1]
+            delete newState.allVideos[action.videoId]
             return newState
 
         default:
