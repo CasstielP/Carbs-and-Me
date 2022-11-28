@@ -1,4 +1,4 @@
-//CONSTANTS
+    //CONSTANTS
 const GET_ALL_VIDEOS = 'videos/all'
 const GET_USER_VIDEOS = 'videos/user'
 const GET_SINGLE_VIDEO = 'videos/single'

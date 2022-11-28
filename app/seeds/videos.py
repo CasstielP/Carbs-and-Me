@@ -25,6 +25,9 @@ def seed_videos():
     vid6 = Video(
         user_id=2, url="https://aaprojects.s3.us-west-1.amazonaws.com/snowy-fudge.MOV", title="snowyfudge", description="good"
     )
+    vid7 = Video(
+        user_id=1, url="https://aaprojects.s3.us-west-1.amazonaws.com/32cdacf63b9e4fae9554ebff86fbf1ec.mp4", title="fengjing", description="good"
+    )
 
     db.session.add(vid1)
     db.session.add(vid2)
@@ -32,11 +35,14 @@ def seed_videos():
     db.session.add(vid4)
     db.session.add(vid5)
     db.session.add(vid6)
+    db.session.add(vid7)
     db.session.commit()
+
 
 def undo_videos():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(
+            f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
     else:
         db.session.execute("DELETE FROM videos")
 

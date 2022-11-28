@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import * as videoActions from "../store/video";
 import UserVideoCard from "./videos/userVideoCard";
 import VideoCard from "./videos/videoCard";
+import CommentCard from "./comments/commentCard";
+import * as commentActions from '../store/comment'
 function User() {
   // const [user, setUser] = useState({});
   const dispatch = useDispatch();
@@ -13,10 +15,11 @@ function User() {
   const allVidArr = Object.values(allVideos)
   const [isLoaded, setIsLoaded] = useState(false)
   const userVideos = allVidArr.filter(video => video.user_id == userId);
-
+  const userComments = useSelector(state=>Object.values(state.comment.userComments))
   useEffect(() => {
     dispatch(videoActions.fetchAllVideos())
-  }, [dispatch]);
+    dispatch(commentActions.fetchUserComments(userId))
+  }, [dispatch, userId]);
 
 
 
@@ -41,6 +44,14 @@ function User() {
           <UserVideoCard key={video.id} video={video} />
         ))}
       </div>
+      <div>
+        <h2>Comments</h2>
+        {userComments.map((comment)=> (
+          <CommentCard key={comment.id} comment={comment}/>
+        ))}
+
+      </div>
+
     </>
   );
 }

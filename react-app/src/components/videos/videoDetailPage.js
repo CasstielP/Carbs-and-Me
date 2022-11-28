@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import * as videoActions from "../../store/video";
 import { useHistory, Link, useParams } from "react-router-dom";
 import VideoCard from "./videoCard";
+import CommentList from "../comments";
 
 const VideoDetailPage = () => {
   const { videoId } = useParams();
@@ -27,6 +28,7 @@ const VideoDetailPage = () => {
         </video>
         <div>{video.title}</div>
         </div>
+        <CommentList videoId={videoId} />
       </>
     );
   } else {
