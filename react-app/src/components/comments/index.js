@@ -11,25 +11,30 @@ const CommentList = ({ video }) => {
   let isCurrenOwner = false
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
-  if(video.user_id === user.id) isCurrenOwner = true
   const [comment, setComment] = useState('')
-
+  const [isopen, setIsOpen] = useState(true)
+  let userId;
   useEffect(() => {
     dispatch(commentActions.fetchAllComments(video.id));
   }, [dispatch, video.id]);
 
+  if(user) {
+    userId = user.id
+    if(video.user_id === user.id) isCurrenOwner = true
+
+  }
   const payload = {
-    user_id: user.id,
+    user_id: userId,
     video_id: video.id,
     content: comment
   }
 
   const handleSubmit= async(e)=> {
     e.preventDefault();
-    const newComment = await dispatch(commentActions.createCommentThunk(payload))
-    .then((newComment)=> {
-        if(newComment) window.alert('thank you for your feedback')
-    })
+    setComment('')
+    await dispatch(commentActions.createCommentThunk(payload))
+    window.alert('thank you for your feedback')
+
   }
 
 
@@ -37,7 +42,8 @@ const CommentList = ({ video }) => {
     <>
       <div>Comment List</div>
       <div className="comment-container">
-        {!isCurrenOwner && user &&
+        {!isCurrenOwner &&
+        user &&
           <div>
             <h2>Comments</h2>
             <form onSubmit={handleSubmit}>

@@ -7,7 +7,9 @@ const user = useSelector(state=> state.session.user)
 let commentId = comment.id
 // const currentComment = useSelector(state=> state.comment.singleComment)
 let isCurrenOwner = false
-if(comment.user_id === user.id) isCurrenOwner = true
+if(user) {
+      if(comment.user_id === user.id) isCurrenOwner = true
+}
 const [isEditing, setIsEditing] = useState(false)
 const [editComment, setEditComment] = useState('')
 const dispatch = useDispatch()
