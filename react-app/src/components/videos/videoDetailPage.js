@@ -28,7 +28,7 @@ const VideoDetailPage = () => {
         </video>
         <div>{video.title}</div>
         </div>
-        <CommentList videoId={videoId} />
+        <CommentList video={video} />
       </>
     );
   } else {

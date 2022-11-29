@@ -7,8 +7,8 @@ const EditVideoPage = ({videoId, setShowModal}) => {
   const dispatch = useDispatch();
   const currentVideo = useSelector((state) => state.video.singleVideo);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState(currentVideo.title);
+  const [description, setDescription] = useState(currentVideo.description);
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {

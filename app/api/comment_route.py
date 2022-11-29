@@ -12,11 +12,6 @@ comment_routes = Blueprint("comments", __name__)
 def get_all_video_comments(video_id):
     all_video_comments = []
     data = Comment.query.filter(Comment.video_id==video_id).all()
-    if not data:
-        return {
-            "message": "Comments not found",
-            "statusCode": 404,
-        }
     for comment in data:
          all_video_comments.append(comment.to_dict())
     return jsonify( all_video_comments)
@@ -28,11 +23,6 @@ def get_all_video_comments(video_id):
 def get_all_user_comments(user_id):
     all_user_comments = []
     data = Comment.query.filter(Comment.user_id==user_id).all()
-    if not data:
-        return {
-            "message": "Comments not found",
-            "statusCode": 404,
-        }
     for comment in data:
          all_user_comments.append(comment.to_dict())
     return jsonify( all_user_comments)

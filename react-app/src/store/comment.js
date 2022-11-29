@@ -38,6 +38,7 @@ const createComment = (comment) => {
 const editComment = (comment) => {
   return {
     type: EDIT_COMMENT,
+    comment
   };
 };
 
@@ -51,6 +52,7 @@ const deleteComment = (commentId) => {
 //thunks
 export const fetchAllComments = (videoId) => async (dispatch) => {
   const res = await fetch(`/api/comments/videos/${videoId}`);
+  console.log('got here ok', res)
   if (res.ok) {
     const comments = await res.json();
     dispatch(getAllComments(comments));
@@ -60,11 +62,18 @@ export const fetchAllComments = (videoId) => async (dispatch) => {
 export const fetchUserComments = (userId) => async (dispatch) => {
   const res = await fetch(`/api/comments/users/${userId}`);
   if (res.ok) {
-      console.log('===============')
       const comments = await res.json();
     dispatch(getUserComments(comments));
   }
 };
+
+export const fetchSingleComment = (commentId) => async (dispatch) => {
+  const res = await fetch(`/api/comments/${commentId}`)
+  if(res.ok) {
+    const comment = await res.json()
+    dispatch(getSingleComment(comment))
+  }
+}
 
 export const createCommentThunk = (payload) => async (dispatch) => {
   const res = await fetch(`/api/comments`, {
@@ -107,7 +116,8 @@ export const deleteCommentThunk = (commentId) => async(dispatch)=> {
 
 const initialState = {
     videoComments: {},
-    userComments: {}
+    userComments: {},
+    singleComment:{}
 }
 
 
@@ -115,14 +125,27 @@ const commentReducer = (state = initialState, action) => {
     let newState
     switch (action.type) {
         case GET_ALL_COMMENTS:
+          console.log('==========================343434', action.comments)
             newState = {...state, videoComments:{}, userComments:{}}
-            action.comments.forEach((comment)=> newState.videoComments[comment.id] = comment)
-            return newState
+              action.comments.forEach((comment)=> newState.videoComments[comment.id] = comment)
+              return newState
+
 
         case GET_USER_COMMENTS:
             newState = {...state, videoComments:{}, userComments:{}}
             action.comments.forEach((comment)=>newState.userComments[comment.id] = comment)
             return newState
+
+
+        case GET_SINGLE_COMMENT:
+            newState = {...state, singleComment:action.comment}
+            return newState
+
+        case CREATE_COMMENT:
+            newState = {...state}
+            newState.videoComments[action.comment.id]= action.comment
+            return newState
+
 
         case EDIT_COMMENT:
             newState = {...state}

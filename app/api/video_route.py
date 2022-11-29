@@ -55,6 +55,7 @@ def upload_video():
         return {"errors": "file type not permitted"}, 400
 
     video.filename = get_unique_filename(video.filename)
+    print(video)
 
     upload = upload_file_to_s3(video)
 
