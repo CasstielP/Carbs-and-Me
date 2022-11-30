@@ -57,7 +57,7 @@ const CommentList = ({ video }) => {
             </form>
           </div>
         }
-        {videoComments.map((comment) => (
+        {videoComments.reverse().map((comment) => (
           <CommentCard key={comment.id} comment={comment} />
         ))}
       </div>

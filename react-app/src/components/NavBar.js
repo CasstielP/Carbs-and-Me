@@ -35,13 +35,13 @@ const NavBar = () => {
             </NavLink>
           </li>
         )}
-        {user && (
+        {/* {user && (
           <li>
             <NavLink to="/upload" exact={true} activeClassName="active">
               Upload Video
             </NavLink>
           </li>
-        )}
+        )} */}
 
         {user && (
           <li>

@@ -133,10 +133,7 @@ const commentReducer = (state = initialState, action) => {
 
         case GET_USER_COMMENTS:
             newState = {...state, videoComments:{}, userComments:{}}
-            for (let i=action.comments.length-1; i>=0; i--) {
-              newState.userComments[action.comments[i].length] = action.comments[i]
-            }
-            // action.comments.forEach((comment)=>newState.userComments[comment.id] = comment)
+            action.comments.forEach((comment)=>newState.userComments[comment.id] = comment)
             return newState
 
 

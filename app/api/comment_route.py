@@ -12,6 +12,7 @@ comment_routes = Blueprint("comments", __name__)
 def get_all_video_comments(video_id):
     all_video_comments = []
     data = Comment.query.filter(Comment.video_id==video_id).all()
+    # order to change the entry orders
     for comment in data:
          all_video_comments.append(comment.to_dict())
     return jsonify( all_video_comments)

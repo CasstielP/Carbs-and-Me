@@ -128,16 +128,23 @@ export const deleteVideoThunk = (videoId) => async (dispatch) => {
 
 const initialState = {
     allVideos:{},
-    singleVideo:{}
+    singleVideo:{},
+    userVideos:{}
 }
 
 const videoReducer  = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case GET_ALL_VIDEOS:
-            newState = {...state, allVideos:{}, singleVideo: {}}
+            newState = {...state, allVideos:{}, singleVideo: {}, userVideos:{}}
             action.videos.forEach(video=>(newState.allVideos[video.id] = video))
             return newState
+
+        case GET_USER_VIDEOS:
+            newState = {...state, allVideos:{}, singleVideo:{}, userVideos:{}}
+            action.videos.forEach(video=>{newState.userVideos[video.id]= video})
+            return newState
+
 
         case GET_SINGLE_VIDEO:
             newState = {...state, singleVideo: action.video}
@@ -146,16 +153,18 @@ const videoReducer  = (state = initialState, action) => {
 
 
         case EDIT_VIDEO:
-            newState = {...state}
-            newState.allVideos[action.video.id] = action.video
+            newState = {...state, singleVideo:{...state.singleVideo}}
+            newState.singleVideo = action.video
             return newState
 
         case DELETED_VIDEO:
             newState = {
                 allVideos:{...state.allVideos},
+                userVideos:{...state.userVideos},
                 singleVideo:{}
             }
             delete newState.allVideos[action.videoId]
+            delete newState.userVideos[action.videoId]
             return newState
 
         default:

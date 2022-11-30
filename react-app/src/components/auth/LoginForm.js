@@ -12,11 +12,17 @@ const LoginForm = () => {
 
   const onLogin = async (e) => {
     e.preventDefault();
+    setErrors([])
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);
     }
   };
+
+  const demoUserButton = (e) => {
+    setEmail('cpss5433@gmail.com')
+    setPassword('password')
+  }
 
   const updateEmail = (e) => {
     setEmail(e.target.value);
@@ -57,6 +63,9 @@ const LoginForm = () => {
           onChange={updatePassword}
         />
         <button type='submit'>Login</button>
+        <div>
+          <button type='submit' onClick={demoUserButton}>Demo User</button>
+        </div>
       </div>
     </form>
   );

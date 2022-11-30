@@ -13,6 +13,7 @@ if(user) {
 const [isEditing, setIsEditing] = useState(false)
 const [editComment, setEditComment] = useState('')
 const dispatch = useDispatch()
+
 useEffect(()=> {
     // dispatch(commentActions.fetchSingleComment(comment.id))
     setEditComment(comment.content)
@@ -20,6 +21,7 @@ useEffect(()=> {
 
 const handleEdit = async()=> {
     setIsEditing(true)
+    // dispatch(commentActions.fetchSingleComment())
     setEditComment(comment.content)
 }
 

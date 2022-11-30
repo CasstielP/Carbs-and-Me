@@ -8,10 +8,11 @@ const VideoList = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const videos = useSelector(state=>Object.values(state.video.allVideos))
+    const singleVid = useSelector(state=>(state.video.singleVideo))
 
     useEffect(()=> {
         dispatch(videoActions.fetchAllVideos())
-    }, [dispatch])
+    }, [])
 
 
 
