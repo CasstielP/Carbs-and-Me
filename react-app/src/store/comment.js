@@ -125,7 +125,7 @@ const commentReducer = (state = initialState, action) => {
     let newState
     switch (action.type) {
         case GET_ALL_COMMENTS:
-          console.log('==========================343434', action.comments)
+          // console.log('==========================343434', action.comments)
             newState = {...state, videoComments:{}, userComments:{}}
               action.comments.forEach((comment)=> newState.videoComments[comment.id] = comment)
               return newState

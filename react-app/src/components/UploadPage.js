@@ -24,34 +24,39 @@ const UploadVideo = () => {
       if(!video.type.includes('mp4'||'mov'||'wmv'||'flv'||'avi')) errors.push('Only video file type allowed')
     }
     setError(errors);
-    if (error) {
-      return
-    }
-    setVideoLoading(true);
-    const res = await fetch("/api/videos", {
-      method: "POST",
-      body: formData,
-    }).then(async (res) => {
-      let url = await res.text();
-      const payload = {
-        url: url,
-        user_id: user.id,
-        title: title,
-        description: description,
-      };
-      const response = fetch("/api/videos/new", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
 
-      setVideoLoading(false);
-      // await response.json();
-      window.alert("Successully Uploded Video");
-      history.push("/");
-    });
+
+    if (error.length) {
+      return
+    } else {
+      setVideoLoading(true);
+      const res = await fetch("/api/videos", {
+        method: "POST",
+        body: formData,
+      })
+      .then(async (res) => {
+        let url = await res.text();
+        const payload = {
+          url: url,
+          user_id: user.id,
+          title: title,
+          description: description,
+        };
+        // const response =
+        await fetch("/api/videos/new", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+
+        setVideoLoading(false);
+        // await response.json();
+        window.alert("Successully Uploded Video");
+        history.push("/");
+      });
+    }
   };
 
   const updateVideo = (e) => {

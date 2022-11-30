@@ -3,14 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import * as commentActions from '../../store/comment'
 
-const DeleteCommentPage = ({commentId, setShowModal}) => {
+const DeleteCommentPage = ({comment, setShowModal}) => {
     const dispatch = useDispatch()
 
+    // useEffect(()=>{
+    //   dispatch(commentActions.fetchAllComments(comment.video_id))
+
+    // }, [comment.video_id])
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setShowModal(false)
-        dispatch(commentActions.deleteCommentThunk(commentId))
+        dispatch(commentActions.deleteCommentThunk(comment.id))
         window.alert('successfully deleted comment')
     }
 

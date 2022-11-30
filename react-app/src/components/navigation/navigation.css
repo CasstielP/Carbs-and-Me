@@ -1,0 +1,14 @@
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.nav-wrapper{
+
+}
+
+.logo{
+    width: 150px;
+    margin-left: 60px;
+}

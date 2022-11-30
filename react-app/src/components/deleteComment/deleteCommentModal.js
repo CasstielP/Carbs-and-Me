@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import DeleteCommentPage from ".";
 import { Modal } from "../../context/Modal";
 
-const DeleteCommentModal = ({commentId}) => {
+const DeleteCommentModal = ({comment}) => {
     const [showModal, setShowModal] = useState(false)
 
     return(
@@ -12,7 +12,7 @@ const DeleteCommentModal = ({commentId}) => {
         <Modal onClose={() => setShowModal(false)}>
           <DeleteCommentPage
            setShowModal={setShowModal}
-           commentId={commentId}
+           comment={comment}
            />
         </Modal>
       )}
