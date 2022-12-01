@@ -24,10 +24,11 @@ const EditVideoPage = ({videoId, setShowModal}) => {
   const handleSubmit = (e) =>{
     e.preventDefault();
     setErrors([]);
-    // if(!title)Errors.push('title cannot be empty')
-    // if(!description)Errors.push('description cannot be empty')
-    // setErrors(Errors)
-    // if(errors) return;
+    if(!title)Errors.push('title cannot be empty')
+    if(!description)Errors.push('description cannot be empty')
+    setErrors(Errors)
+    if(Errors.length) return;
+    console.log('got here')
     const video = {
       title: title,
       description: description
@@ -42,31 +43,48 @@ const EditVideoPage = ({videoId, setShowModal}) => {
   return (
     <>
       <div className="edit-video-modal">
-      <div>Edit Video</div>
+      <div className="edit-vid-wrapper">
+
         <form className="edit-form" onSubmit={handleSubmit}>
+      <div id="edit-modal-header">Edit Video</div>
         <div className="error-list">
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
       </div>
-          <label>
-            Title
+      <div className="edit-modal-iw">
+          <label className="edit-modal-label">
+            Title:
+            </label>
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-            />
-          </label>
-          <label>
-            Description
+              id='em-short-in'
+              className='em-input-field'
+
+            >
+            </input>
+
+      </div>
+      <div className="edit-modal-iw">
+
+          <label className="edit-modal-label">
+            Description:
+            </label>
             <input
               type="text"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-            />
-          </label>
-        <button className="submit-button" type="submit">Submit</button>
+              className='em-input-field'
+
+            >
+              </input>
+
+      </div>
+        <button className="em-submit-button" type="submit">Submit</button>
         </form>
+      </div>
       </div>
     </>
   );

@@ -28,12 +28,14 @@ const DeleteVideoPage = ({ videoId, setShowModal }) => {
       <div>
         <h3>Are You Sure You Want to Delete this Video?</h3>
         <form onSubmit={handleSubmit}>
-          <button className="submit-button" type="button" onClick={()=>setShowModal(false)}>
+          <div className="dm-button">
+          <button className="em-submit-button" type="button" onClick={()=>setShowModal(false)}>
             Cancel
           </button>
-          <button className="submit-button" type="submit">
+          <button className="em-submit-button" type="submit">
             Submit
           </button>
+          </div>
         </form>
       </div>
     </>

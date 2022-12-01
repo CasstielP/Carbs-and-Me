@@ -20,9 +20,11 @@ const UploadVideo = () => {
     if (!title) errors.push("Title cannot be empty");
     if (!description) errors.push("Description cannot be empty");
     if (!video) errors.push("Must upload a video file");
+    console.log(video.type)
     if (video) {
-      if (!video.type.endsWith(".mp4" || ".mov" || ".wmv" || ".flv" || ".avi"))
+      if (!video.type.endsWith("mp4" || "mov" || "wmv" || "flv" || "avi"))
         errors.push("Only video file type allowed");
+
     }
     setError(errors);
 
@@ -68,7 +70,7 @@ const UploadVideo = () => {
       <div className="login-wrapper">
         <div className="form-wrapper">
           <img id="ulp-icon" src={siteicon}></img>
-          <h3 id="ul-h3">Become an inspiration, Start your Chanel today!</h3>
+          <h3 id="ul-h3">Become an inspiration, Start your Channel today!</h3>
           <form className="li-form" onSubmit={handleSubmit}>
             <div className="error-list">
               {error.map((error, ind) => (
@@ -90,7 +92,10 @@ const UploadVideo = () => {
               placeholder="description"
               onChange={(e) => setDescription(e.target.value)}
             />
+            <div className="input-file-container">
             <input id="file-input" type="file" accept="video/*" onChange={updateVideo} />
+
+            </div>
             <button className="lg-button" type="submit">Submit</button>
             {videoLoading && <p>Loading...</p>}
           </form>

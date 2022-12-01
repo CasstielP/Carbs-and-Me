@@ -1,0 +1,19 @@
+.comment-textarea{
+    width: 800px;
+    border: none;
+    border-bottom: 1px;
+}
+
+input.comment-textarea:focus{
+    outline-width: 0;
+
+}
+
+.line-break{
+    background-color: rgb(200, 200, 200);
+    width: 800px;
+    height: 1px;
+    /* margin-left: -11px;
+      margin-top: 10px; */
+    margin-bottom: 10px;
+}

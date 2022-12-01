@@ -3,17 +3,19 @@ import { useSelector, useDispatch } from "react-redux";
 import * as commentActions from "../../store/comment";
 import { useHistory, Link } from "react-router-dom";
 import CommentCard from "./commentCard";
-
+import './comment.css'
 const CommentList = ({ video }) => {
   const videoComments = useSelector((state) =>
     Object.values(state.comment.videoComments)
   );
   let isCurrenOwner = false
   const dispatch = useDispatch();
+  const [errors, setErrors] = useState([])
   const user = useSelector((state) => state.session.user);
   const [comment, setComment] = useState('')
   const [isopen, setIsOpen] = useState(true)
   let userId;
+  let Errors=[]
   useEffect(() => {
     dispatch(commentActions.fetchAllComments(video.id));
   }, [dispatch, video.id]);
@@ -32,6 +34,10 @@ const CommentList = ({ video }) => {
   const handleSubmit= async(e)=> {
     e.preventDefault();
     setComment('')
+    setErrors([])
+    if(!comment)Errors.push('comment cannot be empty')
+    setErrors(Errors)
+    if(Errors.length) return
     await dispatch(commentActions.createCommentThunk(payload))
     window.alert('thank you for your feedback')
 
@@ -40,19 +46,26 @@ const CommentList = ({ video }) => {
 
   return (
     <>
-      <div>Comment List</div>
       <div className="comment-container">
+        <h2>Comments</h2>
         {!isCurrenOwner &&
         user &&
           <div>
-            <h2>Comments</h2>
             <form onSubmit={handleSubmit}>
-                <textarea
+            <div className="error-list">
+        {errors.map((error, ind) => (
+          <div key={ind}>{error}</div>
+        ))}
+      </div>
+                <input
                   type="text"
                   value={comment}
                   onChange={(e) => setComment(e.target.value)}
                   required
+                  placeholder="add a comment..."
+                  className="comment-textarea"
                 />
+                 <div className="line-break"></div>
             <button type="submit">Submit</button>
             </form>
           </div>
