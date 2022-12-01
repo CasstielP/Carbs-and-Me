@@ -1,19 +1,97 @@
 .comment-textarea{
-    width: 800px;
-    border: none;
-    border-bottom: 1px;
+    width: 990px;
+    /* border: none; */
+    border-top: none;
+    border-right:none ;
+    border-left: none;
+    border-bottom: solid grey 1px;
+    height: 30px;
+    /* outline-width: 0; */
 }
 
 input.comment-textarea:focus{
-    outline-width: 0;
+    outline-width: 1px;
 
 }
 
-.line-break{
+/* .line-break{
     background-color: rgb(200, 200, 200);
     width: 800px;
     height: 1px;
-    /* margin-left: -11px;
-      margin-top: 10px; */
+
     margin-bottom: 10px;
+} */
+
+.ce-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    /* margin-right: 260px; */
+}
+
+.ce-button{
+    cursor: pointer;
+    margin: 20px;
+    border-radius: 30px;
+    width: 100px;
+    height: 40px;
+    border: none;
+}
+.ce-button:hover{
+    background-color: #8b8a8a;
+}
+
+.cm-fineprint{
+    color: #9f8380;
+    font-size: 13px;
+    /* margin-bottom:5px; */
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.leave-cm-container{
+    display: flex;
+    flex-direction: column;
+    width: 990px;
+
+}
+#comment-content{
+    margin: 10px;
+}
+
+.single-comment-container{
+    display: flex;
+    flex-direction: column;
+    width:990px;
+}
+.s-ce-button{
+    cursor: pointer;
+    margin: 10px;
+    border-radius: 30px;
+    width: 50px;
+    height: 30px;
+    border: none;
+}
+
+.s-ce-button:hover{
+    background-color: #8b8a8a;
+}
+
+.s-ce-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    /* margin-right: 260px; */
+    margin: none;
+    border-bottom: solid 1px #cac7c7;
+}
+
+.is-ce-button{
+    cursor: pointer;
+    margin: 10px;
+    border-radius: 30px;
+    width: 50px;
+    height: 30px;
+    border: none;
+    background-color: #287ce9;
+    color: white;
 }

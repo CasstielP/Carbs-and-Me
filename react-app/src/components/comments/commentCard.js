@@ -8,6 +8,9 @@ const allUserComments = useSelector(state=>state.comment.userComments)
 let commentId = comment.id
 const allVideoComments = useSelector(state=> state.comment.videoComments)
 let isCurrenOwner = false
+let end = new Date();
+let start = new Date(comment.created_at);
+let elapsed = (end - start) / 1000 / 60 / 60 / 24;
 if(user) {
       if(comment.user_id === user.id) isCurrenOwner = true
 }
@@ -45,31 +48,42 @@ const handleCancel = async() => {
     return (
         <>
         <div>
+            <div className="single-comment-container">
+
             { !isEditing &&
-                <div>{comment.content}</div>
+            <>
+            <div className="cm-fineprint">{elapsed.toFixed()} days ago</div>
+            <div id='comment-content'>{comment.content}</div>
+            </>
             }
             { isEditing &&
             <div>
             <form onSubmit={handleSubmit}>
-                <textarea
+                <div className="leave-cm-container"></div>
+                <input
                   type="text"
                   value={editComment}
                   onChange={(e) => setEditComment(e.target.value)}
                   required
+                  className="comment-textarea"
+
                 />
-            <button type="submit">Submit</button>
-            <button type="button" onClick={handleCancel}>Cancel</button>
+            <button className="is-ce-button" type="submit">Submit</button>
+            <button className="is-ce-button" type="button" onClick={handleCancel}>Cancel</button>
             </form>
             </div>
             }
         {
             isCurrenOwner &&
             <>
-            <button onClick={handleEdit}>Edit</button>
+            <div className="s-ce-buttons">
+            <button className="s-ce-button" onClick={handleEdit}>Edit</button>
             {/* <button>Delete</button> */}
             <DeleteCommentModal comment={comment}/>
+            </div>
             </>
         }
+            </div>
         </div>
         </>
     )

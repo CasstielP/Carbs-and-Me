@@ -7,7 +7,7 @@ const DeleteCommentModal = ({comment}) => {
 
     return(
         <>
-      <button onClick={() => setShowModal(true)}>Delete</button>
+      <button className="s-ce-button" onClick={() => setShowModal(true)}>Delete</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <DeleteCommentPage

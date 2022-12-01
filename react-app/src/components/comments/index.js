@@ -47,26 +47,33 @@ const CommentList = ({ video }) => {
   return (
     <>
       <div className="comment-container">
-        <h2>Comments</h2>
+        <h2>Leave your comments</h2>
         {!isCurrenOwner &&
         user &&
           <div>
             <form onSubmit={handleSubmit}>
             <div className="error-list">
         {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
+          <div className="error-list" key={ind}>{error}</div>
         ))}
       </div>
+      <div className="leave-cm-container">
+
                 <input
                   type="text"
                   value={comment}
                   onChange={(e) => setComment(e.target.value)}
-                  required
+
                   placeholder="add a comment..."
                   className="comment-textarea"
                 />
                  <div className="line-break"></div>
-            <button type="submit">Submit</button>
+            <div className="ce-buttons">
+            <button className="ce-button" type="submit">Submit</button>
+            <button className="ce-button" type='button' onClick={()=>setComment('')}>Cancel</button>
+                </div>
+      </div>
+
             </form>
           </div>
         }
