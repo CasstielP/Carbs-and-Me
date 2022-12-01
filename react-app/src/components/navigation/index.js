@@ -49,8 +49,11 @@ const NavBar = () => {
             {!user && (
               <div className="loginselect">
                 <NavLink
-                style={{ textDecoration: "none", color: "black" }}
-                to="/login" exact={true} activeClassName="active">
+                  style={{ textDecoration: "none", color: "black" }}
+                  to="/login"
+                  exact={true}
+                  activeClassName="active"
+                >
                   Login
                 </NavLink>
               </div>
@@ -58,23 +61,35 @@ const NavBar = () => {
             {!user && (
               <div className="loginselect">
                 <NavLink
-                style={{ textDecoration: "none", color: "black" }}
-                to="/sign-up" exact={true} activeClassName="active">
+                  style={{ textDecoration: "none", color: "black" }}
+                  to="/sign-up"
+                  exact={true}
+                  activeClassName="active"
+                >
                   Sign Up
                 </NavLink>
               </div>
             )}
             {user && (
-              <div className="loginselect">
-                <NavLink
-                style={{ textDecoration: "none", color: "black" }}
-                  to={`/users/${user.id}`}
-                  exact={true}
-                  activeClassName="active"
-                >
-                  User Profile
-                </NavLink>
-              </div>
+              <>
+                <div className="loginselect">
+                  <NavLink
+                    style={{ textDecoration: "none", color: "black" }}
+                    to={`/users/${user.id}`}
+                    exact={true}
+                    activeClassName="active"
+                  >
+                    User Profile
+                  </NavLink>
+                </div>
+                <div className="loginselect">
+                  <NavLink
+                  style={{ textDecoration: "none", color: "black" }}
+                  to="/upload" exact={true} activeClassName="active">
+                    Upload Video
+                  </NavLink>
+                </div>
+              </>
             )}
 
             {user && (

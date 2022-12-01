@@ -74,7 +74,7 @@ const SignUpForm = () => {
       <h3 className='rightSide-text' id='h3text'>Create your Noogles Account</h3>
       <p className='rightSide-text' id='p-text'>to continue to Carbs & Me</p>
     <form className='su-form' onSubmit={onSignUp}>
-      <div>
+      <div className="error-list">
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
@@ -158,7 +158,7 @@ const SignUpForm = () => {
       </div>
       <div className='right-side'>
         <img src={accountIcon} />
-        <p id='rs-text'>One Account. All recipies unlocks for you.</p>
+        <p id='rs-text'>One Account. All recipes unlocked for you.</p>
       </div>
     </div>
     </div>

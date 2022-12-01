@@ -6,6 +6,7 @@ import UserVideoCard from "./videos/userVideoCard";
 import VideoCard from "./videos/videoCard";
 import CommentCard from "./comments/commentCard";
 import * as commentActions from '../store/comment'
+import banner from './banner.jpg'
 function User() {
   // const [user, setUser] = useState({});
   const dispatch = useDispatch();
@@ -27,24 +28,14 @@ function User() {
 
   return (
     <>
-      <ul>
-        <li>
-          <strong>User Id</strong> {userId}
-        </li>
-        <li>
-          <strong>Username</strong> {user.username}
-        </li>
-        <li>
-          <strong>Email</strong> {user.email}
-        </li>
-      </ul>
-      <button>
+
+      <div className="video-container">
+      <img id='banner' src={banner}></img>
+      {/* <div>
       <NavLink to="/upload" exact={true} activeClassName="active">
               Upload Video
             </NavLink>
-      </button>
-
-      <div className="video-container">
+      </div> */}
         {userVideos.map((video) => (
           <UserVideoCard key={video.id} video={video} />
         ))}

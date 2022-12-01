@@ -44,7 +44,7 @@ const EditVideoPage = ({videoId, setShowModal}) => {
       <div className="edit-video-modal">
       <div>Edit Video</div>
         <form className="edit-form" onSubmit={handleSubmit}>
-        <div>
+        <div className="error-list">
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}

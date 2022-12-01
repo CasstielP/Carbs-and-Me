@@ -12,7 +12,7 @@ const EditVideoModal = ({ videoId }) => {
   }
   return (
     <>
-      <button onClick={handleEditButton}>Edit</button>
+      <div className="user-page-bt" onClick={handleEditButton}>Edit</div>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <EditVideoPage

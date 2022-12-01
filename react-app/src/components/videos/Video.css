@@ -21,3 +21,48 @@
 .time-elapsed{
     color: #666361;
 }
+
+.auth-button{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.user-page-bt{
+    cursor: pointer;
+    /* margin: 12px 20px 0px 20px; */
+    border-radius: 3px;
+    width: 50px;
+    height: 20px;
+    border: none;
+    background-color: #287ce9;
+    color: white;
+    text-align: center;
+    font-size: 15px;
+}
+
+#banner{
+    width: 1800px;
+    height: 350px;
+    margin-bottom: 50px;
+
+}
+
+#ul-h3{
+    text-align: center;
+
+}
+
+#file-input{
+    margin: 20px;
+}
+
+#ulp-icon{
+    width: 300px;
+    margin-bottom: 40px;
+}
+
+.error-list{
+    color: red;
+}

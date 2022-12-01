@@ -8,7 +8,7 @@ const DeleteVideoModal = ({ videoId }) => {
 
     return (
         <>
-      <button onClick={() => setShowModal(true)}>Delete</button>
+      <div className="user-page-bt" onClick={() => setShowModal(true)}>Delete</div>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <DeleteVideoPage

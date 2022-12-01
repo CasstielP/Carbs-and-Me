@@ -16,7 +16,7 @@ const [editComment, setEditComment] = useState('')
 const dispatch = useDispatch()
 
 useEffect(()=> {
-    dispatch(commentActions.fetchAllComments(comment.video_id))
+    // dispatch(commentActions.fetchAllComments(comment.video_id))
     setEditComment(comment.content)
 },[dispatch, comment.content, comment.video_id])
 
