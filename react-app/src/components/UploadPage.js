@@ -20,7 +20,7 @@ const UploadVideo = () => {
     if (!title) errors.push("Title cannot be empty");
     if (!description) errors.push("Description cannot be empty");
     if (!video) errors.push("Must upload a video file");
-    console.log(video.type)
+    // console.log(video.type)
     if (video) {
       if (!video.type.endsWith("mp4" || "mov" || "wmv" || "flv" || "avi"))
         errors.push("Only video file type allowed");

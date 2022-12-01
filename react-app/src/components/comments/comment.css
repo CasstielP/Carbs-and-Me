@@ -71,6 +71,16 @@ input.comment-textarea:focus{
     height: 30px;
     border: none;
 }
+.sd-ce-button{
+    cursor: pointer;
+    margin: 10px;
+    border-radius: 30px;
+    width: 55px;
+    height: 30px;
+    border: none;
+    background-color: #287ce9;
+    color: white;
+}
 
 .s-ce-button:hover{
     background-color: #8b8a8a;

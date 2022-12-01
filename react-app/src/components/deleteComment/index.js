@@ -23,10 +23,10 @@ const DeleteCommentPage = ({comment, setShowModal}) => {
       <div>
         <h3>Delete Your Comment Permanetly?</h3>
         <form onSubmit={handleSubmit}>
-          <button className="submit-button" type="button" onClick={()=>setShowModal(false)}>
+          <button className="sd-ce-button" type="button" onClick={()=>setShowModal(false)}>
             Cancel
           </button>
-          <button className="submit-button" type="submit">
+          <button className="sd-ce-button" type="submit">
             Submit
           </button>
         </form>
