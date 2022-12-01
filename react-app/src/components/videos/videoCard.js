@@ -13,14 +13,14 @@ const VideoCard = ({ video }) => {
             style={{ textDecoration: "none", color: "black" }}
             to={`/videos/${video.id}`}
           >
-            <video controls width="350">
+            <video className="video-box" controls width="350">
               <source src={video.url}></source>
             </video>
           </Link>
         </div>
         <div className="video-card-info">
-          <div>{video.title}</div>
-          <div>{elapsed.toFixed()} days ago</div>
+          <div className="video-title">{video.title}</div>
+          <div className="time-elapsed">{elapsed.toFixed()} days ago</div>
           <div className="auth-button">
           {/* <button>Edit</button>
           <button>Delete</button> */}

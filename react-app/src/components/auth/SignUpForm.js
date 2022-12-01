@@ -1,27 +1,40 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
+import { NavLink, Redirect, useHistory } from 'react-router-dom';
 import { signUp } from '../../store/session';
-
+import './signup.css'
+import logo from '../navigation/iconname.png'
+import accountIcon from './gooincon.png'
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
+  const history = useHistory()
   const [username, setUsername] = useState('');
-  const [firstName, setFristName] = useState('')
-  const [lastName, setLastName] = useState('')
+  const [firstname, setFristname] = useState('')
+  const [lastname, setLastname] = useState('')
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
+  let Errors = []
+
 
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
       setErrors([]);
-      const data = await dispatch(signUp(username, firstName, lastName, email, password));
-      if (data) {
+      if(username.length<5 || username.length>20) Errors.push('Username length must be between 5 to 20 characters!')
+      if(firstname.length<5 || firstname.length>20) Errors.push('Frist name length must be between 5 to 20 characters!')
+      if(lastname.length<5 || lastname.length>20) Errors.push('Last name length must be between 5 to 20 characters!')
+      if(!email.includes('@'||'.')) Errors.push('Invalid Email Format!')
+      setErrors(Errors)
+      if(Errors.length) return;
+      const data = await dispatch(signUp(username, firstname, lastname, email, password));
+      // if (data) {
         setErrors(data)
-      }
+        window.alert('Welcome to Carb & Me !')
+        history.push('/')
+      // }
     }else return setErrors(['Confirm Password field must be the same as the Password field']);
   };
 
@@ -30,11 +43,11 @@ const SignUpForm = () => {
   };
 
   const updateFirstName = (e) => {
-    setFristName(e.target.value);
+    setFristname(e.target.value);
   };
 
   const updateLastName = (e) => {
-    setLastName(e.target.value);
+    setLastname(e.target.value);
   };
 
   const updateEmail = (e) => {
@@ -54,69 +67,101 @@ const SignUpForm = () => {
   }
 
   return (
-    <form onSubmit={onSignUp}>
+    <div className='signup-page'>
+    <div className='signup-wrapper'>
+    <div className='left-side'>
+      <img className='logo-su' src={logo} />
+      <h3 className='rightSide-text' id='h3text'>Create your Noogles Account</h3>
+      <p className='rightSide-text' id='p-text'>to continue to Carbs & Me</p>
+    <form className='su-form' onSubmit={onSignUp}>
       <div>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
       </div>
-      <div>
-        <label>User Name</label>
+      <div className='input-wrapper'>
         <input
           type='text'
           name='username'
           onChange={updateUsername}
           value={username}
+          placeholder='username'
+          className='f-input-field input-field'
         ></input>
       </div>
+      <div className='nameinfo-container input-wrapper'>
       <div>
-        <label>First Name</label>
         <input
           type='text'
           name='firstname'
           onChange={updateFirstName}
-          value={firstName}
+          value={firstname}
+          placeholder='first name'
+          className='input-field'
         ></input>
       </div>
       <div>
-        <label>Last Name</label>
         <input
           type='text'
           name='lastname'
           onChange={updateLastName}
-          value={lastName}
+          value={lastname}
+          placeholder='last name'
+          className='input-field'
         ></input>
       </div>
-      <div>
-        <label>Email</label>
+      </div>
+      <div className='input-wrapper'>
         <input
           type='text'
           name='email'
           onChange={updateEmail}
           value={email}
+          placeholder='Your email address'
+          className='f-input-field input-field'
         ></input>
+        <p className='fine-print'>reminder: email entered must be unique.</p>
       </div>
+
+      <div className='password-container '>
       <div>
-        <label>Password</label>
         <input
           type='password'
           name='password'
           onChange={updatePassword}
           value={password}
+          placeholder='password'
+          className='input-field'
         ></input>
       </div>
       <div>
-        <label>Repeat Password</label>
         <input
           type='password'
           name='repeat_password'
           onChange={updateRepeatPassword}
           value={repeatPassword}
           required={true}
+          placeholder='confirm'
+          className='input-field'
         ></input>
       </div>
-      <button type='submit'>Sign Up</button>
+      </div>
+      <p className='fine-print-p'>password must be between 5 to 20 characters</p>
+
+      <div className='su-button-container'>
+      <NavLink style={{ textDecoration: "none", color: "black" }} to="/login" exact={true}>
+        <p className='su-button-content' id='su-button-p'>Sign in instead</p>
+      </NavLink>
+      <button id='su-button-s' type='submit'>Sign Up</button>
+      </div>
     </form>
+      </div>
+      <div className='right-side'>
+        <img src={accountIcon} />
+        <p id='rs-text'>One Account. All recipies unlocks for you.</p>
+      </div>
+    </div>
+    </div>
   );
 };
 

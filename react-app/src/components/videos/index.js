@@ -18,7 +18,7 @@ const VideoList = () => {
 
     return (
         <>
-        <h1>Video List</h1>
+        {/* <h1>Video List</h1> */}
         <div className='video-container'>
             { videos.map((video)=>
                 <VideoCard key={video.id} video={video} />

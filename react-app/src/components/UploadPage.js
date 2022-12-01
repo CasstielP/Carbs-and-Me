@@ -21,12 +21,12 @@ const UploadVideo = () => {
     if (!description) errors.push("Description cannot be empty");
     if(!video) errors.push('Must upload a video file')
     if(video) {
-      if(!video.type.includes('mp4'||'mov'||'wmv'||'flv'||'avi')) errors.push('Only video file type allowed')
+      if(!video.type.endsWith('.mp4'||'.mov'||'.wmv'||'.flv'||'.avi')) errors.push('Only video file type allowed')
     }
     setError(errors);
 
 
-    if (error.length) {
+    if (errors.length) {
       return
     } else {
       setVideoLoading(true);

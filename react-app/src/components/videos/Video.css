@@ -10,3 +10,14 @@
     flex-direction: column;
     margin: 20px;
 }
+
+.video-box{
+    border-radius: 15px;
+}
+.video-title{
+    font-weight: bold;
+}
+
+.time-elapsed{
+    color: #666361;
+}

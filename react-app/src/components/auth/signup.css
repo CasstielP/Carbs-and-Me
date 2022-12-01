@@ -1,0 +1,129 @@
+.signup-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* min-height: 100vh; */
+}
+
+.signup-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: solid #e8eaec 2px;
+    border-radius: 10px;
+    margin-top: 100px;
+    margin-bottom: 300px;
+    width: 1000px;
+    height: 700px;
+}
+
+.left-side{
+    /* border: solid green 1px; */
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    /* align-items: center; */
+
+}
+
+.right-side{
+    /* border: 1px solid blue; */
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.su-form{
+    display: flex;
+    flex-direction: column;
+
+}
+.nameinfo-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.password-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 20px 20px 5px 20px;
+}
+
+.input-wrapper{
+    margin: 20px;
+}
+
+.f-input-field{
+    width: 98%;
+}
+
+
+.input-field{
+    border: #dee0e4 solid 1.7px;
+    border-radius: 5px;
+    height: 30px;
+    width: 100%;
+}
+
+.logo-su{
+    width: 200px;
+    margin-left: 20px;
+}
+.rightSide-text{
+    margin-left: 25px;
+}
+#p-text{
+    margin-top: 0%;
+    margin-bottom: 20px;
+}
+#h3text{
+    margin-bottom: 10px;
+}
+.fine-print{
+    color: #a08a7b;
+    font-size: 12px;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+.fine-print-p{
+    color: #a08a7b;
+    font-size: 12px;
+    margin-top: 0%;
+    margin-left: 25px;
+}
+
+.su-button-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.su-button-content{
+    margin: 25px;
+}
+#su-button-p{
+    font-weight: bold;
+    color: #287ce9;
+}
+
+#su-button-s{
+ margin: 12px 20px 0px 20px;
+ border-radius: 3px;
+ width: 100px;
+ height: 40px;
+ border: none;
+ background-color: #287ce9;
+ color: white;
+ font-weight: bold;
+}
+
+#rs-text{
+    text-align: center;
+    font-size: 30px;
+    color: #786259;
+    font-weight: -100;
+}
