@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import siteicon from './navigation/iconname.png'
-const UploadVideo = () => {
+import SideBar from "./sideBar";
+const UploadVideo = ({showSideBar, setShowSideBar}) => {
   const history = useHistory(); // so that we can redirect after the image upload is successful
   const [video, setVideo] = useState(null);
   const [title, setTitle] = useState("");
@@ -66,6 +67,9 @@ const UploadVideo = () => {
   };
 
   return (
+    <>
+    <div id='upload-sb-wrapper'>
+    <SideBar showSideBar={showSideBar}/>
     <div className="login-page-wrapper">
       <div className="login-wrapper">
         <div className="form-wrapper">
@@ -102,6 +106,11 @@ const UploadVideo = () => {
         </div>
       </div>
     </div>
+
+    </div>
+
+    </>
+
   );
 };
 

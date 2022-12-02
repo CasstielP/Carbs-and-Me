@@ -16,6 +16,9 @@ import EditVideoPage from './components/editVideo';
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const [showSideBar, setShowSideBar] = useState(true)
+
+
 
   useEffect(() => {
     (async() => {
@@ -30,28 +33,28 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
+      <NavBar showSideBar={showSideBar} setShowSideBar={setShowSideBar}/>
       <Switch>
         <Route path='/login' exact={true}>
-          <LoginForm />
+          <LoginForm showSideBar={showSideBar} setShowSideBar={setShowSideBar}/>
         </Route>
         <Route path='/sign-up' exact={true}>
-          <SignUpForm />
+          <SignUpForm showSideBar={showSideBar} setShowSideBar={setShowSideBar}/>
         </Route>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
+          <User showSideBar={showSideBar} setShowSideBar={setShowSideBar}/>
         </ProtectedRoute>
         <Route path='/' exact={true} >
-          <VideoList />
+          <VideoList showSideBar={showSideBar} setShowSideBar={setShowSideBar} />
         </Route>
         <Route path='/upload' exact={true}>
-          <UploadVideo />
+          <UploadVideo showSideBar={showSideBar} setShowSideBar={setShowSideBar}/>
         </Route>
         <Route path='/videos/:videoId' exact={true}>
-          <VideoDetailPage />
+          <VideoDetailPage showSideBar={showSideBar} setShowSideBar={setShowSideBar}/>
         </Route>
         {/* <Route path='/edit/videos/:videoId'>
           <EditVideoPage />

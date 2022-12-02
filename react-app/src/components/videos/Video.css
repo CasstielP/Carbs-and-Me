@@ -16,6 +16,7 @@
 }
 .video-title{
     font-weight: bold;
+    width: 350px;
 }
 
 .time-elapsed{
@@ -86,4 +87,64 @@ input[type=file]::file-selector-button:hover {
 .input-file-container{
     border: 1px solid #e5e5e5;
     margin: 20px;
+}
+.vid-des{
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    align-items: center;
+    max-width: 1000px;
+    max-height: 120px;
+    border-radius: 10px;
+    background-color: #f2f2f2;
+    margin-bottom: 50px;
+}
+#des-p{
+    margin-left: 20px;
+    width: 950px;
+}
+
+#lc-h{
+    margin-bottom: 50px;
+}
+
+.side-bar{
+    /* border: #287ce9 solid 1px; */
+    width: 300px;
+    margin-bottom: 100px;
+    margin-right: 40px;
+
+}
+
+.main-page-wrapper{
+    display: flex;
+    flex-direction: row;
+}
+
+.sidebarcontent{
+    font-size: 35px;
+    cursor: pointer;
+    font-weight: light;
+    margin-right: 15px;
+    border-radius: 100px;
+    width: 45px;
+}
+.line-break-sb{
+    background-color: rgb(200, 200, 200);
+    width: 220px;
+    height: 1px;
+    margin-bottom: 10px;
+}
+#vdp-wrapper{
+    display: flex;
+    flex-direction: row;
+}
+#up-sb-wrapper{
+    display: flex;
+    flex-direction: row;
+}
+#upload-sb-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }

@@ -7,7 +7,8 @@ import VideoCard from "./videos/videoCard";
 import CommentCard from "./comments/commentCard";
 import * as commentActions from '../store/comment'
 import banner from './banner.jpg'
-function User() {
+import SideBar from "./sideBar";
+function User({showSideBar, setShowSideBar}) {
   // const [user, setUser] = useState({});
   const dispatch = useDispatch();
   const { userId } = useParams();
@@ -27,18 +28,15 @@ function User() {
 
   return (
     <>
-
+    <div id='up-sb-wrapper'>
+      <SideBar showSideBar={showSideBar}/>
       <div className="video-container">
       <img id='banner' src={banner}></img>
-      {/* <div>
-      <NavLink to="/upload" exact={true} activeClassName="active">
-              Upload Video
-            </NavLink>
-      </div> */}
         {Object.values(userVideos).reverse().map((video) => (
           <UserVideoCard key={video.id} video={video} />
         ))}
       </div>
+    </div>
 
     </>
   );

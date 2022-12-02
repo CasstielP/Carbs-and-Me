@@ -4,8 +4,9 @@ import * as videoActions from "../../store/video";
 import { useHistory, Link, useParams } from "react-router-dom";
 import VideoCard from "./videoCard";
 import CommentList from "../comments";
+import SideBar from "../sideBar";
 
-const VideoDetailPage = () => {
+const VideoDetailPage = ({showSideBar, setShowSideBar}) => {
   const { videoId } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -21,13 +22,20 @@ const VideoDetailPage = () => {
   if(isLoaded) {
     return (
       <>
+      <div id='vdp-wrapper'>
+      <SideBar showSideBar={showSideBar}/>
         <div>
         <video controls width="1000">
           <source src={video.url}></source>
         </video>
-        <div>{video.title}</div>
+        <h2>{video.title}</h2>
+        <div className="vid-des">
+        <p id="des-p">{video.description}</p>
         </div>
+
         <CommentList video={video} />
+        </div>
+      </div>
       </>
     );
   } else {

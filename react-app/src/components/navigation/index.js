@@ -4,10 +4,12 @@ import { NavLink } from "react-router-dom";
 import LogoutButton from "../auth/LogoutButton";
 import "./navigation.css";
 import logo from "./iconname.png";
-
-const NavBar = () => {
+import menufill from './menu_FILL.png'
+import SideBar from "../sideBar";
+const NavBar = ({showSideBar, setShowSideBar}) => {
   const user = useSelector((state) => state.session.user);
   const [showMenu, setShowMenu] = useState(false);
+
   const openMenu = () => {
     if (showMenu) return;
     setShowMenu(true);
@@ -24,11 +26,26 @@ const NavBar = () => {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
+  const handlesidebar = () => {
+    if(showSideBar) {
+      setShowSideBar(false)
+    } else{
+      setShowSideBar(true)
+    }
+  }
+
   return (
     <div className="header">
+      <div className="nav-left">
+        <div onClick={handlesidebar}  id="bar-menu">
+      <img className="material-symbols-outlined" src={menufill}/>
+        </div>
+      {/* <span class="material-symbols-outlined">menu</span> */}
+
       <NavLink exact to="/">
         <img className="logo" src={logo}></img>
       </NavLink>
+      </div>
 
       <div className="wrapper">
         {!user && (
@@ -84,8 +101,11 @@ const NavBar = () => {
                 </div>
                 <div className="loginselect">
                   <NavLink
-                  style={{ textDecoration: "none", color: "black" }}
-                  to="/upload" exact={true} activeClassName="active">
+                    style={{ textDecoration: "none", color: "black" }}
+                    to="/upload"
+                    exact={true}
+                    activeClassName="active"
+                  >
                     Upload Video
                   </NavLink>
                 </div>

@@ -7,8 +7,9 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-top: 15px;
-    margin-bottom: 50px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    height: 60px;
 }
 
 .nav-wrapper{
@@ -17,7 +18,8 @@
 
 .logo{
     width: 150px;
-    margin-left: 60px;
+    margin-left: 10px;
+    margin-top: 3px;
 }
 
 .dropdownMenulogin {
@@ -108,3 +110,59 @@
   #signin{
     margin-bottom: 50px;
   }
+  .nav-left{
+    display: flex;
+    flex-direction: row;
+    margin-left: 50px;
+    height: 100%;
+  }
+
+  .material-symbols-outlined {
+    cursor: pointer;
+    color: grey;
+    margin-right: 15px;
+    border-radius: 100px;
+    width: 40px;
+  }
+
+  .material-symbols-outlined:hover {
+    background-color: #f2f2f2;
+  }
+
+
+.sb-home{
+  width: 40px;
+}
+.sb-home-wrapper{
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-radius: 10px;
+  height: 40px;
+  margin-top: 18px;
+  margin-bottom: 18px;
+  margin-right: 18px;
+
+}
+.sb-home-wrapper:hover{
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+.sb-home-txt{
+  margin-top: 12px;
+  margin-left: 50px;
+  font-size: 18px;
+}
+#linkedin{
+  width: 30px;
+  height: 30px;
+  margin-top: 6px;
+  margin-left: 16px;
+}
+#github{
+  width: 33px;
+  height: 33px;
+  margin-left: 3px;
+  margin-top: 3px;
+}

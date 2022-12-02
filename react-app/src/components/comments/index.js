@@ -47,7 +47,7 @@ const CommentList = ({ video }) => {
   return (
     <>
       <div className="comment-container">
-        <h2>Leave your comments</h2>
+        <h3 id='lc-h'>Leave your comments</h3>
         {!isCurrenOwner &&
         user &&
           <div>
