@@ -67,7 +67,7 @@ def update_comment(id):
     data = request.get_json()
     comment.content = data['content']
     db.session.commit()
-    return data
+    return comment.to_dict()
 
 
 

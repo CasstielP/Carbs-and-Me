@@ -20,7 +20,7 @@ const VideoList = () => {
         <>
         {/* <h1>Video List</h1> */}
         <div className='video-container'>
-            { videos.map((video)=>
+            { videos.reverse().map((video)=>
                 <VideoCard key={video.id} video={video} />
             )
             }

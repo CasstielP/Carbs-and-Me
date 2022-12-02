@@ -20,7 +20,7 @@ def username_exists(form, field):
     user = User.query.filter(User.username == username).first()
     if user:
         raise ValidationError('Username is already in use.')
-    if len(username) < 4 or len(username) > 12:
+    if len(username) < 5 or len(username) > 20:
         raise ValidationError(
             'Username should be betweeen 4 and 12 charaters.')
 

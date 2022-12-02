@@ -114,7 +114,7 @@ def update_video(id):
     video.title = data['title']
     video.description = data['description']
     db.session.commit()
-    return data
+    return video.to_dict()
 
 
 

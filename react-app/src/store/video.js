@@ -153,8 +153,10 @@ const videoReducer  = (state = initialState, action) => {
 
 
         case EDIT_VIDEO:
-            newState = {...state, singleVideo:{...state.singleVideo}}
+            newState = {...state, singleVideo:{...state.singleVideo}, userVideos:{...state.userVideos}}
             newState.singleVideo = action.video
+            console.log(action.video)
+            newState.userVideos[action.video.id] = action.video
             return newState
 
         case DELETED_VIDEO:

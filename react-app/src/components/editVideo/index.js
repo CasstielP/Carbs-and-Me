@@ -34,9 +34,11 @@ const EditVideoPage = ({videoId, setShowModal}) => {
       description: description
     }
     dispatch(videoActions.editVideoThunk(video, videoId))
-    dispatch(videoActions.fetchUserVideos(user.id))
-    setShowModal(false)
-    window.alert('Successfully edited video')
+    .then(()=> {
+      dispatch(videoActions.fetchUserVideos(user.id))
+      setShowModal(false)
+      alert('Successfully edited video')
+    })
   }
 
 

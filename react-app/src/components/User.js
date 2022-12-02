@@ -12,15 +12,14 @@ function User() {
   const dispatch = useDispatch();
   const { userId } = useParams();
   const user = useSelector(state=>state.session.user)
-  const userVideos = useSelector(state =>Object.values(state.video.userVideos));
+  const userVideos = useSelector(state =>(state.video.userVideos));
   // const allVidArr = Object.values(allVideos)
   const [isLoaded, setIsLoaded] = useState(false)
+  const singleVideo = useSelector(state=>state.video.singleVideo)
   // const userVideos = allVidArr.filter(video => video.user_id == userId);
-  const userComments = useSelector(state=>Object.values(state.comment.userComments))
   useEffect(() => {
     dispatch(videoActions.fetchUserVideos(userId))
-    dispatch(commentActions.fetchUserComments(userId))
-  }, [dispatch, userId]);
+  }, []);
 
 
 
@@ -36,17 +35,10 @@ function User() {
               Upload Video
             </NavLink>
       </div> */}
-        {userVideos.map((video) => (
+        {Object.values(userVideos).reverse().map((video) => (
           <UserVideoCard key={video.id} video={video} />
         ))}
       </div>
-      {/* <div>
-        <h2>Comments</h2>
-        {userComments.reverse().map((comment)=> (
-          <CommentCard key={comment.id} comment={comment}/>
-        ))}
-
-      </div> */}
 
     </>
   );
