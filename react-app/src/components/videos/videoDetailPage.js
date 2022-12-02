@@ -21,7 +21,6 @@ const VideoDetailPage = () => {
   if(isLoaded) {
     return (
       <>
-        <h1>video detail page</h1>
         <div>
         <video controls width="1000">
           <source src={video.url}></source>

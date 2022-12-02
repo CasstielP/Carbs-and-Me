@@ -5,7 +5,13 @@ import DeleteVideoModal from "../deleteVideo/deleteVideoModal";
 const UserVideoCard = ({ video }) => {
   let end = new Date();
   let start = new Date(video.created_at);
-  let elapsed = (end - start) / 1000 / 60 / 60 / 24;
+  let elapsed = ((end - start)-(28800000)) / 1000 / 60 / 60 / 24;
+  if(elapsed > 1) {
+    elapsed = `${elapsed.toFixed()} day ago`
+} else {
+    elapsed = ((end - start)-(28800000)) / 1000 / 60 / 60
+    elapsed = `${elapsed.toFixed()} hour ago`
+}
   const [showModal, setShowModal] = useState(false)
 
   return (
@@ -23,7 +29,7 @@ const UserVideoCard = ({ video }) => {
         </div>
         <div className="video-card-info">
           <div className="video-title">{video.title}</div>
-          <div className="time-elapsed">{elapsed.toFixed()} days ago</div>
+          <div className="time-elapsed">{elapsed}</div>
           <div className="auth-button">
            <EditVideoModal  videoId={video.id}/>
           {/* <button>Delete</button> */}

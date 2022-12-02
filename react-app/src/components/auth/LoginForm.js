@@ -10,7 +10,7 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
-
+  //testing
   const onLogin = async (e) => {
     e.preventDefault();
     setErrors([]);
@@ -71,7 +71,7 @@ const LoginForm = () => {
 
               />
               <div className="su-button-container">
-              <button className="lg-button" type="submit" onClick={demoUserButton}>
+              <button className="lg-button" type="button" onClick={demoUserButton}>
                 Demo User
               </button>
               <button className="lg-button" type="submit">Login</button>

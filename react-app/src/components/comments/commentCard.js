@@ -10,7 +10,14 @@ const allVideoComments = useSelector(state=> state.comment.videoComments)
 let isCurrenOwner = false
 let end = new Date();
 let start = new Date(comment.created_at);
-let elapsed = (end - start) / 1000 / 60 / 60 / 24;
+let elapsed = ((end - start)-(28800000)) / 1000 / 60 / 60 / 24;
+if(elapsed > 1) {
+    elapsed = `${elapsed.toFixed()} day ago`
+} else {
+    elapsed = ((end - start)-(28800000)) / 1000 / 60 / 60
+    elapsed = `${elapsed.toFixed()} hour ago`
+}
+
 if(user) {
       if(comment.user_id === user.id) isCurrenOwner = true
 }
@@ -52,7 +59,7 @@ const handleCancel = async() => {
 
             { !isEditing &&
             <>
-            <div className="cm-fineprint">{elapsed.toFixed()} days ago</div>
+            <div className="cm-fineprint">{elapsed}</div>
             <div id='comment-content'>{comment.content}</div>
             </>
             }
