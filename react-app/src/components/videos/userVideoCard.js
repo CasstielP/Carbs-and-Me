@@ -5,12 +5,22 @@ import DeleteVideoModal from "../deleteVideo/deleteVideoModal";
 const UserVideoCard = ({ video }) => {
   let end = new Date();
   let start = new Date(video.created_at);
-  let elapsed = ((end - start)-(28800000)) / 1000 / 60 / 60 / 24;
-  if(elapsed > 1) {
-    elapsed = `${elapsed.toFixed()} day ago`
-} else {
-    elapsed = ((end - start)-(28800000)) / 1000 / 60 / 60
-    elapsed = `${elapsed.toFixed()} hour ago`
+
+  let elapsed = ((end - start)-(28800000));
+  if(elapsed < 60000) {
+    elapsed = `few seconds ago`
+}
+  if(60000 <= elapsed && elapsed < 3600000) {
+    elapsed = ((end - start)-(28800000))/1000/60
+    elapsed = elapsed===1 ? `${elapsed.toFixed()} minute ago` : `${elapsed.toFixed()} minutes ago`
+  }
+  if (3600000 <= elapsed && elapsed <86400000) {
+    elapsed = ((end - start)-(28800000))/1000/60/60
+    elapsed = elapsed===1 ? `${elapsed.toFixed()} hour ago` : `${elapsed.toFixed()} hours ago`
+  }
+ if( elapsed >= 86400000) {
+    elapsed = ((end - start)-(28800000)) / 1000 / 60 / 60/24
+    elapsed = elapsed===1 ? `${elapsed.toFixed()} day ago` : `${elapsed.toFixed()} days ago`
 }
   const [showModal, setShowModal] = useState(false)
 

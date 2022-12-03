@@ -4,7 +4,8 @@ import { Redirect } from "react-router-dom";
 import { login } from "../../store/session";
 import "./login.css";
 import siteLogo from "../navigation/iconname.png";
-const LoginForm = () => {
+import SideBar from "../sideBar";
+const LoginForm = ({showSideBar, setShowSideBar}) => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -38,6 +39,9 @@ const LoginForm = () => {
   }
 
   return (
+    <>
+    <div className="lg-pg-wrapper">
+    <SideBar showSideBar={showSideBar}/>
     <div className="login-page-wrapper">
       <div className="login-wrapper">
         <div className="form-wrapper">
@@ -82,6 +86,8 @@ const LoginForm = () => {
         </div>
       </div>
     </div>
+    </div>
+    </>
   );
 };
 

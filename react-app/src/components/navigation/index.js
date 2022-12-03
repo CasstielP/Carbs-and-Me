@@ -6,6 +6,9 @@ import "./navigation.css";
 import logo from "./iconname.png";
 import menufill from './menu_FILL.png'
 import SideBar from "../sideBar";
+import accountCircle from './account_circle.png'
+import dots from './more_horiz.png'
+import manageAccount from './manage_accounts.png'
 const NavBar = ({showSideBar, setShowSideBar}) => {
   const user = useSelector((state) => state.session.user);
   const [showMenu, setShowMenu] = useState(false);
@@ -50,65 +53,68 @@ const NavBar = ({showSideBar, setShowSideBar}) => {
       <div className="wrapper">
         {!user && (
           <button onClick={openMenu} className="pfbutton">
-            <span className="material-symbols-outlined">account_circle</span>
+            <div className="nav-icon-holder">
+            <img className="nav-icons" src={accountCircle} />
             <span> </span>
-            <span class="material-symbols-outlined">more_horiz</span>
+            <img className="nav-icons" src={dots} />
+            </div>
           </button>
         )}
         {user && (
           <button onClick={openMenu} className="pfbutton">
-            <span class="material-symbols-outlined">person</span>
+            {/* <span class="material-symbols-outlined">person</span> */}
+            <img id='manage-acct' src={manageAccount} />
           </button>
         )}
 
         {showMenu && (
           <div className="dropdownMenulogin">
             {!user && (
-              <div className="loginselect">
                 <NavLink
                   style={{ textDecoration: "none", color: "black" }}
                   to="/login"
                   exact={true}
                   activeClassName="active"
                 >
+              <div className="loginselect">
                   Login
-                </NavLink>
               </div>
+                </NavLink>
             )}
             {!user && (
-              <div className="loginselect">
                 <NavLink
                   style={{ textDecoration: "none", color: "black" }}
                   to="/sign-up"
                   exact={true}
                   activeClassName="active"
                 >
+              <div className="loginselect">
                   Sign Up
-                </NavLink>
               </div>
+                </NavLink>
             )}
             {user && (
               <>
-                <div className="loginselect">
                   <NavLink
                     style={{ textDecoration: "none", color: "black" }}
                     to={`/users/${user.id}`}
                     exact={true}
                     activeClassName="active"
                   >
-                    User Profile
-                  </NavLink>
-                </div>
                 <div className="loginselect">
+                    User Profile
+                </div>
+                  </NavLink>
                   <NavLink
                     style={{ textDecoration: "none", color: "black" }}
                     to="/upload"
                     exact={true}
                     activeClassName="active"
                   >
+                <div className="loginselect">
                     Upload Video
-                  </NavLink>
                 </div>
+                  </NavLink>
               </>
             )}
 
@@ -121,42 +127,6 @@ const NavBar = ({showSideBar, setShowSideBar}) => {
         )}
       </div>
     </div>
-    // <nav>
-    //   <ul>
-    //     <li>
-    //       <NavLink to="/" exact={true} activeClassName="active">
-    //         Home
-    //       </NavLink>
-    //     </li>
-    //    {!user && <li>
-    //       <NavLink to="/login" exact={true} activeClassName="active">
-    //         Login
-    //       </NavLink>
-    //     </li>}
-    //     {!user && <li>
-    //       <NavLink to="/sign-up" exact={true} activeClassName="active">
-    //         Sign Up
-    //       </NavLink>
-    //     </li>}
-    //     {user && (
-    //       <li>
-    //         <NavLink
-    //           to={`/users/${user.id}`}
-    //           exact={true}
-    //           activeClassName="active"
-    //         >
-    //           User Profile
-    //         </NavLink>
-    //       </li>
-    //     )}
-
-    //     {user && (
-    //       <li>
-    //         <LogoutButton />
-    //       </li>
-    //     )}
-    //   </ul>
-    // </nav>
   );
 };
 

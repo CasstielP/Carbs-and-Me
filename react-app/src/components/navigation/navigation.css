@@ -100,7 +100,7 @@
     border-radius: 15px;
     top: 56px;
     position: absolute;
-    height: 145px;
+    height: fit-content;
     width: 150px;
     z-index: 5000;
     padding-top: 11px;
@@ -137,7 +137,7 @@
   cursor: pointer;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   border-radius: 10px;
   height: 40px;
   margin-top: 18px;
@@ -158,11 +158,15 @@
   width: 30px;
   height: 30px;
   margin-top: 6px;
-  margin-left: 16px;
+  margin-left: 5px;
 }
 #github{
   width: 33px;
   height: 33px;
   margin-left: 3px;
   margin-top: 3px;
+}
+
+.sb-content{
+  margin-left: 30px;
 }

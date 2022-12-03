@@ -5,7 +5,8 @@ import { signUp } from '../../store/session';
 import './signup.css'
 import logo from '../navigation/iconname.png'
 import accountIcon from './gooincon.png'
-const SignUpForm = () => {
+import SideBar from '../sideBar';
+const SignUpForm = ({showSideBar, setShowSideBar}) => {
   const [errors, setErrors] = useState([]);
   const history = useHistory()
   const [username, setUsername] = useState('');
@@ -67,6 +68,9 @@ const SignUpForm = () => {
   }
 
   return (
+    <>
+    <div className='su-pg-wrapper'>
+    <SideBar showSideBar={showSideBar}/>
     <div className='signup-page'>
     <div className='signup-wrapper'>
     <div className='left-side'>
@@ -162,6 +166,9 @@ const SignUpForm = () => {
       </div>
     </div>
     </div>
+
+    </div>
+    </>
   );
 };
 

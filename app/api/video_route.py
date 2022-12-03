@@ -94,6 +94,7 @@ def upload_video_info():
         user_id=data['user_id'],
         title=data['title'],
         description=data['description']
+
         )
     db.session.add(new_video)
     db.session.commit()

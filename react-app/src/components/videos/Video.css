@@ -146,5 +146,21 @@ input[type=file]::file-selector-button:hover {
 #upload-sb-wrapper{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    /* justify-content: space-around; */
+}
+
+.su-pg-wrapper{
+    display: flex;
+    flex-direction: row;
+}
+.nav-icon-holder{
+    display: flex;
+    flex-direction: row;
+    margin-left: 12px;
+}
+.nav-icons{
+    width: 30px;
+}
+#manage-acct{
+    width: 30px;
 }
