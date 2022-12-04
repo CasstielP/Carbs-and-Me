@@ -43,7 +43,7 @@ const UploadVideo = ({showSideBar, setShowSideBar}) => {
           user_id: user.id,
           title: title,
           description: description,
-          created_at: new Date()
+
         };
         // const response =
         await fetch("/api/videos/new", {

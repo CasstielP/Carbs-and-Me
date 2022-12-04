@@ -96,6 +96,7 @@ def upload_video_info():
         description=data['description']
 
         )
+    print('================got here', data)
     db.session.add(new_video)
     db.session.commit()
     return new_video.to_dict()
