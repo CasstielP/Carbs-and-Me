@@ -15,6 +15,9 @@ const VideoCard = ({ video }) => {
   let elapsed = ((end - start)-(28800000));
   if(elapsed <= 0) {
     elapsed = 'this is strange'
+    console.log('////////////////', elapsed)
+    console.log('================', elapsed+28800000)
+
   }
   if(elapsed < 60000 && elapsed >0) {
     elapsed = `few seconds ago`
