@@ -7,7 +7,13 @@ const UserVideoCard = ({ video }) => {
   let start = new Date(video.created_at);
 
   let elapsed = ((end - start)-(28800000));
-  if(elapsed < 60000) {
+  if(elapsed <= 0) {
+    console.log('================', elapsed+28800000)
+    console.log('////////////////', elapsed)
+    elapsed = 'this is strange'
+
+  }
+  if(elapsed < 60000 && elapsed >0) {
     elapsed = `few seconds ago`
 }
   if(60000 <= elapsed && elapsed < 3600000) {
