@@ -1,6 +1,80 @@
 # Capstone Project
+Carbs & Me is a clone full-stack web application inspired by YouTube.
 
-This is the starter for the Capstone project.
+[visit the liveLink here](https://carbsandme.onrender.com)
+
+## Wiki Link
+https://github.com/CasstielP/Captstone-Project/wiki
+
+## Technologies 
+1. Python 
+2. Flask
+3. Javascript
+4. React
+5. Redux
+6. AWS s3
+
+
+## MVP Core features
+Carbs&Me, a video-sharing service, is a website for users to share videos, see other users' video-posts, and interact with the community by liking and commenting.
+
+## 1. New account creation, log in, log out, and guest/demo login
+* Users can sign up, log in, and log out.
+* Users can use a demo login to try the site.
+* Users can't use certain features without logging in (like upload videos and commenting).
+* Logged in users are directed to home page where all the available videos are displayed. 
+* Logged out users can also be on the home page and the video detail page, no access to perform actions like comments, liking, or uploading videos.
+
+## 2. Hosting on Render
+
+## 3. Videos (CRUD)
+* Logged in users can upload videos. 
+* Logged in users can edit and delete their own videos.
+* Logged in and logged out users can videos all available videos as well as the video detail page to watch the video.
+
+## 4. Comments (CRUD)
+* Logged in users can post comments on videos(not including their own). 
+* Logged in users can edit and delete their own comments.
+* Logged in and logged out users can view the comments on a video.
+
+ 
+
+
+
+
+
+
+
+## Home Page
+![image](https://user-images.githubusercontent.com/106496513/205553801-4f91eda2-8e24-4f77-a120-e2dfb81f33cb.png)
+
+## Login & Sign Up Page
+![image](https://user-images.githubusercontent.com/106496513/205553919-08978708-977a-44d7-8718-705494f6d095.png)
+![image](https://user-images.githubusercontent.com/106496513/205553937-e6f6f4fe-6634-47fb-8859-ba7565d079c2.png)
+
+
+## Video Detail Page
+![image](https://user-images.githubusercontent.com/106496513/205554056-1152a440-9f38-4352-94bb-891f1806f098.png)
+
+
+## User Profile Page
+![image](https://user-images.githubusercontent.com/106496513/205554116-f51a2692-1299-46bc-8c42-d566ed8de1ea.png)
+
+
+
+
+## Future Implementation Goals
+##  Likes (CRUD)
+Logged in users can like or unlike on videos and comments.
+logged in users can remove like or unlike of videos or comments by click on the buttons again.
+the amount of likes and unlikes will be displayed as numbers along side of the videos and comment components. 
+
+##  Search bars 
+logged in users and logged out users can use search bar to search for videos with titles that are part, or of the input typed in the search bar
+
+##  subscribe (CRD)
+Logged in users can subscribe and unsubscribe to the channel (other user' account) 
+
 
 ## Getting started
 1. Clone this repository (only this branch)
@@ -16,12 +90,8 @@ This is the starter for the Capstone project.
 
 4. Make sure the SQLite3 database connection URL is in the **.env** file
 
-5. This starter organizes all tables inside the `flask_schema` schema, defined
-   by the `SCHEMA` environment variable.  Replace the value for
-   `SCHEMA` with a unique name, **making sure you use the snake_case
-   convention**.
 
-6. Get into your pipenv, migrate your database, seed your database, and run your Flask app
+5. Get into your pipenv, migrate your database, seed your database, and run your Flask app
 
    ```bash
    pipenv shell
@@ -39,7 +109,7 @@ This is the starter for the Capstone project.
    flask run
    ```
 
-7. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
+6. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
 
 
 ## Deployment through Render.com
