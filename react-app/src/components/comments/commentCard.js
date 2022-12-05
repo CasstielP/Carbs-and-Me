@@ -9,7 +9,9 @@ let commentId = comment.id
 const allVideoComments = useSelector(state=> state.comment.videoComments)
 let isCurrenOwner = false
 let end = new Date();
-let start = new Date(new Date(comment.created_at).toLocaleString('en-US', { timeZone: "UTC" }));
+// let start = new Date(new Date(comment.created_at).toLocaleString('en-US', { timeZone: "UTC" }));
+let start = new Date(comment.created_at)
+
 
 let elapsed = ((end - start));
 

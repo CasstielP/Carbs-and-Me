@@ -4,7 +4,8 @@ import EditVideoModal from '../editVideo/EditVideoModal'
 import DeleteVideoModal from "../deleteVideo/deleteVideoModal";
 const UserVideoCard = ({ video }) => {
   let end = new Date();
-  let start = new Date(new Date(video.created_at).toLocaleString('en-US', { timeZone: "UTC" }));
+  // let start = new Date(new Date(video.created_at).toLocaleString('en-US', { timeZone: "UTC" }));
+  let start = new Date(video.created_at)
 
 
   let elapsed = ((end - start));
