@@ -2,15 +2,24 @@ import { Link } from "react-router-dom";
 
 const VideoCard = ({ video }) => {
   let end = new Date();
-  console.log('//////////////////////', video.created_at)
-  console.log('===================', new Date(video.created_at))
-  let start = new Date(video.created_at);
+  let end2 =  Date.now();
 
+  // console.log('wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww', end)
+  // console.log('dddddddddddddddddddddddddddddddddddddddd', end2)
+  // console.log('dddddddddddddddddddddddddddddddddddddddd', end2-video.created_at)
+  // console.log('//////////////////////', video.created_at)
+  // console.log('===================', new Date(video.created_at))
+  let start = new Date(video.created_at);
+  let test  = end - start
+  console.log('ppppppppppppppppppp', test)
   let elapsed = ((end - start)-(28800000));
-  if(elapsed < 60000) {
+  if(elapsed <= 0) {
+    elapsed = 'this is strange'
+  }
+  if(elapsed < 60000 && elapsed >0) {
     elapsed = `few seconds ago`
 }
-  if(60000 <= elapsed && elapsed < 3600000) {
+  if(elapsed >= 60000   && elapsed < 3600000) {
     elapsed = ((end - start)-(28800000))/1000/60
     elapsed = elapsed<2 ? `1 minute ago` : `${elapsed.toFixed()} minutes ago`
   }

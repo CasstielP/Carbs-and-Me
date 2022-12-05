@@ -97,6 +97,7 @@ def upload_video_info():
         description=data['description'],
         created_at =datetime.now()
 
+
         )
     print('================got here', data)
     db.session.add(new_video)
