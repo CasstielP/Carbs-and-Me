@@ -4,28 +4,24 @@ import EditVideoModal from '../editVideo/EditVideoModal'
 import DeleteVideoModal from "../deleteVideo/deleteVideoModal";
 const UserVideoCard = ({ video }) => {
   let end = new Date();
-  let start = new Date(video.created_at);
+  let start = new Date(new Date(video.created_at).toLocaleString('en-US', { timeZone: "UTC" }));
 
-  let elapsed = ((end - start)-(28800000));
-  if(elapsed <= 0) {
-    console.log('================', elapsed+28800000)
-    console.log('////////////////', elapsed)
-    elapsed = 'this is strange'
 
-  }
-  if(elapsed < 60000 && elapsed >0) {
+  let elapsed = ((end - start));
+
+  if(elapsed < 60000) {
     elapsed = `few seconds ago`
 }
-  if(60000 <= elapsed && elapsed < 3600000) {
-    elapsed = ((end - start)-(28800000))/1000/60
+  if(elapsed >= 60000   && elapsed < 3600000) {
+    elapsed = ((end - start))/1000/60
     elapsed = elapsed<2 ? `1 minute ago` : `${elapsed.toFixed()} minutes ago`
   }
   if (3600000 <= elapsed && elapsed <86400000) {
-    elapsed = ((end - start)-(28800000))/1000/60/60
+    elapsed = ((end - start))/1000/60/60
     elapsed = elapsed<2 ? `1 hour ago` : `${elapsed.toFixed()} hours ago`
   }
  if( elapsed >= 86400000) {
-    elapsed = ((end - start)-(28800000)) / 1000 / 60 / 60/24
+    elapsed = ((end - start)) / 1000/60/60/24
     elapsed = elapsed<2 ? `${elapsed.toFixed()} day ago` : `${elapsed.toFixed()} days ago`
 }
   const [showModal, setShowModal] = useState(false)

@@ -2,24 +2,11 @@ import { Link } from "react-router-dom";
 
 const VideoCard = ({ video }) => {
   let end = new Date();
-  let end2 =  Date.now();
+  let start = new Date(new Date(video.created_at).toLocaleString('en-US', { timeZone: "UTC" }));
 
-  // console.log('wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww', end)
-  // console.log('dddddddddddddddddddddddddddddddddddddddd', end2)
-  // console.log('dddddddddddddddddddddddddddddddddddddddd', end2-video.created_at)
-  // console.log('//////////////////////', video.created_at)
-  // console.log('===================', new Date(video.created_at))
-  let start = new Date(video.created_at);
-  let test  = end - start
-  console.log('ppppppppppppppppppp', test)
   let elapsed = ((end - start));
-  if(elapsed <= 0) {
-    console.log('================', elapsed+28800000)
-    console.log('////////////////', elapsed)
-    elapsed = 'this is strange'
 
-  }
-  if(elapsed < 60000 && elapsed >0) {
+  if(elapsed < 60000) {
     elapsed = `few seconds ago`
 }
   if(elapsed >= 60000   && elapsed < 3600000) {
@@ -31,7 +18,7 @@ const VideoCard = ({ video }) => {
     elapsed = elapsed<2 ? `1 hour ago` : `${elapsed.toFixed()} hours ago`
   }
  if( elapsed >= 86400000) {
-    elapsed = ((end - start)) / 1000 / 60 / 60/24
+    elapsed = ((end - start)) / 1000/60/60/24
     elapsed = elapsed<2 ? `${elapsed.toFixed()} day ago` : `${elapsed.toFixed()} days ago`
 }
   return (
