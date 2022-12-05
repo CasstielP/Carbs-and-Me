@@ -99,9 +99,10 @@ input.comment-textarea:focus{
     cursor: pointer;
     margin: 10px;
     border-radius: 30px;
-    width: 50px;
+    width: 60px;
     height: 30px;
     border: none;
     background-color: #287ce9;
     color: white;
+    text-align: center;
 }

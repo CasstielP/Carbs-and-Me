@@ -75,7 +75,7 @@ const LoginForm = ({showSideBar, setShowSideBar}) => {
 
               />
               <div className="su-button-container">
-              <button className="lg-button" type="button" onClick={demoUserButton}>
+              <button className="lg-button" type="submit" onClick={demoUserButton}>
                 Demo User
               </button>
               <button className="lg-button" type="submit">Login</button>

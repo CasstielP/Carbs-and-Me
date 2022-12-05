@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify, session, redirect
 from app.models import db, Comment
+from datetime import datetime
 from flask_login import current_user, login_required
 from app.aws import (
     upload_file_to_s3, allowed_file, get_unique_filename)
@@ -47,7 +48,8 @@ def create_comment():
     new_comment = Comment(
         user_id= data['user_id'],
         video_id=data['video_id'],
-        content=data['content']
+        content=data['content'],
+        created_at=datetime.now()
     )
     db.session.add(new_comment)
     db.session.commit()

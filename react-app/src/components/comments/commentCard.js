@@ -10,12 +10,21 @@ const allVideoComments = useSelector(state=> state.comment.videoComments)
 let isCurrenOwner = false
 let end = new Date();
 let start = new Date(comment.created_at);
-let elapsed = ((end - start)-(28800000)) / 1000 / 60 / 60 / 24;
-if(elapsed > 1) {
-    elapsed = `${elapsed.toFixed()} day ago`
-} else {
-    elapsed = ((end - start)-(28800000)) / 1000 / 60 / 60
-    elapsed = `${elapsed.toFixed()} hour ago`
+let elapsed = ((end - start)-(28800000));
+if(elapsed < 60000) {
+  elapsed = `few seconds ago`
+}
+if(60000 <= elapsed && elapsed < 3600000) {
+  elapsed = ((end - start)-(28800000))/1000/60
+  elapsed = elapsed<2 ? `1 minute ago` : `${elapsed.toFixed()} minutes ago`
+}
+if (3600000 <= elapsed && elapsed <86400000) {
+  elapsed = ((end - start)-(28800000))/1000/60/60
+  elapsed = elapsed<2 ? `1 hour ago` : `${elapsed.toFixed()} hours ago`
+}
+if( elapsed >= 86400000) {
+  elapsed = ((end - start)-(28800000)) / 1000 / 60 / 60/24
+  elapsed = elapsed<2 ? `${elapsed.toFixed()} day ago` : `${elapsed.toFixed()} days ago`
 }
 
 if(user) {

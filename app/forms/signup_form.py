@@ -20,24 +20,24 @@ def username_exists(form, field):
     user = User.query.filter(User.username == username).first()
     if user:
         raise ValidationError('Username is already in use.')
-    if len(username) < 5 or len(username) > 20:
+    if len(username) < 3 or len(username) > 20:
         raise ValidationError(
-            'Username should be betweeen 4 and 12 charaters.')
+            'Username should be betweeen 3 and 20 charaters.')
 
 
 def firstname_valid(form, field):
     # Checking if username is already in use
     firstname = field.data
 
-    if len(firstname) < 5 or len(firstname) > 20:
-        raise ValidationError('First name should be betweeen 5 and 20 charaters.')
+    if len(firstname) < 1 or len(firstname) > 20:
+        raise ValidationError('First name should be betweeen 1 and 20 charaters.')
 
 def lastname_valid(form, field):
     # Checking if username is already in use
     lastname = field.data
 
-    if len(lastname) < 5 or len(lastname) > 20:
-        raise ValidationError('Last name should be betweeen 5 and 20 charaters.')
+    if len(lastname) < 1 or len(lastname) > 20:
+        raise ValidationError('Last name should be betweeen 1 and 20 charaters.')
 
 
 def password_valid(form, field):

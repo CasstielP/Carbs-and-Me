@@ -24,17 +24,28 @@ const SignUpForm = ({showSideBar, setShowSideBar}) => {
     e.preventDefault();
     if (password === repeatPassword) {
       setErrors([]);
-      if(username.length<5 || username.length>20) Errors.push('Username length must be between 5 to 20 characters!')
-      if(firstname.length<5 || firstname.length>20) Errors.push('Frist name length must be between 5 to 20 characters!')
-      if(lastname.length<5 || lastname.length>20) Errors.push('Last name length must be between 5 to 20 characters!')
+      if(username.length<3 || username.length>20) Errors.push('Username length must be between 3 to 20 characters!')
+      if(firstname.length<1 || firstname.length>20) Errors.push('Frist name length must be between 1 to 20 characters!')
+      if(lastname.length<1 || lastname.length>20) Errors.push('Last name length must be between 1 to 20 characters!')
       if(!email.includes('@'||'.')) Errors.push('Invalid Email Format!')
       setErrors(Errors)
       if(Errors.length) return;
-      const data = await dispatch(signUp(username, firstname, lastname, email, password));
+      dispatch(signUp(username, firstname, lastname, email, password))
+      .then((res)=>{
+        if(res == null){
+          // setErrors(data)
+          window.alert('Welcome to Carb & Me !')
+          history.push('/')
+        } else {
+          console.log('================', res)
+          console.log('================', typeof res)
+
+          setErrors(res)
+        }
+        return;
+
+      })
       // if (data) {
-        setErrors(data)
-        window.alert('Welcome to Carb & Me !')
-        history.push('/')
       // }
     }else return setErrors(['Confirm Password field must be the same as the Password field']);
   };
