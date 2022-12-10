@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    /* justify-content: space-evenly; */
 }
 
 .video-card-container{
@@ -16,7 +16,8 @@
 }
 .video-title{
     font-weight: bold;
-    width: 350px;
+    width: 280px;
+    /* word-wrap: break-word; */
 }
 
 .time-elapsed{
@@ -237,3 +238,26 @@ input[type=file]::file-selector-button:hover {
     text-decoration: none;
     color: inherit;
  }
+
+ .video-card-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+ }
+.vid-info-right{
+    display: flex;
+    flex-direction: column;
+    /* margin-left: 20px; */
+}
+.vid-card-img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: #287ce9 solid 1px;
+}
+/* .vid-card-img >img{
+    border-radius: 50%;
+    background-size: cover;
+    background-color: #287ce9;
+} */

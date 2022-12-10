@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import profilepic from '../sideBar/python.png'
 const VideoCard = ({ video }) => {
   let end = new Date();
   // let start = new Date(new Date(video.created_at).toLocaleString('en-US', { timeZone: "UTC" }));
@@ -37,12 +37,15 @@ const VideoCard = ({ video }) => {
           </Link>
         </div>
         <div className="video-card-info">
+          {/* <div "> */}
+            <img className="vid-card-img" src={profilepic} ></img>
+          {/* </div> */}
+          <div className="vid-info-right">
           <div className="video-title">{video.title}</div>
+          <div>{video.user.firstname} {video.user.lastname}</div>
           <div className="time-elapsed">{elapsed}</div>
-          <div className="auth-button">
-          {/* <button>Edit</button>
-          <button>Delete</button> */}
           </div>
+
         </div>
       </div>
     </>

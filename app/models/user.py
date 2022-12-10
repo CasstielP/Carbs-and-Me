@@ -66,8 +66,16 @@ class Video(db.Model):
             'url': self.url,
             'title': self.title,
             'description': self.description,
-            'created_at': self.created_at
+            'created_at': self.created_at,
+            'comments': self.comments_to_dict(),
+            'user': self.user.to_dict()
         }
+
+    def comments_to_dict(self):
+        cmt_dict = {}
+        for comment in self.comments:
+            cmt_dict[comment.to_dict()['id']] = comment.to_dict()
+        return cmt_dict
 
 
 class Comment(db.Model):
