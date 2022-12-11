@@ -261,3 +261,28 @@ input[type=file]::file-selector-button:hover {
     background-size: cover;
     background-color: #287ce9;
 } */
+.vid-detail-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 20px;
+}
+#vid-dh-title{
+    font-size: 30px;
+    font-weight: bold;
+}
+.like-bttn{
+    display: flex;
+    flex-direction: row;
+    border: none;
+    border-radius: 50px;
+    width: 80px;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+#thumb-up{
+    width: 23px;
+    margin-right: 5px;
+}

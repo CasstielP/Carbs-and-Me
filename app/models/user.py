@@ -19,6 +19,7 @@ class User(db.Model, UserMixin):
 
     videos = db.relationship('Video', back_populates='user')
     comments = db.relationship('Comment', back_populates='user')
+    likes = db.relationship("Like", back_populates='user')
 
     @property
     def password(self):
@@ -54,10 +55,12 @@ class Video(db.Model):
     url = db.Column(db.String(200), nullable=False)
     title = db.Column(db.String(200), nullable=False)
     description = db.Column(db.String(2000), nullable=False)
+    likeCount = db.Column(db.Integer, nullable=False, default=0)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
     user = db.relationship('User', back_populates='videos')
     comments = db.relationship('Comment', back_populates='video', cascade='all, delete-orphan')
+    likes = db.relationship('Like', back_populates='video')
 
     def to_dict(self):
         return {
@@ -68,7 +71,8 @@ class Video(db.Model):
             'description': self.description,
             'created_at': self.created_at,
             'comments': self.comments_to_dict(),
-            'user': self.user.to_dict()
+            'user': self.user.to_dict(),
+            'likes': [like.to_dict() for like in list(Like.query.filter(self.id == Like.video_id).all())],
         }
 
     def comments_to_dict(self):
@@ -91,6 +95,7 @@ class Comment(db.Model):
         add_prefix_for_prod('videos.id')
     ))
     content = db.Column(db.String(2000), nullable=False)
+    likeCount = db.Column(db.Integer, nullable=False, default=0)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
     user = db.relationship('User', back_populates='comments')
@@ -104,4 +109,29 @@ class Comment(db.Model):
             'video_id': self.video_id,
             'content': self.content,
             'created_at': self.created_at
+        }
+
+
+class Like(db.Model):
+    __tablename__ = 'likes'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
+    id = db.Column(db.Integer, primary_key=True)
+    video_id = db.Column(db.Integer, db.ForeignKey (
+        add_prefix_for_prod("videos.id")
+    ), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey (
+        add_prefix_for_prod("users.id")
+    ), nullable=False)
+
+    video = db.relationship("Video", back_populates='likes')
+    user = db.relationship("User", back_populates='likes')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'videoId': self.video_id,
+            'userId': self.user_id
         }

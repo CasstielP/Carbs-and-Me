@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify, session, redirect
-from app.models import db, Video
+from app.models import db, Video, Like
 from datetime import datetime
 from flask_login import current_user, login_required
 from app.aws import (
@@ -130,3 +130,36 @@ def delete_video(id):
     db.session.delete(video)
     db.session.commit()
     return 'successfully deleted video'
+
+
+# ------------------------EDIT VIDEO LIKES---------------------------------
+@video_routes.route('/likes', methods=['PUT'])
+# <int:id>
+def updateLikes():
+    req = request.get_json()
+    videoId = req['videoId']
+    userId = req['userId']
+
+    video = Video.query.get(videoId)
+
+    likeExist = Like.query.filter(Like.user_id == userId, Like.video_id == videoId).one_or_none()
+
+    if(likeExist == None):
+        video.likeCount += 1;
+        newLike = Like(
+            user_id = userId,
+            video_id = videoId
+        )
+        db.session.add(newLike)
+        db.session.commit()
+        print("ADD LIKE")
+    else:
+        if video.likeCount != 0:
+            video.likeCount -= 1
+
+        db.session.delete(likeExist)
+        db.session.commit()
+        print('REMOVE LIKES')
+
+    data = Video.query.get(videoId).to_dict()
+    return data
