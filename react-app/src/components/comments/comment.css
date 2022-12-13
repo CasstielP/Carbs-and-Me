@@ -106,3 +106,22 @@ input.comment-textarea:focus{
     color: white;
     text-align: center;
 }
+
+.cmt-info-wrapper{
+    display: flex;
+    flex-direction: row;
+}
+#cmt-username{
+    margin-top: 7px;
+    font-weight: bold;
+}
+.cmt-likebtn-wrapper{
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+}
+
+.cmt-like-bttn{
+    width: 20px;
+    margin-right: 8px;
+}

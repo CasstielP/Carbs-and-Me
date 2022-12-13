@@ -111,6 +111,22 @@ export const updateLikes = (userId, videoId) => async (dispatch) => {
 }
 
 
+//process dislikes
+export const updateDisLikes = (userId, videoId) => async (dispatch) => {
+    const res = await fetch(`/api/videos/dislikes`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({userId, videoId})
+    })
+    if(res.ok) {
+        const data = await res.json()
+        dispatch(getSingleVideo(data))
+        return data
+    }
+}
+
 
 
 

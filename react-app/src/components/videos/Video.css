@@ -286,3 +286,11 @@ input[type=file]::file-selector-button:hover {
     width: 23px;
     margin-right: 5px;
 }
+#thumb-down{
+    width: 23px;
+    margin-right: 5px;
+}
+.like-btn-wrapper{
+    display: flex;
+    flex-direction: row;
+}

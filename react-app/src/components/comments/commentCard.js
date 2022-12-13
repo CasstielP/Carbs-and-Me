@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import * as commentActions from '../../store/comment'
 import DeleteCommentModal from "../deleteComment/deleteCommentModal"
+import thumbup from '../videos/thumb_up.png'
+import thumbdown from '../videos/thumb_down.png'
 const CommentCard = ({comment}) => {
 const user = useSelector(state=> state.session.user)
 const allUserComments = useSelector(state=>state.comment.userComments)
@@ -72,8 +74,15 @@ const handleCancel = async() => {
 
             { !isEditing &&
             <>
+            <div className="cmt-info-wrapper">
+            <div id='cmt-username'>{comment.user.firstname}</div>
             <div className="cm-fineprint">{elapsed}</div>
+            </div>
             <div id='comment-content'>{comment.content}</div>
+            <div className="cmt-likebtn-wrapper">
+                <img className="cmt-like-bttn" src={thumbup}></img>
+                <img className="cmt-like-bttn" src={thumbdown}></img>
+            </div>
             </>
             }
             { isEditing &&
