@@ -7,17 +7,20 @@ import CommentList from "../comments";
 import SideBar from "../sideBar";
 import thumbup from './thumb_up.png'
 import thumbdown from './thumb_down.png'
+import VideoFeed from "./videoFeed";
 const VideoDetailPage = ({showSideBar, setShowSideBar}) => {
   const { videoId } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector(state=> state.session.user)
   const video = useSelector(state=> state.video.singleVideo);
+  const feedVids = useSelector(state=> state.video.allVideos)
   console.log(video.likes)
   const curUserLike = video?.likes?.filter(like=> like.userId == user.id)
   const curUserDisLike = video?.dislikes?.filter(dislike=> dislike.userId == user.id)
   const [isLoaded, setIsLoaded] = useState(false)
   useEffect(() => {
+    // dispatch(videoActions.fetchAllVideos())
     dispatch(videoActions.fetchSingleVideo(videoId))
     .then(()=>{
       setIsLoaded(true)
@@ -72,6 +75,7 @@ const VideoDetailPage = ({showSideBar, setShowSideBar}) => {
 
         <CommentList video={video} />
         </div>
+        {/* <VideoFeed /> */}
       </div>
       </>
     );

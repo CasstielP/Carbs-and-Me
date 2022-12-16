@@ -254,7 +254,7 @@ input[type=file]::file-selector-button:hover {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: #287ce9 solid 1px;
+    /* border: #287ce9 solid 1px; */
 }
 /* .vid-card-img >img{
     border-radius: 50%;
@@ -293,4 +293,10 @@ input[type=file]::file-selector-button:hover {
 .like-btn-wrapper{
     display: flex;
     flex-direction: row;
+}
+
+.feed-container{
+    border: #287ce9 1px solid;
+    width: 400px;
+    margin-left: 50px;
 }

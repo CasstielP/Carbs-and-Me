@@ -4,8 +4,8 @@ import EditVideoModal from '../editVideo/EditVideoModal'
 import DeleteVideoModal from "../deleteVideo/deleteVideoModal";
 const UserVideoCard = ({ video }) => {
   let end = new Date();
-  // let start = new Date(new Date(video.created_at).toLocaleString('en-US', { timeZone: "UTC" }));
-  let start = new Date(video.created_at)
+  let start = new Date(new Date(video.created_at).toLocaleString('en-US', { timeZone: "UTC" }));
+  // let start = new Date(video.created_at)
 
 
   let elapsed = ((end - start));
@@ -43,12 +43,12 @@ const UserVideoCard = ({ video }) => {
         <div className="video-card-info">
           <div className="video-title">{video.title}</div>
           <div className="time-elapsed">{elapsed}</div>
+        </div>
           <div className="auth-button">
            <EditVideoModal  videoId={video.id}/>
           {/* <button>Delete</button> */}
           <DeleteVideoModal  videoId={video.id}/>
           </div>
-        </div>
       </div>
     </>
   );
