@@ -179,3 +179,7 @@
 .sb-content{
   margin-left: 30px;
 }
+.cmt-content-wrapper{
+  display: flex;
+  flex-direction: row;
+}

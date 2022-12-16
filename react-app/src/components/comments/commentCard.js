@@ -4,10 +4,14 @@ import * as commentActions from '../../store/comment'
 import DeleteCommentModal from "../deleteComment/deleteCommentModal"
 import thumbup from '../videos/thumb_up.png'
 import thumbdown from '../videos/thumb_down.png'
+import morevert from './more_vert.png'
+import editpic from './edit.png'
+
 const CommentCard = ({comment}) => {
 const user = useSelector(state=> state.session.user)
 const allUserComments = useSelector(state=>state.comment.userComments)
 let commentId = comment.id
+const [clickOptBtn, setClickOptBtn] = useState(false)
 const allVideoComments = useSelector(state=> state.comment.videoComments)
 let isCurrenOwner = false
 let end = new Date();
@@ -67,6 +71,11 @@ const handleCancel = async() => {
     setIsEditing(false)
 }
 
+const handleEditCmt = () => {
+    if(clickOptBtn) setClickOptBtn(false)
+    else setClickOptBtn(true)
+}
+
     return (
         <>
         <div>
@@ -78,7 +87,21 @@ const handleCancel = async() => {
             <div id='cmt-username'>{comment.user.firstname}</div>
             <div className="cm-fineprint">{elapsed}</div>
             </div>
+            <div className="cmt-content-wrapper">
             <div id='comment-content'>{comment.content}</div>
+            <div className="s-ce-buttons">
+             <img id='cmt-morevert' src={morevert} onClick={handleEditCmt}/>
+             {
+                clickOptBtn &&
+            <div className="edit-cmt-container">
+            <div className="edit-cmt-col" onClick={handleEdit}><img className="edit-pic" src={editpic}></img>
+                <div id='edit-cmt-edit'>Edit</div>
+            </div>
+            <DeleteCommentModal comment={comment}/>
+             </div>
+             }
+            </div>
+            </div>
             <div className="cmt-likebtn-wrapper">
                 <img className="cmt-like-bttn" src={thumbup}></img>
                 <img className="cmt-like-bttn" src={thumbdown}></img>
@@ -105,11 +128,7 @@ const handleCancel = async() => {
         {
             isCurrenOwner &&
             <>
-            <div className="s-ce-buttons">
-            <button className="s-ce-button" onClick={handleEdit}>Edit</button>
-            {/* <button>Delete</button> */}
-            <DeleteCommentModal comment={comment}/>
-            </div>
+
             </>
         }
             </div>

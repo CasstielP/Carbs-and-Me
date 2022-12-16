@@ -86,14 +86,13 @@ input.comment-textarea:focus{
     background-color: #8b8a8a;
 }
 
-.s-ce-buttons{
+/* .s-ce-buttons{
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    /* margin-right: 260px; */
     margin: none;
     border-bottom: solid 1px #cac7c7;
-}
+} */
 
 .is-ce-button{
     cursor: pointer;
@@ -119,9 +118,61 @@ input.comment-textarea:focus{
     display: flex;
     flex-direction: row;
     margin-left: 10px;
+    margin-bottom: 30px;
 }
 
 .cmt-like-bttn{
     width: 20px;
     margin-right: 8px;
+    cursor: pointer;
+}
+#cmt-morevert{
+    height: 26px;
+    cursor: pointer;
+
+}
+
+.edit-cmt-container{
+    display: flex;
+    flex-direction: column;
+    border: solid rgb(187, 200, 228, 0.3) 0.1px;
+    box-shadow: 0px 0px 10px rgb(187, 200, 228, 0.7);
+    background-color: white;
+    border-radius: 15px;
+    z-index: 5000;
+    position: absolute;
+    margin-right: 20px;
+    height: 100px;
+    width: 105px;
+
+
+}
+.cmt-content-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.edit-pic{
+    width: 25px;
+    margin: 10px;
+}
+.edit-cmt-col{
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    border-radius: 15px;
+
+
+}
+
+.edit-cmt-col:hover{
+    background-color: #8b8a8a;
+}
+
+
+#edit-cmt-edit{
+    margin-top: 14px;
+}
+#cmt-delete-txt{
+    margin-top: 13px;
 }
