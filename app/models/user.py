@@ -21,6 +21,8 @@ class User(db.Model, UserMixin):
     comments = db.relationship('Comment', back_populates='user')
     likes = db.relationship("Like", back_populates='user')
     dislikes = db.relationship('DisLike', back_populates='user')
+    cmtlikes = db.relationship('CmtLike', back_populates='user')
+    cmtdislikes = db.relationship('CmtDisLike', back_populates='user')
 
     @property
     def password(self):
@@ -100,11 +102,13 @@ class Comment(db.Model):
     ))
     content = db.Column(db.String(2000), nullable=False)
     likeCount = db.Column(db.Integer, nullable=False, default=0)
+    DislikeCount = db.Column(db.Integer, nullable=False, default=0)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
     user = db.relationship('User', back_populates='comments')
     video = db.relationship('Video', back_populates='comments')
-
+    cmtlikes = db.relationship('CmtLike', back_populates='comment')
+    cmtdislikes = db.relationship('CmtDisLike', back_populates='comment')
 
     def to_dict(self):
         return {
@@ -113,7 +117,9 @@ class Comment(db.Model):
             'video_id': self.video_id,
             'content': self.content,
             'created_at': self.created_at,
-            'user': self.user.to_dict()
+            'user': self.user.to_dict(),
+            'likes': [like.to_dict() for like in list(CmtLike.query.filter(self.id == CmtLike.comment_id).all())],
+            'dislikes': [dislike.to_dict() for dislike in list(CmtDisLike.query.filter(self.id == CmtDisLike.comment_id).all())]
         }
 
 
@@ -163,5 +169,55 @@ class DisLike(db.Model):
         return {
             'id': self.id,
             'videoId': self.video_id,
+            'userId': self.user_id
+        }
+
+
+class CmtLike(db.Model):
+    __tablename__ = 'cmtlikes'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
+    id = db.Column(db.Integer, primary_key=True)
+    comment_id = db.Column(db.Integer, db.ForeignKey (
+        add_prefix_for_prod("comments.id")
+    ), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey (
+        add_prefix_for_prod("users.id")
+    ), nullable=False)
+
+    comment = db.relationship("Comment", back_populates='cmtlikes')
+    user = db.relationship("User", back_populates='cmtlikes')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'commentId': self.comment_id,
+            'userId': self.user_id
+        }
+
+
+class CmtDisLike(db.Model):
+    __tablename__ = 'cmtdislikes'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
+    id = db.Column(db.Integer, primary_key=True)
+    comment_id = db.Column(db.Integer, db.ForeignKey (
+        add_prefix_for_prod("comments.id")
+    ), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey (
+        add_prefix_for_prod("users.id")
+    ), nullable=False)
+
+    comment = db.relationship("Comment", back_populates='cmtdislikes')
+    user = db.relationship("User", back_populates='cmtdislikes')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'commentId': self.comment_id,
             'userId': self.user_id
         }
