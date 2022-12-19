@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify, session, redirect
-from app.models import db, Comment
+from app.models import db, Comment, CmtLike, CmtDisLike
 from datetime import datetime
 from flask_login import current_user, login_required
 from app.aws import (
@@ -81,3 +81,72 @@ def delete_comment(id):
     db.session.delete(comment)
     db.session.commit()
     return 'successfully deleted comment'
+
+
+
+
+# ------------------------EDIT COMMENT LIKES ---------------------------------
+@comment_routes.route('/likes', methods=['PUT'])
+def updateLikes():
+    req = request.get_json()
+    commentId = req['commentId']
+    userId = req['userId']
+
+
+    comment = Comment.query.get(commentId)
+
+    likeExist = CmtLike.query.filter(CmtLike.user_id == userId, CmtLike.comment_id == commentId).one_or_none()
+
+    if(likeExist == None):
+        Comment.likeCount += 1;
+        newLike = CmtLike(
+            user_id = userId,
+            comment_id = commentId
+        )
+        db.session.add(newLike)
+        db.session.commit()
+        print("ADD LIKE")
+    else:
+        if comment.likeCount != 0:
+            comment.likeCount -= 1
+
+        db.session.delete(likeExist)
+        db.session.commit()
+        print('REMOVE LIKES')
+
+    data = Comment.query.get(commentId).to_dict()
+    return data
+
+
+
+# ------------------------EDIT COMMENT DISLIKES ---------------------------------
+@comment_routes.route('/dislikes', methods=['PUT'])
+def updateDisLikes():
+    req = request.get_json()
+    commentId = req['commentId']
+    userId = req['userId']
+
+
+    comment = Comment.query.get(commentId)
+
+    DislikeExist = CmtDisLike.query.filter(CmtDisLike.user_id == userId, CmtDisLike.comment_id == commentId).one_or_none()
+
+    if(DislikeExist == None):
+        comment.DislikeCount += 1;
+        newDisLike = CmtDisLike(
+            user_id = userId,
+            comment_id = commentId
+        )
+        db.session.add(newDisLike)
+        db.session.commit()
+        print("ADD DISLIKE")
+    else:
+        if comment.DislikeCount != 0:
+            comment.DislikeCount -= 1
+
+        db.session.delete(DislikeExist)
+        db.session.commit()
+        print('REMOVE LIKES')
+
+    data = Comment.query.get(commentId).to_dict()
+    return data
