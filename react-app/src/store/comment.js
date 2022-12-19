@@ -51,8 +51,8 @@ const deleteComment = (commentId) => {
 
 //thunks
 export const fetchAllComments = (videoId) => async (dispatch) => {
+  // console.log('got here ok', videoId)
   const res = await fetch(`/api/comments/videos/${videoId}`);
-  console.log('got here ok', res)
   if (res.ok) {
     const comments = await res.json();
     dispatch(getAllComments(comments));

@@ -13,15 +13,15 @@ const VideoDetailPage = ({showSideBar, setShowSideBar}) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector(state=> state.session.user)
-  const video = useSelector(state=> state.video.singleVideo);
-  const feedVids = useSelector(state=> state.video.allVideos)
-  console.log(video.likes)
+  // const video = useSelector(state=> state.video.singleVideo);
+  const feedVids = useSelector(state=> Object.values(state.video.allVideos))
+  const video = feedVids[videoId - 1]
   const curUserLike = video?.likes?.filter(like=> like.userId == user.id)
   const curUserDisLike = video?.dislikes?.filter(dislike=> dislike.userId == user.id)
   const [isLoaded, setIsLoaded] = useState(false)
   useEffect(() => {
-    // dispatch(videoActions.fetchAllVideos())
-    dispatch(videoActions.fetchSingleVideo(videoId))
+    dispatch(videoActions.fetchAllVideos())
+    // dispatch(videoActions.fetchSingleVideo(videoId))
     .then(()=>{
       setIsLoaded(true)
     })
@@ -58,7 +58,7 @@ const VideoDetailPage = ({showSideBar, setShowSideBar}) => {
       <>
       <div id='vdp-wrapper'>
       <SideBar showSideBar={showSideBar}/>
-        <div>
+        <div className="detail-page-content">
         <video controls width="1000">
           <source src={video.url}></source>
         </video>
@@ -75,7 +75,8 @@ const VideoDetailPage = ({showSideBar, setShowSideBar}) => {
 
         <CommentList video={video} />
         </div>
-        {/* <VideoFeed /> */}
+        <VideoFeed feedVids={feedVids} />
+
       </div>
       </>
     );

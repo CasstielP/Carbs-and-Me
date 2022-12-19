@@ -14,11 +14,13 @@ const CommentList = ({ video }) => {
   const user = useSelector((state) => state.session.user);
   const [comment, setComment] = useState('')
   const [isopen, setIsOpen] = useState(true)
+  const videoId = video?.id
+  console.log('9999999999999999999', video)
   let userId;
   let Errors=[]
   useEffect(() => {
-    dispatch(commentActions.fetchAllComments(video.id));
-  }, [dispatch, video.id]);
+    dispatch(commentActions.fetchAllComments(videoId));
+  }, [dispatch, videoId]);
 
   if(user) {
     userId = user.id
