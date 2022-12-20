@@ -13,15 +13,16 @@ const VideoDetailPage = ({showSideBar, setShowSideBar}) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector(state=> state.session.user)
-  // const video = useSelector(state=> state.video.singleVideo);
   const feedVids = useSelector(state=> Object.values(state.video.allVideos))
-  const video = feedVids[videoId - 1]
+  const video = useSelector(state=> state.video.singleVideo);
+  // const video = feedVids[videoId - 1]
+  console.log('8888888888888888888', typeof video)
   const curUserLike = video?.likes?.filter(like=> like.userId == user.id)
   const curUserDisLike = video?.dislikes?.filter(dislike=> dislike.userId == user.id)
   const [isLoaded, setIsLoaded] = useState(false)
   useEffect(() => {
-    dispatch(videoActions.fetchAllVideos())
-    // dispatch(videoActions.fetchSingleVideo(videoId))
+    // dispatch(videoActions.fetchAllVideos())
+    dispatch(videoActions.fetchSingleVideo(videoId))
     .then(()=>{
       setIsLoaded(true)
     })
@@ -60,10 +61,10 @@ const VideoDetailPage = ({showSideBar, setShowSideBar}) => {
       <SideBar showSideBar={showSideBar}/>
         <div className="detail-page-content">
         <video controls width="1000">
-          <source src={video.url}></source>
+          <source src={video?.url}></source>
         </video>
         <div className="vid-detail-header">
-        <div id='vid-dh-title'>{video.title}</div>
+        <div id='vid-dh-title'>{video?.title}</div>
         <div className="like-btn-wrapper">
         <button onClick={handleLike} className="like-bttn"><img id='thumb-up' src={thumbup}></img>{video?.likes?.length}k</button>
         <button onClick={handleDislike} className="like-bttn"><img src={thumbdown} id='thumb-down'></img>{video?.dislikes?.length}</button>
@@ -80,7 +81,8 @@ const VideoDetailPage = ({showSideBar, setShowSideBar}) => {
       </div>
       </>
     );
-  } else {
+  }
+  else {
     return 'loading...'
   }
 };

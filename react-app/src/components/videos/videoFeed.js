@@ -17,7 +17,7 @@ const VideoFeed = ({feedVids}) => {
         <>
         <div className="feed-container">
         {feedVids.map((video)=> (
-            <FeedVideoCard  video={video}/>
+            <FeedVideoCard  key={video.id} video={video}/>
         ))}
         </div>
         </>
