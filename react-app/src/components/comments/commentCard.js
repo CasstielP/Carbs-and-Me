@@ -67,6 +67,10 @@ const handleSubmit = async() => {
     window.alert('succcessfully edited comment!')
 }
 
+const handleLike = () => {
+    dispatch(commentActions.updateLikes(user.id, commentId))
+}
+
 const handleCancel = async() => {
     setIsEditing(false)
 }
@@ -103,7 +107,9 @@ const handleEditCmt = () => {
             </div>
             </div>
             <div className="cmt-likebtn-wrapper">
-                <img className="cmt-like-bttn" src={thumbup}></img>
+                <div className="cmt-likebtn-container">
+                    <img onClick={handleLike} className="cmt-like-bttn" src={thumbup}></img><div>{comment.likes.length}k</div>
+                </div>
                 <img className="cmt-like-bttn" src={thumbdown}></img>
             </div>
             </>

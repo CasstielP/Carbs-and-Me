@@ -111,6 +111,44 @@ export const deleteCommentThunk = (commentId) => async(dispatch)=> {
     }
 }
 
+//process comment likes and dislikes
+
+export const updateLikes = (userId, commentId) => async(dispatch)=> {
+  const res = await fetch(`/api/comments/likes`, {
+    method: 'PUT',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({userId, commentId})
+  })
+  if(res.ok) {
+    const data = await res.json()
+    dispatch(getSingleComment(data))
+    return data
+}
+}
+
+export const updateDisLikes = (userId, commentId) => async (dispatch) => {
+  const res = await fetch(`/api/comments/dislikes`, {
+    method: 'PUT',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({userId, commentId})
+  })
+  if(res.ok) {
+    const data = await res.json()
+    dispatch(getSingleComment(data))
+    return data
+}
+}
+
+
+
+
+
+
+
 
 //reducer
 

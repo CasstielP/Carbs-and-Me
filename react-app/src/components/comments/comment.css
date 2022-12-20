@@ -123,7 +123,7 @@ input.comment-textarea:focus{
 
 .cmt-like-bttn{
     width: 25px;
-    margin-right: 20px;
+    margin-right: 5px;
     cursor: pointer;
 }
 #cmt-morevert{
@@ -175,4 +175,10 @@ input.comment-textarea:focus{
 }
 #cmt-delete-txt{
     margin-top: 13px;
+}
+
+.cmt-likebtn-container{
+    display: flex;
+    flex-direction: row;
+    margin-right: 20px;
 }
