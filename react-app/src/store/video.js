@@ -173,7 +173,9 @@ const videoReducer  = (state = initialState, action) => {
     switch (action.type) {
         case GET_ALL_VIDEOS:
             newState = {...state, allVideos:{}, singleVideo: {}, userVideos:{}}
+            newState.singleVideo = {...state.singleVideo}
             action.videos.forEach(video=>(newState.allVideos[video.id] = video))
+            // console.log('777777777777777777', newState)
             return newState
 
         case GET_USER_VIDEOS:
@@ -183,7 +185,8 @@ const videoReducer  = (state = initialState, action) => {
 
 
         case GET_SINGLE_VIDEO:
-            newState = {...state, singleVideo: action.video}
+            newState = {...state, singleVideo: action.video, allVideos:{}}
+            newState.allVideos = {...state.allVideos}
             // newState.singleVideo = action.video
             return newState
 

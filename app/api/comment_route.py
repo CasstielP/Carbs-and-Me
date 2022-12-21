@@ -91,7 +91,7 @@ def updateLikes():
     req = request.get_json()
     commentId = req['commentId']
     userId = req['userId']
-
+    videoId = req['videoId']
 
     comment = Comment.query.get(commentId)
 
@@ -114,8 +114,14 @@ def updateLikes():
         db.session.commit()
         print('REMOVE LIKES')
 
-    data = Comment.query.get(commentId).to_dict()
-    return data
+    # data = Comment.query.get(commentId).to_dict()
+    # return data
+    all_video_comments = []
+    data = Comment.query.filter(Comment.video_id==videoId).all()
+    # order to change the entry orders
+    for comment in data:
+         all_video_comments.append(comment.to_dict())
+    return jsonify( all_video_comments)
 
 
 
@@ -125,7 +131,7 @@ def updateDisLikes():
     req = request.get_json()
     commentId = req['commentId']
     userId = req['userId']
-
+    videoId = req['videoId']
 
     comment = Comment.query.get(commentId)
 
@@ -148,5 +154,12 @@ def updateDisLikes():
         db.session.commit()
         print('REMOVE LIKES')
 
-    data = Comment.query.get(commentId).to_dict()
-    return data
+    # data = Comment.query.get(commentId).to_dict()
+    # return data
+
+    all_video_comments = []
+    data = Comment.query.filter(Comment.video_id==videoId).all()
+    # order to change the entry orders
+    for comment in data:
+         all_video_comments.append(comment.to_dict())
+    return jsonify( all_video_comments)

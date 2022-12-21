@@ -14,6 +14,8 @@ let commentId = comment.id
 const [clickOptBtn, setClickOptBtn] = useState(false)
 const allVideoComments = useSelector(state=> state.comment.videoComments)
 let isCurrenOwner = false
+const userCmtLike = comment.likes.filter(like=> like.userId == user.id)
+const userCmtDislike = comment.dislikes.filter(dislike=> dislike.userId == user.id)
 let end = new Date();
 let start = new Date(new Date(comment.created_at).toLocaleString('en-US', { timeZone: "UTC" }));
 // let start = new Date(comment.created_at)
@@ -56,7 +58,6 @@ const handleEdit = async()=> {
 }
 
 const handleSubmit = async() => {
-    console.log('qqqqqqqqqqqqqqqqqqqqqqq', comment.id)
     setIsEditing(false)
     const payload = {
         user_id: user.id,
@@ -68,7 +69,31 @@ const handleSubmit = async() => {
 }
 
 const handleLike = () => {
-    dispatch(commentActions.updateLikes(user.id, commentId))
+    if(!user) {
+        alert('You must be logged in first')
+    } else {
+        if(userCmtDislike.length){
+            dispatch(commentActions.updateDisLikes(user.id, commentId, comment.video_id))
+            dispatch(commentActions.updateLikes(user.id, commentId, comment.video_id))
+        }
+        else{
+            dispatch(commentActions.updateLikes(user.id, commentId, comment.video_id))
+        }
+    }
+}
+
+const handleDislike = () => {
+    if(!user) {
+        window.alert('You must be logged in first')
+    } else{
+        if(userCmtLike.length) {
+            dispatch(commentActions.updateLikes(user.id, commentId, comment.video_id))
+            dispatch(commentActions.updateDisLikes(user.id, commentId, comment.video_id))
+        } else {
+            dispatch(commentActions.updateDisLikes(user.id, commentId, comment.video_id))
+        }
+    }
+
 }
 
 const handleCancel = async() => {
@@ -108,9 +133,11 @@ const handleEditCmt = () => {
             </div>
             <div className="cmt-likebtn-wrapper">
                 <div className="cmt-likebtn-container">
-                    <img onClick={handleLike} className="cmt-like-bttn" src={thumbup}></img><div>{comment.likes.length}k</div>
+                    <img onClick={handleLike} className="cmt-like-bttn" src={thumbup}></img><div>{comment.likes.length? comment.likes.length : ''}</div>
                 </div>
-                <img className="cmt-like-bttn" src={thumbdown}></img>
+                <div className="cmt-likebtn-container">
+                <img onClick={handleDislike} className="cmt-like-bttn" src={thumbdown}></img><div>{comment.dislikes.length? comment.dislikes.length : ''}</div>
+                </div>
             </div>
             </>
             }
