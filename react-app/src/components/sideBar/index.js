@@ -17,12 +17,14 @@ const SideBar = ({ showSideBar }) => {
       {showSideBar && (
         <div className="side-bar">
           <div className="sb-content">
-            <NavLink style={{ textDecoration: "none", color: "black" }} to="/">
+            {/* <NavLink style={{ textDecoration: "none", color: "black" }} to="/"> */}
+            <a href="/">
               <div className="sb-home-wrapper">
                 <img className="sb-home" src={homefill}></img>
                 <div className="sb-home-txt">Home</div>
               </div>
-            </NavLink>
+            </a>
+            {/* </NavLink> */}
             <a
               href="https://www.linkedin.com/in/casstiel-pi"
               target="_blank"

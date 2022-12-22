@@ -46,9 +46,12 @@ const NavBar = ({showSideBar, setShowSideBar}) => {
         </div>
       {/* <span class="material-symbols-outlined">menu</span> */}
 
-      <NavLink exact to="/">
-        <img className="logo" src={logo}></img>
-      </NavLink>
+      {/* <NavLink  exact to="/" >
+        <img  className="logo" src={logo}></img>
+      </NavLink> */}
+      <a href="/">
+      <img  className="logo" src={logo}></img>
+      </a>
       </div>
 
       <SearchBar />

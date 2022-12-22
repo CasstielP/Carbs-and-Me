@@ -31,10 +31,14 @@ function User({showSideBar, setShowSideBar}) {
     <div id='up-sb-wrapper'>
       <SideBar showSideBar={showSideBar}/>
       <div className="video-container">
+        <div className="profile-page">
       <img id='banner' src={banner}></img>
+      <div id='profile-vid-wrapper'>
         {Object.values(userVideos).reverse().map((video) => (
           <UserVideoCard key={video.id} video={video} />
         ))}
+      </div>
+        </div>
       </div>
     </div>
 
