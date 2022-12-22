@@ -9,6 +9,7 @@ import SideBar from "../sideBar";
 import accountCircle from './account_circle.png'
 import dots from './more_horiz.png'
 import manageAccount from './manage_accounts.png'
+import SearchBar from "./searchBar";
 const NavBar = ({showSideBar, setShowSideBar}) => {
   const user = useSelector((state) => state.session.user);
   const [showMenu, setShowMenu] = useState(false);
@@ -49,6 +50,8 @@ const NavBar = ({showSideBar, setShowSideBar}) => {
         <img className="logo" src={logo}></img>
       </NavLink>
       </div>
+
+      <SearchBar />
 
       <div className="wrapper">
         {!user && (

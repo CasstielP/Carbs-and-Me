@@ -183,3 +183,31 @@
   display: flex;
   flex-direction: row;
 }
+
+.searchInputs{
+  border: #d3d3d3 1px solid;
+  width: 540px;
+  height: 38px;
+  border-radius: 40px 0 0 40px ;
+}
+
+.search-wrapper{
+  display: flex;
+  flex-direction: row;
+}
+
+.search-button{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0 40px 40px 0;
+  border: #d3d3d3 1px solid;
+  height: 40px;
+  width: 50px;
+  background-color: #f8f8f8;
+}
+#search-icon{
+  width: 30px;
+  height: 30px;
+}
