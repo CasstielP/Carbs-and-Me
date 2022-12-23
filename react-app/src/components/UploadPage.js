@@ -69,6 +69,8 @@ const UploadVideo = ({showSideBar, setShowSideBar}) => {
 
   return (
     <>
+
+    {user?
     <div id='upload-sb-wrapper'>
     <SideBar showSideBar={showSideBar}/>
     <div className="login-page-wrapper">
@@ -109,7 +111,8 @@ const UploadVideo = ({showSideBar, setShowSideBar}) => {
     </div>
 
     </div>
-
+    : history.push('/')
+    }
     </>
   //testing
   );

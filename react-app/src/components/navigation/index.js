@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import LogoutButton from "../auth/LogoutButton";
 import "./navigation.css";
 import logo from "./iconname.png";
@@ -10,10 +10,11 @@ import accountCircle from './account_circle.png'
 import dots from './more_horiz.png'
 import manageAccount from './manage_accounts.png'
 import SearchBar from "./searchBar";
+import uploadIcon from './video.png'
 const NavBar = ({showSideBar, setShowSideBar}) => {
   const user = useSelector((state) => state.session.user);
   const [showMenu, setShowMenu] = useState(false);
-
+  const history = useHistory()
   const openMenu = () => {
     if (showMenu) return;
     setShowMenu(true);
@@ -55,7 +56,15 @@ const NavBar = ({showSideBar, setShowSideBar}) => {
       </div>
 
       <SearchBar />
-
+      <div className="nav-right">
+        {user &&
+        <>
+        <div id='create-vid-wrapper'>
+      <img onClick={()=>history.push(`/upload`)} id='uploadIcon' src={uploadIcon}></img>
+      <div className="hide">Create</div>
+        </div>
+        </>
+        }
       <div className="wrapper">
         {!user && (
           <button onClick={openMenu} className="pfbutton">
@@ -101,6 +110,7 @@ const NavBar = ({showSideBar, setShowSideBar}) => {
             )}
             {user && (
               <>
+
                   <NavLink
                     style={{ textDecoration: "none", color: "black" }}
                     to={`/users/${user.id}`}
@@ -131,6 +141,7 @@ const NavBar = ({showSideBar, setShowSideBar}) => {
             )}
           </div>
         )}
+      </div>
       </div>
     </div>
   );
