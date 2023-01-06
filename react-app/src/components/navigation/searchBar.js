@@ -19,7 +19,7 @@ const SearchBar = () => {
         setWordEntered(searchWord)
         const newFilter = videos.filter((video)=> {
             console.log(video.title.toLowerCase().split(' ').includes(searchWord.toLowerCase()))
-            return video.title.toLowerCase().split(' ').includes(searchWord.toLowerCase())
+            return video.title.toLowerCase().includes(searchWord.toLowerCase())
         })
         if(searchWord === ''){
             setFilteredData([])
