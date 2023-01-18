@@ -38,6 +38,7 @@ const UploadVideo = ({showSideBar, setShowSideBar}) => {
         body: formData,
       }).then(async (res) => {
         let url = await res.text();
+        console.log('urlurlurlurlurlurlurl', url)
         const payload = {
           url: url,
           user_id: user.id,

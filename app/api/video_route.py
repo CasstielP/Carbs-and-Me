@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify, session, redirect
+from ffmpy import FFmpeg
 from app.models import db, Video, Like, DisLike
 from datetime import datetime
 from flask_login import current_user, login_required
@@ -68,6 +69,8 @@ def upload_video():
         return upload, 400
 
     url = upload["url"]
+    print('==============================================',url)
+    ff = FFmpeg(inputs={})
     # title = videoInfo['title']
     # user_id = videoInfo['user_id']
     # description = videoInfo['description']
@@ -80,8 +83,7 @@ def upload_video():
     #     )
     # db.session.add(new_video)
     # db.session.commit()
-    print('==============================================',url)
-    return url
+    return [url, thumbnailUrl]
 
 
 
