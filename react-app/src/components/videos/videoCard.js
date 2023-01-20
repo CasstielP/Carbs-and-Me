@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import profilepic from './pp.jpg'
+import verified from './verified.png'
 const VideoCard = ({ video }) => {
   let end = new Date();
   let start = new Date(new Date(video.created_at).toLocaleString('en-US', { timeZone: "UTC" }));
@@ -43,7 +44,10 @@ const VideoCard = ({ video }) => {
           {/* </div> */}
           <div className="vid-info-right">
           <div className="video-title">{video.title}</div>
-          <div>{video.user.firstname} {video.user.lastname}</div>
+          <div className="vid_card_name_wrapper">
+          <div>{video.user.firstname } {video.user.lastname}</div>
+          <img id='verified_check' src={verified}/>
+          </div>
           <div className="time-elapsed">{elapsed}</div>
           </div>
 

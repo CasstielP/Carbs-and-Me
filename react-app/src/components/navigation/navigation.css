@@ -178,6 +178,7 @@
 
 .sb-content{
   margin-left: 30px;
+  width: 160px;
 }
 .cmt-content-wrapper{
   display: flex;
