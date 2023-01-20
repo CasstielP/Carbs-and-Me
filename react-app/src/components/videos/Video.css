@@ -25,6 +25,13 @@
 
 .video-box{
     border-radius: 15px;
+    width: 350px;
+    height: 200px;
+}
+.feed-video-box{
+    width: 168px;
+    height: 94px;
+    border-radius: 10px;
 }
 .video-title{
     font-weight: bold;
@@ -321,6 +328,7 @@ input[type=file]::file-selector-button:hover {
 .feed-vid-card{
     display: flex;
     flex-direction: row;
+    margin-bottom: 10px;
 }
 
 .feed-vid-info{

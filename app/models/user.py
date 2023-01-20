@@ -56,6 +56,7 @@ class Video(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod("users.id")))
     url = db.Column(db.String(200), nullable=False)
+    thumbnail = db.Column(db.String(200), nullable=False)
     title = db.Column(db.String(200), nullable=False)
     description = db.Column(db.String(2000), nullable=False)
     likeCount = db.Column(db.Integer, nullable=False, default=0)
@@ -72,6 +73,7 @@ class Video(db.Model):
             'id': self.id,
             'user_id': self.user_id,
             'url': self.url,
+            'thumbnail': self.thumbnail,
             'title': self.title,
             'description': self.description,
             'created_at': self.created_at,

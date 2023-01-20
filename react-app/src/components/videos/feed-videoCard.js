@@ -29,9 +29,10 @@ const FeedVideoCard = ({video}) => {
         <div className="feed-vid-card">
                 <Link style={{ textDecoration: "none", color: "black" }}
             to={`/videos/${video.id}`}>
-                <video className="video-box" controls width='200'>
+                {/* <video className="video-box" controls width='200'>
                     <source src={video.url}></source>
-                </video>
+                </video> */}
+            <img className="feed-video-box" src={video.thumbnail} />
                 </Link>
             <div className="feed-vid-info">
                 <div id='feed-vid-title'>{video.title}</div>

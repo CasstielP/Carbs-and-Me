@@ -31,9 +31,10 @@ const VideoCard = ({ video }) => {
             style={{ textDecoration: "none", color: "black" }}
             to={`/videos/${video.id}`}
           >
-            <video className="video-box" controls width="350">
+            {/* <video className="video-box" controls width="350">
               <source src={video.url}></source>
-            </video>
+            </video> */}
+            <img className="video-box" src={video.thumbnail} />
           </Link>
         </div>
         <div className="video-card-info">
