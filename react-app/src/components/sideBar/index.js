@@ -19,7 +19,7 @@ const SideBar = ({ showSideBar }) => {
           <div className="sb-content">
             {/* <NavLink style={{ textDecoration: "none", color: "black" }} to="/"> */}
             <a href="/">
-              <div className="sb-home-wrapper">
+              <div className="sb-home-wrapper" id='sbHomeWrapper1st'>
                 <img className="sb-home" src={homefill}></img>
                 <div className="sb-home-txt">Home</div>
               </div>

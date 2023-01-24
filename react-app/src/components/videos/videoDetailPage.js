@@ -66,7 +66,7 @@ const VideoDetailPage = ({showSideBar, setShowSideBar}) => {
         <div className="vid-detail-header">
         <div id='vid-dh-title'>{video?.title}</div>
         <div className="like-btn-wrapper">
-        <button onClick={handleLike} className="like-bttn"><img id='thumb-up' src={thumbup}></img>{video?.likes?.length}k</button>
+        <button onClick={handleLike} className="like-bttn"><img id='thumb-up' src={thumbup}></img>{video?.likes?.length}</button>
         <button onClick={handleDislike} className="like-bttn"><img src={thumbdown} id='thumb-down'></img>{video?.dislikes?.length}</button>
         </div>
         </div>
