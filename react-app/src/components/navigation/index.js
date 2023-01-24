@@ -121,7 +121,7 @@ const NavBar = ({showSideBar, setShowSideBar}) => {
                     User Profile
                 </div>
                   </NavLink>
-                  <NavLink
+                  {/* <NavLink
                     style={{ textDecoration: "none", color: "black" }}
                     to="/upload"
                     exact={true}
@@ -130,7 +130,7 @@ const NavBar = ({showSideBar, setShowSideBar}) => {
                 <div className="loginselect">
                     Upload Video
                 </div>
-                  </NavLink>
+                  </NavLink> */}
               </>
             )}
 
