@@ -285,6 +285,7 @@ input[type=file]::file-selector-button:hover {
     flex-direction: row;
     justify-content: space-between;
     margin: 20px;
+    align-items: center;
 }
 #vid-dh-title{
     font-size: 30px;
@@ -312,6 +313,8 @@ input[type=file]::file-selector-button:hover {
 .like-btn-wrapper{
     display: flex;
     flex-direction: row;
+    height: 37px;
+
 }
 
 .feed-container{
@@ -322,6 +325,7 @@ input[type=file]::file-selector-button:hover {
 
 .detail-page-content{
     margin-bottom: 100px;
+    width: 1000px;
 }
 
 
