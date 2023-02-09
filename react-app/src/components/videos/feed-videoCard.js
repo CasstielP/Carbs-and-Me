@@ -36,6 +36,7 @@ const FeedVideoCard = ({video}) => {
                 </Link>
             <div className="feed-vid-info">
                 <div id='feed-vid-title'>{video.title}</div>
+                <div className="vid-btm-info"></div>
                 <div id='feed-vid-owner'>{video.user.firstname} {video.user.lastname}</div>
                 <div id='feed-vid-time'>{elapsed}</div>
             </div>
