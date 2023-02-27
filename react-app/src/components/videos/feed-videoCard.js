@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 
 const FeedVideoCard = ({video}) => {
@@ -27,13 +27,12 @@ const FeedVideoCard = ({video}) => {
     return (
         <>
         <div className="feed-vid-card">
-                <Link style={{ textDecoration: "none", color: "black" }}
-            to={`/videos/${video.id}`}>
-                {/* <video className="video-box" controls width='200'>
-                    <source src={video.url}></source>
-                </video> */}
+                {/* <NavLink style={{ textDecoration: "none", color: "black" }}
+            to={`/videos/${video.id}`} reloadDocument> */}
+            <a href= {`/videos/${video.id}`}>
             <img className="feed-video-box" src={video.thumbnail} />
-                </Link>
+            </a>
+                {/* </NavLink> */}
             <div className="feed-vid-info">
                 <div id='feed-vid-title'>{video.title}</div>
                 <div className="vid-btm-info"></div>
