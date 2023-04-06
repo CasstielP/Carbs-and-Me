@@ -17,8 +17,12 @@ const VideoDetailPage = ({showSideBar, setShowSideBar}) => {
   const video = useSelector(state=> state.video.singleVideo);
   // const video = feedVids[videoId - 1]
   // console.log('8888888888888888888', typeof video)
-  const curUserLike = video?.likes?.filter(like=> like.userId == user.id)
-  const curUserDisLike = video?.dislikes?.filter(dislike=> dislike.userId == user.id)
+  let curUserDisLike = null
+  let curUserLike = null
+  if(user) {
+    curUserLike = video?.likes?.filter(like=> like.userId == user.id)
+    curUserDisLike = video?.dislikes?.filter(dislike=> dislike.userId == user?.id)
+  }
   const [isLoaded, setIsLoaded] = useState(false)
   useEffect(() => {
     dispatch(videoActions.fetchAllVideos())
