@@ -8,6 +8,7 @@ const UploadVideo = ({ showSideBar, setShowSideBar }) => {
   const [video, setVideo] = useState(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [thumbnail, setThumbnail] = useState(null);
   const [videoLoading, setVideoLoading] = useState(false);
   const user = useSelector((state) => state.session.user);
   const [error, setError] = useState([]);
@@ -26,6 +27,11 @@ const UploadVideo = ({ showSideBar, setShowSideBar }) => {
         errors.push("Only video file type allowed");
 
     }
+    if (!thumbnail) {
+      error.push("Must uplaod a thumbnail image")
+    } else if (thumbnail && !["image/jpeg", "image/png"].includes(thumbnail.type)) {
+      errors.push("Only image file types (jpeg, png) are allowed for thumbnail image")
+    }
     setError(errors);
 
     if (errors.length) {
@@ -41,6 +47,7 @@ const UploadVideo = ({ showSideBar, setShowSideBar }) => {
           url: url,
           user_id: user.id,
           title: title,
+          thumbnail: thumbnail,
           description: description,
 
         };
@@ -67,6 +74,10 @@ const UploadVideo = ({ showSideBar, setShowSideBar }) => {
   const updateVideo = (e) => {
     const file = e.target.files[0];
     setVideo(file);
+  };
+  const updateImage = (e) => {
+    const file = e.target.files[0];
+    setThumbnail(file);
   };
 
   return (
@@ -102,8 +113,12 @@ const UploadVideo = ({ showSideBar, setShowSideBar }) => {
                     onChange={(e) => setDescription(e.target.value)}
                   />
                   <div className="input-file-container">
+                    <input id="file-input" type="file" accept="image/*" onChange={updateImage} />
+                    <label htmlFor="file-input">thumbnail file</label>
+                  </div>
+                  <div className="input-file-container">
                     <input id="file-input" type="file" accept="video/*" onChange={updateVideo} />
-
+                    <label htmlFor="file-input">video file</label>
                   </div>
                   <button className="lg-button" type="submit">Submit</button>
                   {videoLoading && <p>Loading...</p>}
