@@ -22,8 +22,15 @@ const VideoCard = ({ video }) => {
   }
  if( elapsed >= 86400000) {
     elapsed = ((end - start)) / 1000/60/60/24
-    elapsed = elapsed<2 ? `${elapsed.toFixed()} day ago` : `${elapsed.toFixed()} days ago`
+    if (elapsed >= 365.25) {
+      elapsed /= 365.25 //convert to years
+      elapsed = elapsed < 2 ? `${elapsed.toFixed()} year ago` : `${elapsed.toFixed()} years ago`
+    } else {
+      elapsed = elapsed < 2 ? `${elapsed.toFixed()} day ago` : `${elapsed.toFixed()} days ago`
+    }
 }
+
+
   return (
     <>
       <div className="video-card-container">
