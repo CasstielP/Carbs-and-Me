@@ -94,12 +94,11 @@ def upload_video_info():
     data = request.get_json()
     new_video = Video(
         url= data['url'],
+        thumbnail=data['thumbnail'],
         user_id=data['user_id'],
         title=data['title'],
         description=data['description'],
         created_at =datetime.now()
-
-
         )
     print('================got here', data)
     db.session.add(new_video)

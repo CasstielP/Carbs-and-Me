@@ -10,11 +10,10 @@
     height: 600px;
 }
 .login-page-wrapper{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 700px;
-    position: absolute;
+    /* display: flex;
+    justify-content: space-between;
+    align-items: center; */
+
 }
 
 .li-form{
@@ -74,4 +73,7 @@
 .lg-pg-wrapper{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px;
 }

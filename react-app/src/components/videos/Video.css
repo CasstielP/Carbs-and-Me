@@ -133,7 +133,7 @@ input[type=file]::file-selector-button:hover {
     /* border: #287ce9 solid 1px; */
     width: 300px;
     margin-bottom: 100px;
-    margin-right: 40px;
+    /* margin-right: 40px; */
 
 }
 
@@ -168,6 +168,7 @@ input[type=file]::file-selector-button:hover {
 #upload-sb-wrapper{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     /* justify-content: space-around; */
 }
 

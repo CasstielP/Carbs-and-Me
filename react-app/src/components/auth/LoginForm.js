@@ -11,7 +11,7 @@ const LoginForm = ({showSideBar, setShowSideBar}) => {
   const [password, setPassword] = useState("");
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
-  //testing
+
   const onLogin = async (e) => {
     e.preventDefault();
     setErrors([]);
