@@ -108,7 +108,22 @@ input[type=file]::file-selector-button:hover {
 .input-file-container{
     border: 1px solid #e5e5e5;
     margin: 20px;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-around; */
+    align-items: center;
 }
+#li-form-uploadPG{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 310px;
+}
+.file_upload_title {
+    margin-left: 20px;
+    font-size: 14px;
+}
+
 .vid-des{
     display: flex;
     flex-direction: row;

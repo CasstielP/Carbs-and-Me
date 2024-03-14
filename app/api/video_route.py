@@ -6,6 +6,10 @@ from flask_login import current_user, login_required
 from app.aws import (
     upload_file_to_s3, allowed_file, get_unique_filename)
 
+import os
+from io import BytesIO
+
+
 video_routes = Blueprint("videos", __name__)
 
 
@@ -51,39 +55,60 @@ def upload_video():
     # if "video" not in request.files:
     #     return {"errors": "video required"}, 400
     video = request.files["video"]
-    title = request.get_data()
+    thumbnail = request.files["thumbnail"]
+
 
     if not allowed_file(video.filename):
         return {"errors": "file type not permitted"}, 400
 
+    #uploading video file to aws s3
     video.filename = get_unique_filename(video.filename)
-    print(video)
+    video_upload = upload_file_to_s3(video)
+    video_url = video_upload["url"]
 
-    upload = upload_file_to_s3(video)
+    #uploading thumbnail file to aws s3
+    thumbnail.filename = get_unique_filename(thumbnail.filename)
+    thumbnail_upload = upload_file_to_s3(thumbnail)
+    thumbnail_url = thumbnail_upload.get('url')
 
-
-    if "url" not in upload:
+    if "url" not in video_upload:
         # if the dictionary doesn't have a url key
         # it means that there was an error when we tried to upload
         # so we send back that error message
-        return upload, 400
+        return video_upload, 400
 
-    url = upload["url"]
-    print('==============================================',url)
-    ff = FFmpeg(inputs={})
-    # title = videoInfo['title']
-    # user_id = videoInfo['user_id']
-    # description = videoInfo['description']
 
-    # new_video = Video(
-    #     user_id=user_id,
-    #     url=url,
-    #     title=title,
-    #     description=description
+
+    # temp_video_path = os.path.join('/tmp', video.filename)
+    # video.save(temp_video_path)
+
+
+    #create a unique filename for the thumbnail
+    # thumbnail_filename = f"{os.path.splitext(video.filename)[0]}_thumbnail.jpg"
+
+
+
+    # Use ffmpeg to extract a frame from the video as a thumbnail
+    # try:
+    #     out, _ = (
+    #         FFmpeg
+    #         .input(video.stream)
+    #         .output('pipe:', vframes=1, format='image2', vcodec='mjpeg')
+    #         .run(capture_stdout=True, capture_stderr=True)
     #     )
-    # db.session.add(new_video)
-    # db.session.commit()
-    return [url, thumbnailUrl]
+    #     thumbnail_io = BytesIO(out)
+    #     thumbnail_io.seek(0)  # Go to the beginning of the BytesIO object
+    # except FFmpeg.Error as e:
+    #     return {"errors": "Failed to create thumbnail"}, 500
+
+    # thumbnail_upload = upload_file_to_s3(thumbnail_io, filename=thumbnail_filename)
+    # if "url" not in thumbnail_upload:
+    #     return thumbnail_upload, 400
+    # thumbnail_url = thumbnail_upload["url"]
+
+    print('==============================================',thumbnail_url)
+
+    return {"video_url": video_url, "thumbnail_url": thumbnail_url}
 
 
 

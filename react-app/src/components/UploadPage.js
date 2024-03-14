@@ -19,6 +19,9 @@ const UploadVideo = ({ showSideBar, setShowSideBar }) => {
     setError([]);
     const formData = new FormData();
     formData.append("video", video);
+    // formData.append('title', title)
+    // formData.append("description", description);
+    formData.append('thumbnail', thumbnail)
     if (!title) errors.push("Title cannot be empty");
     if (!description) errors.push("Description cannot be empty");
     if (!video) errors.push("Must upload a video file");
@@ -37,24 +40,24 @@ const UploadVideo = ({ showSideBar, setShowSideBar }) => {
     if (errors.length) {
       return;
     } else {
+      console.log('urlurlurlurlurlurlurl', formData)
       setVideoLoading(true); // display video uploading info for the user
       const res = await fetch("/api/videos", {
         method: "POST",
         body: formData,
       }).then(async (res) => {
-        let url = await res.text();
+        let newVid = await res.json();
         const payload = {
-          url: url,
+          url:  newVid.video_url,
           user_id: user.id,
           title: title,
-          thumbnail: thumbnail,
+          thumbnail: newVid.thumbnail_url,
           description: description,
 
         };
-        console.log('urlurlurlurlurlurlurl', res)
 
 
-        // const response =
+
         await fetch("/api/videos/new", {
           method: "POST",
           headers: {
@@ -76,8 +79,8 @@ const UploadVideo = ({ showSideBar, setShowSideBar }) => {
     setVideo(file);
   };
   const updateImage = (e) => {
-    const file = e.target.files[0];
-    setThumbnail(file);
+    const thumbImg = e.target.files[0];
+    setThumbnail(thumbImg);
   };
 
   return (
@@ -91,7 +94,7 @@ const UploadVideo = ({ showSideBar, setShowSideBar }) => {
               <div className="form-wrapper">
                 <img id="ulp-icon" src={siteicon}></img>
                 <h3 id="ul-h3">Become an inspiration, Start your Channel today!</h3>
-                <form className="li-form" onSubmit={handleSubmit}>
+                <form id="li-form-uploadPG" onSubmit={handleSubmit}>
                   <div className="error-list">
                     {error.map((error, ind) => (
                       <div key={ind}>{error}</div>
@@ -112,13 +115,16 @@ const UploadVideo = ({ showSideBar, setShowSideBar }) => {
                     placeholder="description"
                     onChange={(e) => setDescription(e.target.value)}
                   />
+                  {/* <label htmlFor="file-input">thumbnail</label> */}
+
                   <div className="input-file-container">
+                    <div className='file_upload_title'>Thumbnail</div>
                     <input id="file-input" type="file" accept="image/*" onChange={updateImage} />
-                    <label htmlFor="file-input">thumbnail file</label>
                   </div>
                   <div className="input-file-container">
+                    {/* <label htmlFor="file-input">video</label> */}
+                    <div className='file_upload_title'>Video</div>
                     <input id="file-input" type="file" accept="video/*" onChange={updateVideo} />
-                    <label htmlFor="file-input">video file</label>
                   </div>
                   <button className="lg-button" type="submit">Submit</button>
                   {videoLoading && <p>Loading...</p>}
