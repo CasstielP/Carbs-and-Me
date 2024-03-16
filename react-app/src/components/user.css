@@ -1,0 +1,19 @@
+.pf_pg_video_card_wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.pf_pg_video_card_container{
+    margin: 15px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+#pf_pg_video_thumbnail{
+    width: 350px;
+    height: 200px;
+    border-radius: 15px;
+}

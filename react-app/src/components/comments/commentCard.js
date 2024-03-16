@@ -6,6 +6,7 @@ import thumbup from '../videos/thumb_up.png'
 import thumbdown from '../videos/thumb_down.png'
 import morevert from './more_vert.png'
 import editpic from './edit.png'
+import './comment.css'
 
 const CommentCard = ({comment}) => {
 const user = useSelector(state=> state.session.user)
@@ -109,11 +110,17 @@ const handleEditCmt = () => {
         <>
         <div>
             <div className="single-comment-container">
-
+            <div className="single_cmt_side_divider">
             { !isEditing &&
             <>
+            <div className="cmt_left">
+            <div className="cmt_pf_pic">
+                <img></img>
+            </div>
+            </div>
+            <div className="cmt_right">
             <div className="cmt-info-wrapper">
-            <div id='cmt-username'>{comment.user.firstname}</div>
+            <div id='cmt-username'>@{comment.user.username}</div>
             <div className="cm-fineprint">{elapsed}</div>
             </div>
             <div className="cmt-content-wrapper">
@@ -139,8 +146,6 @@ const handleEditCmt = () => {
                 <img onClick={handleDislike} className="cmt-like-bttn" src={thumbdown}></img><div>{comment.dislikes.length? comment.dislikes.length : ''}</div>
                 </div>
             </div>
-            </>
-            }
             { isEditing &&
             <div>
             <form onSubmit={handleSubmit}>
@@ -158,6 +163,10 @@ const handleEditCmt = () => {
             </form>
             </div>
             }
+            </div>
+            </>
+            }
+            </div>
         {
             isCurrenOwner &&
             <>
