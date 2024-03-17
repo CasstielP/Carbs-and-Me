@@ -98,12 +98,12 @@ function User({ showSideBar, setShowSideBar }) {
                       </div>
                       <div className="time-elapsed" video={video}>{calVideoPostTime(video)}</div>
                     </div>
+                  </div>
                     <div className="auth-button">
                       <EditVideoModal videoId={video.id} />
                       {/* <button>Delete</button> */}
                       <DeleteVideoModal videoId={video.id} />
                     </div>
-                  </div>
                 </div>
               ))}
             </div>

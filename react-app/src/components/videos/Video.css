@@ -278,8 +278,9 @@ input[type=file]::file-selector-button:hover {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-
  }
+
+
 .vid-info-right{
     display: flex;
     flex-direction: column;

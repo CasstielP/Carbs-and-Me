@@ -206,3 +206,7 @@ input.comment-textarea:focus{
 .single_cmt_side_divider > * {
     margin-right: 15px;
 }
+
+.cmt_editing_container{
+
+}
