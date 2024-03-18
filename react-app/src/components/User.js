@@ -19,6 +19,7 @@ function User({ showSideBar, setShowSideBar }) {
   const dispatch = useDispatch();
   const { userId } = useParams();
   const user = useSelector(state => state.session.user)
+  const isOwner = userId == user.id
   const userVideos = useSelector(state => (state.video.userVideos));
   // const allVidArr = Object.values(allVideos)
   const [isLoaded, setIsLoaded] = useState(false)
@@ -99,11 +100,13 @@ function User({ showSideBar, setShowSideBar }) {
                       <div className="time-elapsed" video={video}>{calVideoPostTime(video)}</div>
                     </div>
                   </div>
+                  { isOwner &&
                     <div className="auth-button">
                       <EditVideoModal videoId={video.id} />
                       {/* <button>Delete</button> */}
                       <DeleteVideoModal videoId={video.id} />
                     </div>
+                  }
                 </div>
               ))}
             </div>

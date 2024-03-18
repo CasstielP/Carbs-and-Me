@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import profilepic from './pp.jpg'
 import verified from './verified.png'
 const VideoCard = ({ video }) => {
@@ -46,9 +46,12 @@ const VideoCard = ({ video }) => {
           </Link>
         </div>
         <div className="video-card-info">
-          {/* <div "> */}
+          <NavLink style={{textDecoration: "none", color: "black"}}
+                    to={`users/${video.user.id}`}
+            >
             <img className="vid-card-img" src={profilepic} ></img>
-          {/* </div> */}
+          </NavLink>
+
           <div className="vid-info-right">
           <div className="video-title">{video.title}</div>
           <div className="vid_card_name_wrapper">
