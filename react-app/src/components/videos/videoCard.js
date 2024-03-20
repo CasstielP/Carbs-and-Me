@@ -1,22 +1,25 @@
 import { Link, NavLink } from "react-router-dom";
 import profilepic from './pp.jpg'
 import verified from './verified.png'
-const VideoCard = ({ video }) => {
+
+
+export const getInitials = (firstName, lastName) => {
+ return `${firstName[0].toUpperCase()}${lastName[0].toUpperCase()}`
+}
+
+export const getBackgoundColor = () =>{
+ const colors = ['#32681f', '#aa47bd', '#bf360d', '#004c3e', '#00579c', '#679f39', '#ef6c00']
+ const randomIdx = Math.floor(Math.random() * colors.length)
+ const color = colors[randomIdx]
+ return color
+}
+
+ const VideoCard = ({ video }) => {
   let end = new Date();
   let start = new Date(new Date(video.created_at).toLocaleString('en-US', { timeZone: "UTC" }));
   // let start = new Date(video.created_at)
   let elapsed = ((end - start));
 
-  const getInitials = (firstName, lastName) => {
-    return `${firstName[0].toUpperCase()}${lastName[0].toUpperCase()}`
-  }
-
-  const getBackgoundColor = () =>{
-    const colors = ['#32681f', '#aa47bd', '#bf360d', '#004c3e', '#00579c', '#679f39', '#ef6c00']
-    const randomIdx = Math.floor(Math.random() * colors.length)
-    const color = colors[randomIdx]
-    return color
-  }
 
 
   if(elapsed < 60000) {

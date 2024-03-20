@@ -8,6 +8,7 @@ import thumbdown from '../videos/thumb_down.png'
 import morevert from './more_vert.png'
 import editpic from './edit.png'
 import './comment.css'
+import {getBackgoundColor, getInitials} from '../videos/videoCard'
 
 const CommentCard = ({ comment }) => {
     const user = useSelector(state => state.session.user)
@@ -22,7 +23,7 @@ const CommentCard = ({ comment }) => {
     let start = new Date(new Date(comment.created_at).toLocaleString('en-US', { timeZone: "UTC" }));
     // let start = new Date(comment.created_at)
 
-    const dropDownRef =useRef(null)
+    const dropDownRef = useRef(null)
 
 
     let elapsed = ((end - start));
@@ -68,7 +69,7 @@ const CommentCard = ({ comment }) => {
 
     const handleEdit = async () => {
         setIsEditing(true)
-        {console.log('gotheregotheregotheregotheregotheregotheregotheregothere',comment.content)}
+        { console.log('gotheregotheregotheregotheregotheregotheregotheregothere', comment.content) }
         // dispatch(commentActions.fetchSingleComment())
         setEditComment(comment.content)
     }
@@ -117,7 +118,7 @@ const CommentCard = ({ comment }) => {
     }
 
     const handleEditCmt = () => {
-        setClickOptBtn((prev)=>!prev)
+        setClickOptBtn((prev) => !prev)
     }
 
     return (
@@ -125,52 +126,65 @@ const CommentCard = ({ comment }) => {
             <div>
                 <div className="single-comment-container">
                     <div className="single_cmt_side_divider">
-                            <>
-                                <div className="cmt_left">
-                                    <NavLink to={`/users/${comment.user.id}`}>
-                                    <div>
-                                        <img  className='cmt_pf_pic'src={comment.user.profile_pic}></img>
-                                    </div>
-                                    </NavLink>
-                                </div>
-                                <div className="cmt_right">
-                                    <div className="cmt-info-wrapper">
-                                        <div id='cmt-username'>@{comment.user.username}</div>
-                                        <div className="cm-fineprint">{elapsed}</div>
-                                    </div>
-                                    <div className="cmt-content-wrapper">
-
-
-                                        {isEditing &&
-
-
-
-                                            <div className="cmt_editing_container">
-                                                <form onSubmit={handleSubmit}>
-                                                    <div className="leave-cm-container"></div>
-                                                    <input
-                                                        type="text"
-                                                        value={editComment}
-                                                        onChange={(e) => setEditComment(e.target.value)}
-                                                        required
-                                                        className="comment-textarea"
-
-                                                    />
-                                                    <button className="is-ce-button" type="submit">Submit</button>
-                                                    <button className="is-ce-button" type="button" onClick={handleCancel}>Cancel</button>
-                                                </form>
+                        <>
+                            <div className="cmt_left">
+                                <NavLink to={`/users/${comment.user.id}`}>
+                                    {
+                                        comment.user.profile_pic ? (
+                                            <div>
+                                                <img className='cmt_pf_pic' src={comment.user.profile_pic}></img>
                                             </div>
+                                        ) : (
+                                            <div style={{
+                                                backgroundColor: getBackgoundColor(), height: '40px',
+                                                width: '40px', borderRadius: '50%', display: 'flex', justifyContent: 'center',
+                                                alignItems: 'center', fontWeight: 'bold'
+                                            }}>
+                                                {getInitials(comment.user.firstname, comment.user.lastname)}
+                                            </div>
+                                        )
 
-                                         }
+                                    }
+                                </NavLink>
+                            </div>
+                            <div className="cmt_right">
+                                <div className="cmt-info-wrapper">
+                                    <div id='cmt-username'>@{comment.user.username}</div>
+                                    <div className="cm-fineprint">{elapsed}</div>
+                                </div>
+                                <div className="cmt-content-wrapper">
+
+
+                                    {isEditing &&
 
 
 
-                                        {!isEditing &&
-                                            <div id='comment-content'>{comment.content}</div>
+                                        <div className="cmt_editing_container">
+                                            <form onSubmit={handleSubmit}>
+                                                <div className="leave-cm-container"></div>
+                                                <input
+                                                    type="text"
+                                                    value={editComment}
+                                                    onChange={(e) => setEditComment(e.target.value)}
+                                                    required
+                                                    className="comment-textarea"
 
-                                        }
+                                                />
+                                                <button className="is-ce-button" type="submit">Submit</button>
+                                                <button className="is-ce-button" type="button" onClick={handleCancel}>Cancel</button>
+                                            </form>
+                                        </div>
 
-                                        {!isEditing &&
+                                    }
+
+
+
+                                    {!isEditing &&
+                                        <div id='comment-content'>{comment.content}</div>
+
+                                    }
+
+                                    {!isEditing &&
 
                                         <div className="s-ce-buttons">
                                             {isCurrenCmtOwner &&
@@ -186,18 +200,18 @@ const CommentCard = ({ comment }) => {
                                                 </div>
                                             }
                                         </div>
-                                         }
+                                    }
+                                </div>
+                                <div className="cmt-likebtn-wrapper">
+                                    <div className="cmt-likebtn-container">
+                                        <img onClick={handleLike} className="cmt-like-bttn" src={thumbup}></img><div>{comment.likes.length ? comment.likes.length : ''}</div>
                                     </div>
-                                    <div className="cmt-likebtn-wrapper">
-                                        <div className="cmt-likebtn-container">
-                                            <img onClick={handleLike} className="cmt-like-bttn" src={thumbup}></img><div>{comment.likes.length ? comment.likes.length : ''}</div>
-                                        </div>
-                                        <div className="cmt-likebtn-container">
-                                            <img onClick={handleDislike} className="cmt-like-bttn" src={thumbdown}></img><div>{comment.dislikes.length ? comment.dislikes.length : ''}</div>
-                                        </div>
+                                    <div className="cmt-likebtn-container">
+                                        <img onClick={handleDislike} className="cmt-like-bttn" src={thumbdown}></img><div>{comment.dislikes.length ? comment.dislikes.length : ''}</div>
                                     </div>
                                 </div>
-                            </>
+                            </div>
+                        </>
                     </div>
                     {/* {
                         isCurrenCmtOwner &&
