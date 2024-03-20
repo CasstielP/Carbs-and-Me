@@ -6,7 +6,7 @@ def seed_users():
     demo = User(
         username='Demo', firstname='Demo', lastname='Lition',  email='demo@aa.io', password='password')
     cass = User(
-        username='cass', firstname='Casstiel', lastname='Pi', email='cpss5433@gmail.com', password='password')
+        username='cass', firstname='Casstiel', lastname='Pi', email='cpss5433@gmail.com', password='password', profile_pic='https://aaprojects.s3.us-west-1.amazonaws.com/pppic.jpg')
     bobbie = User(
         username='bobbie', firstname='Bobbie', lastname='Lition', email='bobbie@aa.io', password='password')
 

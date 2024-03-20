@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { NavLink } from "react-router-dom"
 import * as commentActions from '../../store/comment'
 import DeleteCommentModal from "../deleteComment/deleteCommentModal"
 import thumbup from '../videos/thumb_up.png'
@@ -126,9 +127,11 @@ const CommentCard = ({ comment }) => {
                     <div className="single_cmt_side_divider">
                             <>
                                 <div className="cmt_left">
-                                    <div className="cmt_pf_pic">
-                                        <img></img>
+                                    <NavLink to={`/users/${comment.user.id}`}>
+                                    <div>
+                                        <img  className='cmt_pf_pic'src={comment.user.profile_pic}></img>
                                     </div>
+                                    </NavLink>
                                 </div>
                                 <div className="cmt_right">
                                     <div className="cmt-info-wrapper">

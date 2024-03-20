@@ -16,6 +16,7 @@ class User(db.Model, UserMixin):
     lastname = db.Column(db.String(40), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    profile_pic = db.Column(db.String(255), nullable=True, default=None)
 
     videos = db.relationship('Video', back_populates='user')
     comments = db.relationship('Comment', back_populates='user')
@@ -41,7 +42,8 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'firstname': self.firstname,
             'lastname': self.lastname,
-            'email': self.email
+            'email': self.email,
+            'profile_pic': self.profile_pic
         }
 
 

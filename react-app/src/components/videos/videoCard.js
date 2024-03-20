@@ -5,9 +5,19 @@ const VideoCard = ({ video }) => {
   let end = new Date();
   let start = new Date(new Date(video.created_at).toLocaleString('en-US', { timeZone: "UTC" }));
   // let start = new Date(video.created_at)
-
-
   let elapsed = ((end - start));
+
+  const getInitials = (firstName, lastName) => {
+    return `${firstName[0].toUpperCase()}${lastName[0].toUpperCase()}`
+  }
+
+  const getBackgoundColor = () =>{
+    const colors = ['#32681f', '#aa47bd', '#bf360d', '#004c3e', '#00579c', '#679f39', '#ef6c00']
+    const randomIdx = Math.floor(Math.random() * colors.length)
+    const color = colors[randomIdx]
+    return color
+  }
+
 
   if(elapsed < 60000) {
     elapsed = `few seconds ago`
@@ -49,7 +59,18 @@ const VideoCard = ({ video }) => {
           <NavLink style={{textDecoration: "none", color: "black"}}
                     to={`users/${video.user.id}`}
             >
-            <img className="vid-card-img" src={profilepic} ></img>
+              {
+                video.user.profile_pic ? (
+                  <img className="vid-card-img" src={video.user.profile_pic} ></img>
+
+                ) : (
+                  <div style={{backgroundColor: getBackgoundColor(), height: '40px',
+                  width: '40px', borderRadius: '50%', display: 'flex', justifyContent: 'center',
+                  alignItems: 'center', fontWeight: 'bold'}}>
+                    {getInitials(video.user.firstname, video.user.lastname)}
+                  </div>
+                )
+              }
           </NavLink>
 
           <div className="vid-info-right">

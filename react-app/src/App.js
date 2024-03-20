@@ -41,9 +41,9 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm showSideBar={showSideBar} setShowSideBar={setShowSideBar}/>
         </Route>
-        <ProtectedRoute path='/users' exact={true} >
+        {/* <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
-        </ProtectedRoute>
+        </ProtectedRoute> */}
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User showSideBar={showSideBar} setShowSideBar={setShowSideBar}/>
         </ProtectedRoute>

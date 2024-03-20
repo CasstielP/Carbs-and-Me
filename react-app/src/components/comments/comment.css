@@ -192,7 +192,6 @@ input.comment-textarea:focus{
 }
 
 .cmt_pf_pic{
-    border: solid 1px black;
     width: 40px;
     height: 40px;
     border-radius: 50%;
