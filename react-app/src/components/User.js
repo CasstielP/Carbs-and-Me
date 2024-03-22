@@ -13,6 +13,8 @@ import verified from './videos/verified.png'
 import profilepic from './videos/pp.jpg'
 import EditVideoModal from "./editVideo/EditVideoModal";
 import DeleteVideoModal from "./deleteVideo/deleteVideoModal";
+import { getBackgoundColor, getInitials } from "./videos/videoCard";
+
 
 function User({ showSideBar, setShowSideBar }) {
   // const [user, setUser] = useState({});
@@ -88,9 +90,22 @@ function User({ showSideBar, setShowSideBar }) {
                     <img id="pf_pg_video_thumbnail" src={video.thumbnail} />
                   </NavLink>
                   <div className="video-card-info">
-                    {/* <div "> */}
-                    <img className="vid-card-img" src={profilepic} ></img>
-                    {/* </div> */}
+
+                    {/* <img className="vid-card-img" src={profilepic} ></img> */}
+
+                    {
+                video.user.profile_pic ? (
+                  <img className="vid-card-img" src={video.user.profile_pic} ></img>
+
+                ) : (
+                  <div style={{backgroundColor: getBackgoundColor(), height: '40px',
+                  width: '40px', borderRadius: '50%', display: 'flex', justifyContent: 'center',
+                  alignItems: 'center', fontWeight: 'bold'}}>
+                    {getInitials(video.user.firstname, video.user.lastname)}
+                  </div>
+                )
+              }
+
                     <div className="vid-info-right">
                       <div className="video-title">{video.title}</div>
                       <div className="vid_card_name_wrapper">

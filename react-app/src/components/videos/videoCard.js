@@ -77,11 +77,15 @@ export const getBackgoundColor = () =>{
           </NavLink>
 
           <div className="vid-info-right">
+          <NavLink to={`/videos/${video.id}`}>
           <div className="video-title">{video.title}</div>
+          </NavLink>
+          <NavLink to={`/users/${video.user.id}`}>
           <div className="vid_card_name_wrapper">
           <div>{video.user.firstname } {video.user.lastname}</div>
           <img id='verified_check' src={verified}/>
           </div>
+          </NavLink>
           <div className="time-elapsed">{elapsed}</div>
           </div>
 

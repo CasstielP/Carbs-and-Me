@@ -21,7 +21,7 @@ const CommentCard = ({ comment }) => {
     const userCmtDislike = comment.dislikes.filter(dislike => dislike.userId == user.id)
     let end = new Date();
     let start = new Date(new Date(comment.created_at).toLocaleString('en-US', { timeZone: "UTC" }));
-    // let start = new Date(comment.created_at)
+
 
     const dropDownRef = useRef(null)
 
