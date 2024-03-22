@@ -60,6 +60,12 @@ const deleteVideo = (videoId) => {
 
 
 // thunks
+
+
+
+
+
+
 export const fetchAllVideos = () => async (dispatch) => {
     const res = await fetch('/api/videos/')
     const data = await res.json()
@@ -127,7 +133,21 @@ export const updateDisLikes = (userId, videoId) => async (dispatch) => {
     }
 }
 
-
+// process subscription
+// export const toggleSubcription = (userId)=> async (dispatch) => {
+//     const res = await fetch(`/api/users/subscribe/${userId}`, {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify(userId)
+//     })
+//     if (res.ok) {
+//       const data = await res.json()
+//     //   console.log('gotheregotheregotheregothere', data)
+//       return data
+//     }
+//   }
 
 
 

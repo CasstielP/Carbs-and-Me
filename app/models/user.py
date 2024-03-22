@@ -3,6 +3,11 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
 
+subscriptions = db.Table('subscriptions',
+    db.Column('subscriber_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
+    db.Column('subscribed_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
+    db.Column('subscribed_on', db.DateTime, nullable=False, default=datetime.now)
+)
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -25,6 +30,35 @@ class User(db.Model, UserMixin):
     cmtlikes = db.relationship('CmtLike', back_populates='user')
     cmtdislikes = db.relationship('CmtDisLike', back_populates='user')
 
+
+    # --------------subscriptions logic------------------
+    subscribed = db.relationship(
+        'User', secondary=subscriptions,
+        primaryjoin=(subscriptions.c.subscriber_id == id),
+        secondaryjoin=(subscriptions.c.subscribed_id == id),
+        backref=db.backref('subscribers', lazy='dynamic'),
+        lazy='dynamic'
+    )
+
+    # Method to subscribe to a user
+    def subscribe(self, user):
+        if not self.is_subscribed(user):
+            self.subscribed.append(user)
+
+    # Method to unsubscribe from a user
+    def unsubscribe(self, user):
+        if self.is_subscribed(user):
+            self.subscribed.remove(user)
+
+    # Helper method to check subscription status
+    def is_subscribed(self, user):
+        print('=====================================',self.subscribed.filter(subscriptions.c.subscribed_id == user.id).count() > 0)
+        return self.subscribed.filter(subscriptions.c.subscribed_id == user.id).count() > 0
+
+    # Method to return the number of subscribers
+    @property
+    def subscribers_count(self):
+        return self.subscribers.count()
     @property
     def password(self):
         return self.hashed_password
@@ -36,15 +70,27 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
-    def to_dict(self):
-        return {
+    def to_dict(self, user=None):
+        data = {
             'id': self.id,
             'username': self.username,
             'firstname': self.firstname,
             'lastname': self.lastname,
             'email': self.email,
-            'profile_pic': self.profile_pic
+            'profile_pic': self.profile_pic,
         }
+        if user is None:
+            data['is_subscribed'] = self.is_subscribed(user)
+        return data
+
+    def is_subscribed(self, user):
+        if user:
+        # This check ensures user is not None and avoids AttributeError
+            print('================================', self.subscribed.filter(subscriptions.c.subscribed_id == user.id).count() > 0)
+            return self.subscribed.filter(subscriptions.c.subscribed_id == user.id).count() > 0
+        else:
+        # Return a sensible default or raise an error when user is None
+            return False
 
 
 
@@ -225,3 +271,8 @@ class CmtDisLike(db.Model):
             'commentId': self.comment_id,
             'userId': self.user_id
         }
+
+
+
+
+# -----------------------------subscription table------------------------------------------

@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
-from flask_login import login_required
-from app.models import User
+from flask_login import login_required, current_user
+from app.models import User, db
 
 user_routes = Blueprint('users', __name__)
 
@@ -23,3 +23,22 @@ def user(id):
     """
     user = User.query.get(id)
     return user.to_dict()
+
+@user_routes.route('/subscribe/<int:id>', methods=['POST'])
+@login_required
+def toggle_subscription(id):
+  user_to_toggle = User.query.get(id)
+#   return user_to_toggle.to_dict()
+  if id == current_user.id:
+     return jsonify({'message': 'you Cannot subscribe to yourself'}), 400
+  if not user_to_toggle:
+     return jsonify({'message': 'user not found'})
+
+  if current_user.is_subscribed(user_to_toggle):
+     current_user.unsubscribe(user_to_toggle)
+     action = True
+  else:
+     current_user.subscribe(user_to_toggle)
+     action = False
+  db.session.commit()
+  return user_to_toggle.to_dict()

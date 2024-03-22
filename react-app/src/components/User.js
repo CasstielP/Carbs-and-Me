@@ -14,28 +14,36 @@ import profilepic from './videos/pp.jpg'
 import EditVideoModal from "./editVideo/EditVideoModal";
 import DeleteVideoModal from "./deleteVideo/deleteVideoModal";
 import { getBackgoundColor, getInitials } from "./videos/videoCard";
-
-
+import { toggleSubcription } from "../store/session";
 function User({ showSideBar, setShowSideBar }) {
   // const [user, setUser] = useState({});
   const dispatch = useDispatch();
   const { userId } = useParams();
   const user = useSelector(state => state.session.user)
   const isOwner = userId == user.id
+  const [subStatus, setSubStatus] = useState(user.is_subscribed)
   const userVideos = useSelector(state => (state.video.userVideos));
   // const allVidArr = Object.values(allVideos)
   const [isLoaded, setIsLoaded] = useState(false)
   const singleVideo = useSelector(state => state.video.singleVideo)
   // const userVideos = allVidArr.filter(video => video.user_id == userId);
+
+
   useEffect(() => {
     dispatch(videoActions.fetchUserVideos(userId))
   }, []);
+
+  const handleSubscription = () =>{
+    dispatch(toggleSubcription(userId))
+    console.log('substaatussubstaatussubstaatussubstaatus', subStatus)
+
+
+  }
 
 
 
   const calVideoPostTime = (video) => {
 
-    console.log('elapsedelapsedelapsedelapsedelapsed', video)
     let end = new Date();
     let start = new Date(new Date(video.created_at).toLocaleString('en-US', { timeZone: "UTC" }));
     // let start = new Date(video.created_at)
@@ -67,6 +75,10 @@ function User({ showSideBar, setShowSideBar }) {
   }
 
 
+  useEffect(()=> {
+    setSubStatus(user.is_subscribed)
+  }, [user.is_subscribed])
+
 
   return (
     <>
@@ -75,11 +87,10 @@ function User({ showSideBar, setShowSideBar }) {
         <div className="video-container">
           <div className="profile-page">
             <img id='banner' src={banner}></img>
-            {/* <div id='profile-vid-wrapper'>
-        {Object.values(userVideos).reverse().map((video) => (
-          <UserVideoCard key={video.id} video={video} />
-        ))}
-      </div> */}
+
+            <button onClick={handleSubscription}>{subStatus? 'subscribe' : 'subscribed!!'}</button>
+
+
             <div className="pf_pg_video_card_wrapper">
               {Object.values(userVideos).reverse().map((video) => (
                 <div className="pf_pg_video_card_container" key={video.id} video={video}>

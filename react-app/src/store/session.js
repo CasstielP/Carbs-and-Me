@@ -99,6 +99,30 @@ export const signUp = (username, firstName, lastName, email, password) => async 
   }
 }
 
+
+// thunk for handling user subscriptions
+export const toggleSubcription = (userId)=> async (dispatch) => {
+  const res = await fetch(`/api/users/subscribe/${userId}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(userId)
+  })
+  if (res.ok) {
+    const data = await res.json()
+  //   console.log('gotheregotheregotheregothere', data)
+    dispatch(setUser(data))
+    return data
+  }
+}
+
+
+
+
+
+
+
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
