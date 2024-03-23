@@ -3,11 +3,27 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
 
-subscriptions = db.Table('subscriptions',
-    db.Column('subscriber_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
-    db.Column('subscribed_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
-    db.Column('subscribed_on', db.DateTime, nullable=False, default=datetime.now)
-)
+
+from datetime import datetime
+
+class Subscription(db.Model):
+    __tablename__ = 'subscriptions'
+    id = db.Column(db.Integer, primary_key=True)
+    subscriber_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    subscribed_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    subscribed_on = db.Column(db.DateTime, nullable=False, default=datetime.now)
+
+    subscriber = db.relationship("User", foreign_keys=[subscriber_id], backref=db.backref('subscribed_to', lazy='dynamic'))
+    subscribed = db.relationship("User", foreign_keys=[subscribed_id], backref=db.backref('subscribers', lazy='dynamic'))
+
+
+
+
+
+
+
+
+
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'

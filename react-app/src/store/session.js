@@ -111,7 +111,7 @@ export const toggleSubcription = (userId)=> async (dispatch) => {
   })
   if (res.ok) {
     const data = await res.json()
-  //   console.log('gotheregotheregotheregothere', data)
+    console.log('gotheregotheregotheregothere', data)
     dispatch(setUser(data))
     return data
   }

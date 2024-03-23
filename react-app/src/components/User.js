@@ -35,7 +35,7 @@ function User({ showSideBar, setShowSideBar }) {
 
   const handleSubscription = () =>{
     dispatch(toggleSubcription(userId))
-    console.log('substaatussubstaatussubstaatussubstaatus', subStatus)
+    // console.log('substaatussubstaatussubstaatussubstaatus', subStatus)
 
 
   }
