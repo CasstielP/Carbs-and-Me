@@ -48,28 +48,26 @@ class User(db.Model, UserMixin):
 
 
     # --------------subscriptions logic------------------
-    subscribed = db.relationship(
-        'User', secondary=subscriptions,
-        primaryjoin=(subscriptions.c.subscriber_id == id),
-        secondaryjoin=(subscriptions.c.subscribed_id == id),
-        backref=db.backref('subscribers', lazy='dynamic'),
-        lazy='dynamic'
-    )
-
-    # Method to subscribe to a user
     def subscribe(self, user):
         if not self.is_subscribed(user):
-            self.subscribed.append(user)
+            subscription = Subscription(subscriber_id=self.id, subscribed_id=user.id)
+            db.session.add(subscription)
+            db.session.commit()
 
-    # Method to unsubscribe from a user
     def unsubscribe(self, user):
-        if self.is_subscribed(user):
-            self.subscribed.remove(user)
+        subscription = Subscription.query.filter_by(subscriber_id=self.id, subscribed_id=user.id).first()
+        if subscription:
+            db.session.delete(subscription)
+            db.session.commit()
 
-    # Helper method to check subscription status
     def is_subscribed(self, user):
-        print('=====================================',self.subscribed.filter(subscriptions.c.subscribed_id == user.id).count() > 0)
-        return self.subscribed.filter(subscriptions.c.subscribed_id == user.id).count() > 0
+        return Subscription.query.filter_by(subscriber_id=self.id, subscribed_id=user.id).count() > 0
+
+    @property
+    def subscribers_count(self):
+        return Subscription.query.filter_by(subscribed_id=self.id).count()
+
+
 
     # Method to return the number of subscribers
     @property
@@ -99,14 +97,7 @@ class User(db.Model, UserMixin):
             data['is_subscribed'] = self.is_subscribed(user)
         return data
 
-    def is_subscribed(self, user):
-        if user:
-        # This check ensures user is not None and avoids AttributeError
-            print('================================', self.subscribed.filter(subscriptions.c.subscribed_id == user.id).count() > 0)
-            return self.subscribed.filter(subscriptions.c.subscribed_id == user.id).count() > 0
-        else:
-        # Return a sensible default or raise an error when user is None
-            return False
+
 
 
 
