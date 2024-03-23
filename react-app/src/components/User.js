@@ -40,6 +40,7 @@ function User({ showSideBar, setShowSideBar }) {
 
   const handlecheckSubStatus = () => {
     dispatch(checkSubStatus(userId))
+
   }
 
 
@@ -78,8 +79,16 @@ function User({ showSideBar, setShowSideBar }) {
 
 
   useEffect(()=> {
-    setSubStatus(user.is_subscribed)
-  }, [user.is_subscribed])
+    async function fetchSubStatus() {
+      try {
+        const res = await dispatch(checkSubStatus(userId));
+        setSubStatus(res);
+      } catch (error) {
+        console.error('Failed to fetch subscription status:', error);
+      }
+    }
+    fetchSubStatus();
+  }, [userId, dispatch])
 
 
   return (
