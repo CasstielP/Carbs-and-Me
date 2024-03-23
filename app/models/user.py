@@ -6,25 +6,6 @@ from datetime import datetime
 
 from datetime import datetime
 
-class Subscription(db.Model):
-    __tablename__ = 'subscriptions'
-    id = db.Column(db.Integer, primary_key=True)
-    subscriber_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    subscribed_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    subscribed_on = db.Column(db.DateTime, nullable=False, default=datetime.now)
-
-    subscriber = db.relationship("User", foreign_keys=[subscriber_id], backref=db.backref('subscribed_to', lazy='dynamic'))
-    subscribed = db.relationship("User", foreign_keys=[subscribed_id], backref=db.backref('subscribers', lazy='dynamic'))
-
-
-
-
-
-
-
-
-
-
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -67,12 +48,6 @@ class User(db.Model, UserMixin):
     def subscribers_count(self):
         return Subscription.query.filter_by(subscribed_id=self.id).count()
 
-
-
-    # Method to return the number of subscribers
-    @property
-    def subscribers_count(self):
-        return self.subscribers.count()
     @property
     def password(self):
         return self.hashed_password
@@ -84,18 +59,41 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
-    def to_dict(self, user=None):
+    def to_dict(self):
         data = {
             'id': self.id,
             'username': self.username,
             'firstname': self.firstname,
             'lastname': self.lastname,
             'email': self.email,
-            'profile_pic': self.profile_pic,
+            'profile_pic': self.profile_pic
         }
-        if user is None:
-            data['is_subscribed'] = self.is_subscribed(user)
         return data
+
+
+class Subscription(db.Model):
+    __tablename__ = 'subscriptions'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
+    id = db.Column(db.Integer, primary_key=True)
+    subscriber_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    subscribed_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    subscribed_on = db.Column(db.DateTime, nullable=False, default=datetime.now)
+
+    subscriber = db.relationship("User", foreign_keys=[subscriber_id], backref=db.backref('subscribed_to', lazy='dynamic'))
+    subscribed = db.relationship("User", foreign_keys=[subscribed_id], backref=db.backref('subscribers', lazy='dynamic'))
+
+
+
+
+
+
+
+
+
+
 
 
 

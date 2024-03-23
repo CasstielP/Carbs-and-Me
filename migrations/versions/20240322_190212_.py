@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 56ef91622efa
-Revises: dcb6b9aca744
-Create Date: 2023-01-18 15:19:00.066414
+Revision ID: 2660b364d4e3
+Revises: 
+Create Date: 2024-03-22 19:02:12.531801
 
 """
 from alembic import op
@@ -10,8 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '56ef91622efa'
-# down_revision = 'dcb6b9aca744'
+revision = '2660b364d4e3'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -26,9 +25,19 @@ def upgrade():
     sa.Column('lastname', sa.String(length=40), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=False),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
+    sa.Column('profile_pic', sa.String(length=255), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
+    )
+    op.create_table('subscriptions',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('subscriber_id', sa.Integer(), nullable=False),
+    sa.Column('subscribed_id', sa.Integer(), nullable=False),
+    sa.Column('subscribed_on', sa.DateTime(), nullable=False),
+    sa.ForeignKeyConstraint(['subscribed_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['subscriber_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('videos',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -98,5 +107,6 @@ def downgrade():
     op.drop_table('dislikes')
     op.drop_table('comments')
     op.drop_table('videos')
+    op.drop_table('subscriptions')
     op.drop_table('users')
     # ### end Alembic commands ###

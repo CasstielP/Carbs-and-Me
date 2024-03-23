@@ -42,3 +42,10 @@ def toggle_subscription(id):
      action = False
   db.session.commit()
   return user_to_toggle.to_dict()
+
+@user_routes.route('/subscribe/<int:id>')
+@login_required
+def getSubStatus(id):
+   user_to_check = User.query.get(id)
+   status = current_user.is_subscribed(user_to_check)
+   return jsonify(status)

@@ -14,14 +14,14 @@ import profilepic from './videos/pp.jpg'
 import EditVideoModal from "./editVideo/EditVideoModal";
 import DeleteVideoModal from "./deleteVideo/deleteVideoModal";
 import { getBackgoundColor, getInitials } from "./videos/videoCard";
-import { toggleSubcription } from "../store/session";
+import { toggleSubcription, checkSubStatus } from "../store/session";
 function User({ showSideBar, setShowSideBar }) {
   // const [user, setUser] = useState({});
   const dispatch = useDispatch();
   const { userId } = useParams();
   const user = useSelector(state => state.session.user)
   const isOwner = userId == user.id
-  const [subStatus, setSubStatus] = useState(user.is_subscribed)
+  const [subStatus, setSubStatus] = useState(null)
   const userVideos = useSelector(state => (state.video.userVideos));
   // const allVidArr = Object.values(allVideos)
   const [isLoaded, setIsLoaded] = useState(false)
@@ -36,8 +36,10 @@ function User({ showSideBar, setShowSideBar }) {
   const handleSubscription = () =>{
     dispatch(toggleSubcription(userId))
     // console.log('substaatussubstaatussubstaatussubstaatus', subStatus)
+  }
 
-
+  const handlecheckSubStatus = () => {
+    dispatch(checkSubStatus(userId))
   }
 
 
@@ -87,7 +89,7 @@ function User({ showSideBar, setShowSideBar }) {
         <div className="video-container">
           <div className="profile-page">
             <img id='banner' src={banner}></img>
-
+            <button onClick={handlecheckSubStatus}>check status</button>
             <button onClick={handleSubscription}>{subStatus? 'subscribe' : 'subscribed!!'}</button>
 
 
