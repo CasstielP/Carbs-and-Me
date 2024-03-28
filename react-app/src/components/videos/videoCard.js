@@ -70,7 +70,7 @@ export const getBackgoundColor = () =>{
                   <div style={{backgroundColor: getBackgoundColor(), height: '40px',
                   width: '40px', borderRadius: '50%', display: 'flex', justifyContent: 'center',
                   alignItems: 'center', fontWeight: 'bold'}}>
-                    {getInitials(video.user.firstname, video.user.lastname)}
+                    {/* {getInitials(video.user.firstname, video.user.lastname)} */}
                   </div>
                 )
               }

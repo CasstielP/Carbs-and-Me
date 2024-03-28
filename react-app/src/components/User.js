@@ -20,6 +20,7 @@ function User({ showSideBar, setShowSideBar }) {
   const dispatch = useDispatch();
   const { userId } = useParams();
   const user = useSelector(state => state.session.user)
+  const channelOwner = useSelector(state=> state.session.channelOwner)
   const isOwner = userId == user.id
   // const [subStatus, setSubStatus] = useState(null)
   const subStatus = useSelector(state=> state.session.subStatus)
@@ -33,7 +34,7 @@ function User({ showSideBar, setShowSideBar }) {
   useEffect(() => {
     dispatch(videoActions.fetchUserVideos(userId))
     dispatch(getSingleUserThunk(userId))
-  }, []);
+  }, [userId, dispatch]);
 
   const handleSubscription = () =>{
     dispatch(toggleSubcription(userId))
@@ -76,7 +77,6 @@ function User({ showSideBar, setShowSideBar }) {
 
   useEffect(()=> {
     dispatch(checkSubStatus(userId))
-    console.log('useeffectuseeffectuseeffectuseeffectuseeffect', subStatus)
   }, [userId, dispatch])
 
 
@@ -91,7 +91,19 @@ function User({ showSideBar, setShowSideBar }) {
             <div className="channel_info_container">
 
             <div className="info_box_ls">
+            {
+                channelOwner.profile_pic ? (
+                  <img className="channelOwner_profilePic" src={channelOwner.profile_pic} ></img>
 
+                ) : (
+                  <div style={{backgroundColor: getBackgoundColor(), height: '160px',
+                  width: '160px', borderRadius: '50%', display: 'flex', justifyContent: 'center',
+                  alignItems: 'center', fontWeight: 'bold'}}>
+                    {getInitials(channelOwner?.firstname?.[0], channelOwner?.lastname?.[0])}
+                    {/* {console.log('channelchannelchannelchannel', channelOwner?.firstname?.[0])} */}
+                  </div>
+                )
+              }
             </div>
             <div className="info_box_rs">
             <button onClick={handleSubscription}>{subStatus? 'subscribe' : 'subscribed!!'}</button>
@@ -122,7 +134,8 @@ function User({ showSideBar, setShowSideBar }) {
                   <div style={{backgroundColor: getBackgoundColor(), height: '40px',
                   width: '40px', borderRadius: '50%', display: 'flex', justifyContent: 'center',
                   alignItems: 'center', fontWeight: 'bold'}}>
-                    {getInitials(video.user.firstname, video.user.lastname)}
+
+                    {/* {getInitials(video.user.firstname, video.user.lastname)} */}
                   </div>
                 )
               }
