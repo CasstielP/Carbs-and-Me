@@ -3,12 +3,17 @@ const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
 const GET_SUB_STATUS = 'session/GET_SUB_STATUS'
 const TOGGLE_SUB_STATUS = 'session/TOGGLE_SUB_STATUS'
-
+const GET_SINGLE_USER = 'session/GET_SINGLE_USER'
 
 const setUser = (user) => ({
   type: SET_USER,
   payload: user
 });
+
+const getSingleUser = (user) => ({
+  type: GET_SINGLE_USER,
+  payload: user
+})
 
 const removeUser = () => ({
   type: REMOVE_USER,
@@ -138,11 +143,22 @@ export const checkSubStatus = (userId) => async (dispatch) => {
 }
 
 
+export const getSingleUserThunk = (userId) => async(dispatch) => {
+  const res = await fetch(`/api/users/${userId}`)
+  const data = await res.json()
+  if (res.ok) {
+    dispatch(getSingleUser(data))
+  }
+}
 
 
 
 
-const initialState = { user: null, subStatus:{}};
+
+
+const initialState = { user: null,
+                       subStatus:{},
+                       channelOwner: {}};
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
@@ -150,7 +166,9 @@ export default function reducer(state = initialState, action) {
     case REMOVE_USER:
       return { ...state, user: null }
     case GET_SUB_STATUS:
-      return { ...state, subStatus: action.payload }
+      return { ...state, subStatus: action.payload}
+    case GET_SINGLE_USER:
+      return { ...state, channelOwner: action.payload}
     default:
       return state;
   }

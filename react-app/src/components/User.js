@@ -14,7 +14,7 @@ import profilepic from './videos/pp.jpg'
 import EditVideoModal from "./editVideo/EditVideoModal";
 import DeleteVideoModal from "./deleteVideo/deleteVideoModal";
 import { getBackgoundColor, getInitials } from "./videos/videoCard";
-import { toggleSubcription, checkSubStatus } from "../store/session";
+import { toggleSubcription, checkSubStatus, getSingleUserThunk } from "../store/session";
 function User({ showSideBar, setShowSideBar }) {
   // const [user, setUser] = useState({});
   const dispatch = useDispatch();
@@ -32,6 +32,7 @@ function User({ showSideBar, setShowSideBar }) {
 
   useEffect(() => {
     dispatch(videoActions.fetchUserVideos(userId))
+    dispatch(getSingleUserThunk(userId))
   }, []);
 
   const handleSubscription = () =>{
@@ -87,7 +88,17 @@ function User({ showSideBar, setShowSideBar }) {
           <div className="profile-page">
             <img id='banner' src={banner}></img>
 
+            <div className="channel_info_container">
+
+            <div className="info_box_ls">
+
+            </div>
+            <div className="info_box_rs">
             <button onClick={handleSubscription}>{subStatus? 'subscribe' : 'subscribed!!'}</button>
+
+            </div>
+            </div>
+
 
 
             <div className="pf_pg_video_card_wrapper">

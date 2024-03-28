@@ -17,3 +17,11 @@
     height: 200px;
     border-radius: 15px;
 }
+
+.channel_info_container{
+    height: 230px;
+    width: 1280px;
+    border: solid black 1px;
+    display: flex;
+    flex-direction: row;
+}
