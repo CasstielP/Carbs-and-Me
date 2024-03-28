@@ -118,7 +118,7 @@ function User({ showSideBar, setShowSideBar }) {
               {
                 subStatus?
                 <div className="pfp_sub_btn_unsb" onClick={handleSubscription}>Subscribe</div> :
-                <div className="pfp_sub_btn_sb"><span class="material-symbols-outlined">
+                <div className="pfp_sub_btn_sb" onClick={handleSubscription}><span id='pfp_sub_btn_bell' class="material-symbols-outlined">
                 notifications
                 </span>Subscribed</div>
               }
