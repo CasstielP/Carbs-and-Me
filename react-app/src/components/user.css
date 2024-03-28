@@ -21,13 +21,53 @@
 .channel_info_container{
     height: 230px;
     width: 1280px;
-    border: solid black 1px;
     display: flex;
     flex-direction: row;
+    align-items: center;
+    gap: 30px;
 }
 
 .channelOwner_profilePic{
     height: 160px;
     width: 160px;
     border-radius: 50%;
+}
+.info_box_rs{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 600px;
+    color: #666d74;
+    gap: 15px;
+}
+.pfp_channel_name{
+    font-size: 36px;
+    color: black;
+    font-weight: bold;
+}
+.pfp_sub_btn_unsb{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background-color: black;
+    height: 35px;
+    width: 95px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.pfp_sub_btn_sb{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background-color: #f2f2f2;
+    height: 35px;
+    width: 95px;
+    font-weight: bold;
+    font-size: 14px;
 }

@@ -106,8 +106,22 @@ function User({ showSideBar, setShowSideBar }) {
               }
             </div>
             <div className="info_box_rs">
-            <button onClick={handleSubscription}>{subStatus? 'subscribe' : 'subscribed!!'}</button>
-
+              <div className="pfp_channel_name">
+                  {channelOwner.firstname} {channelOwner.lastname}
+              </div>
+              <div>
+                {`@${channelOwner.username}`}
+              </div>
+              <div>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum justo purus, iaculis sed maximus in, ullamcorper id turpis. Curabitur at diam nisi. In a sem eget nisl semper ultricies. In tortor dolor, volutpat et lacus vel, malesuada mollis dolor. Donec at fermentum ligula. Cras dignissim condimentum lacus, id commodo sapien sodales in. Ut suscipit venenatis erat, ac pellentesque arcu sagittis vitae.
+              </div>
+              {
+                subStatus?
+                <div className="pfp_sub_btn_unsb" onClick={handleSubscription}>Subscribe</div> :
+                <div className="pfp_sub_btn_sb"><span class="material-symbols-outlined">
+                notifications
+                </span>Subscribed</div>
+              }
             </div>
             </div>
 

@@ -4,7 +4,7 @@ import verified from './verified.png'
 
 
 export const getInitials = (firstName, lastName) => {
- return `${firstName[0].toUpperCase()}${lastName[0].toUpperCase()}`
+ return `${firstName?.[0].toUpperCase()}${lastName?.[0].toUpperCase()}`
 }
 
 export const getBackgoundColor = () =>{
@@ -70,7 +70,7 @@ export const getBackgoundColor = () =>{
                   <div style={{backgroundColor: getBackgoundColor(), height: '40px',
                   width: '40px', borderRadius: '50%', display: 'flex', justifyContent: 'center',
                   alignItems: 'center', fontWeight: 'bold'}}>
-                    {/* {getInitials(video.user.firstname, video.user.lastname)} */}
+                    {getInitials(video.user.firstname, video.user.lastname)}
                   </div>
                 )
               }
