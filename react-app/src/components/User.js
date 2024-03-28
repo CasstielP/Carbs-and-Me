@@ -21,7 +21,8 @@ function User({ showSideBar, setShowSideBar }) {
   const { userId } = useParams();
   const user = useSelector(state => state.session.user)
   const isOwner = userId == user.id
-  const [subStatus, setSubStatus] = useState(null)
+  // const [subStatus, setSubStatus] = useState(null)
+  const subStatus = useSelector(state=> state.session.subStatus)
   const userVideos = useSelector(state => (state.video.userVideos));
   // const allVidArr = Object.values(allVideos)
   const [isLoaded, setIsLoaded] = useState(false)
@@ -37,12 +38,6 @@ function User({ showSideBar, setShowSideBar }) {
     dispatch(toggleSubcription(userId))
     // console.log('substaatussubstaatussubstaatussubstaatus', subStatus)
   }
-
-  const handlecheckSubStatus = () => {
-    dispatch(checkSubStatus(userId))
-
-  }
-
 
 
   const calVideoPostTime = (video) => {
@@ -79,15 +74,8 @@ function User({ showSideBar, setShowSideBar }) {
 
 
   useEffect(()=> {
-    async function fetchSubStatus() {
-      try {
-        const res = await dispatch(checkSubStatus(userId));
-        setSubStatus(res);
-      } catch (error) {
-        console.error('Failed to fetch subscription status:', error);
-      }
-    }
-    fetchSubStatus();
+    dispatch(checkSubStatus(userId))
+    console.log('useeffectuseeffectuseeffectuseeffectuseeffect', subStatus)
   }, [userId, dispatch])
 
 
@@ -98,7 +86,7 @@ function User({ showSideBar, setShowSideBar }) {
         <div className="video-container">
           <div className="profile-page">
             <img id='banner' src={banner}></img>
-            <button onClick={handlecheckSubStatus}>check status</button>
+
             <button onClick={handleSubscription}>{subStatus? 'subscribe' : 'subscribed!!'}</button>
 
 

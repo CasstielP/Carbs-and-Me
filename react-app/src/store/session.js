@@ -1,6 +1,9 @@
 // constants
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
+const GET_SUB_STATUS = 'session/GET_SUB_STATUS'
+const TOGGLE_SUB_STATUS = 'session/TOGGLE_SUB_STATUS'
+
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -11,7 +14,17 @@ const removeUser = () => ({
   type: REMOVE_USER,
 })
 
-const initialState = { user: null };
+const getSubStatus = (status) => ({
+    type: GET_SUB_STATUS,
+    payload: status
+
+})
+
+const toggleSubStatus = (status) => ({
+  type: TOGGLE_SUB_STATUS,
+  payload: status
+})
+
 
 export const authenticate = () => async (dispatch) => {
   const response = await fetch('/api/auth/', {
@@ -101,7 +114,7 @@ export const signUp = (username, firstName, lastName, email, password) => async 
 
 
 // thunk for handling user subscriptions
-export const toggleSubcription = (userId)=> async (dispatch) => {
+export const toggleSubcription = (userId) => async (dispatch) => {
   const res = await fetch(`/api/users/subscribe/${userId}`, {
     method: 'POST',
     headers: {
@@ -112,8 +125,7 @@ export const toggleSubcription = (userId)=> async (dispatch) => {
   if (res.ok) {
     const data = await res.json()
     console.log('gotheregotheregotheregothere', data)
-    dispatch(setUser(data))
-    return data
+    dispatch(getSubStatus(data))
   }
 }
 
@@ -121,8 +133,7 @@ export const checkSubStatus = (userId) => async (dispatch) => {
   const res = await fetch(`/api/users/subscribe/${userId}`)
   const data = await res.json()
   if (res.ok) {
-    // console.log(data)
-    return data
+    dispatch(getSubStatus(data))
   }
 }
 
@@ -131,12 +142,15 @@ export const checkSubStatus = (userId) => async (dispatch) => {
 
 
 
+const initialState = { user: null, subStatus:{}};
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
-      return { user: action.payload }
+      return { ...state, user: action.payload }
     case REMOVE_USER:
-      return { user: null }
+      return { ...state, user: null }
+    case GET_SUB_STATUS:
+      return { ...state, subStatus: action.payload }
     default:
       return state;
   }
