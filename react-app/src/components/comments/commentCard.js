@@ -21,7 +21,7 @@ const CommentCard = ({ comment }) => {
     const userCmtDislike = comment.dislikes.filter(dislike => dislike.userId == user.id)
     let end = new Date();
     let start = new Date(new Date(comment.created_at).toLocaleString('en-US', { timeZone: "UTC" }));
-
+    let isDefaultPfp = comment?.user?.profile_pic?.startsWith('#')
 
     const dropDownRef = useRef(null)
 
@@ -130,18 +130,18 @@ const CommentCard = ({ comment }) => {
                             <div className="cmt_left">
                                 <NavLink to={`/users/${comment.user.id}`}>
                                     {
-                                        comment.user.profile_pic ? (
-                                            <div>
-                                                <img className='cmt_pf_pic' src={comment.user.profile_pic}></img>
-                                            </div>
-                                        ) : (
+                                        isDefaultPfp ? (
                                             <div style={{
-                                                backgroundColor: getBackgoundColor(), height: '40px',
+                                                backgroundColor: comment.user.profile_pic, height: '40px',
                                                 width: '40px', borderRadius: '50%', display: 'flex', justifyContent: 'center',
                                                 alignItems: 'center', fontWeight: 'bold'
                                             }}>
-                                                {getInitials(comment.user.firstname, comment.user.lastname)}
+                                                {getInitials(comment.user.firstname)}
                                             </div>
+                                        ) : (
+                                                <div>
+                                                    <img className='cmt_pf_pic' src={comment.user.profile_pic}></img>
+                                                </div>
                                         )
 
                                     }

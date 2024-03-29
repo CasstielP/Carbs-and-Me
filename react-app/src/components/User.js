@@ -15,6 +15,9 @@ import EditVideoModal from "./editVideo/EditVideoModal";
 import DeleteVideoModal from "./deleteVideo/deleteVideoModal";
 import { getBackgoundColor, getInitials } from "./videos/videoCard";
 import { toggleSubcription, checkSubStatus, getSingleUserThunk } from "../store/session";
+
+
+
 function User({ showSideBar, setShowSideBar }) {
   // const [user, setUser] = useState({});
   const dispatch = useDispatch();
@@ -29,6 +32,7 @@ function User({ showSideBar, setShowSideBar }) {
   const [isLoaded, setIsLoaded] = useState(false)
   const singleVideo = useSelector(state => state.video.singleVideo)
   // const userVideos = allVidArr.filter(video => video.user_id == userId);
+  let isDefaultPfp = channelOwner?.profile_pic?.startsWith('#')
 
 
   useEffect(() => {
@@ -91,18 +95,17 @@ function User({ showSideBar, setShowSideBar }) {
             <div className="channel_info_container">
 
             <div className="info_box_ls">
-            {
-                channelOwner.profile_pic ? (
-                  <img className="channelOwner_profilePic" src={channelOwner.profile_pic} ></img>
 
-                ) : (
-                  <div style={{backgroundColor: getBackgoundColor(), height: '160px',
-                  width: '160px', borderRadius: '50%', display: 'flex', justifyContent: 'center',
-                  alignItems: 'center', fontWeight: 'bold'}}>
-                    {getInitials(channelOwner?.firstname?.[0], channelOwner?.lastname?.[0])}
-                    {/* {console.log('channelchannelchannelchannel', channelOwner?.firstname?.[0])} */}
+            {
+                isDefaultPfp ?
+                    <div style={{backgroundColor: `${channelOwner.profile_pic}`, height: '160px',
+                    width: '160px', borderRadius: '50%', display: 'flex', justifyContent: 'center',
+                    alignItems: 'center', fontSize: '50px', color: 'white', fontWeight: 'bold'}}>
+                    {getInitials(channelOwner?.firstname?.[0])}
                   </div>
-                )
+
+                   :
+                    <img className="channelOwner_profilePic" src={channelOwner.profile_pic} ></img>
               }
             </div>
             <div className="info_box_rs">
@@ -115,12 +118,17 @@ function User({ showSideBar, setShowSideBar }) {
               <div>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum justo purus, iaculis sed maximus in, ullamcorper id turpis. Curabitur at diam nisi. In a sem eget nisl semper ultricies. In tortor dolor, volutpat et lacus vel, malesuada mollis dolor. Donec at fermentum ligula. Cras dignissim condimentum lacus, id commodo sapien sodales in. Ut suscipit venenatis erat, ac pellentesque arcu sagittis vitae.
               </div>
-              {
-                subStatus?
-                <div className="pfp_sub_btn_unsb" onClick={handleSubscription}>Subscribe</div> :
-                <div className="pfp_sub_btn_sb" onClick={handleSubscription}><span id='pfp_sub_btn_bell' class="material-symbols-outlined">
-                notifications
-                </span>Subscribed</div>
+
+
+              { //conditional rendering: only display sub btn when the user page does not belong to the user
+                !isOwner &&
+                (
+                  subStatus?
+                  <div className="pfp_sub_btn_unsb" onClick={handleSubscription}>Subscribe</div> :
+                  <div className="pfp_sub_btn_sb" onClick={handleSubscription}><span id='pfp_sub_btn_bell' class="material-symbols-outlined">
+                  notifications
+                  </span>Subscribed</div>
+                )
               }
             </div>
             </div>
@@ -141,16 +149,14 @@ function User({ showSideBar, setShowSideBar }) {
                     {/* <img className="vid-card-img" src={profilepic} ></img> */}
 
                     {
-                video.user.profile_pic ? (
-                  <img className="vid-card-img" src={video.user.profile_pic} ></img>
-
-                ) : (
-                  <div style={{backgroundColor: getBackgoundColor(), height: '40px',
-                  width: '40px', borderRadius: '50%', display: 'flex', justifyContent: 'center',
-                  alignItems: 'center', fontWeight: 'bold'}}>
-
-                    {/* {getInitials(video.user.firstname, video.user.lastname)} */}
+                video?.user?.profile_pic ? (
+                    <div style={{backgroundColor: video.user.profile_pic, height: '40px',
+                    width: '40px', borderRadius: '50%', display: 'flex', justifyContent: 'center',
+                    alignItems: 'center', color: 'white', fontWeight: 'bold'}}>
+                      {getInitials(video?.user?.firstname?.[0])}
                   </div>
+                  ) : (
+                    <img className="vid-card-img" src={video.user.profile_pic} ></img>
                 )
               }
 

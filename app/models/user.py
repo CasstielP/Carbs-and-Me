@@ -2,7 +2,14 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
+import random
 
+
+defaultColors = ['#32681f', '#aa47bd', '#bf360d', '#004c3e', '#00579c', '#679f39', '#ef6c00']
+
+
+
+randomIdx = random.randint(0, len(defaultColors)-1)
 
 from datetime import datetime
 
@@ -18,7 +25,7 @@ class User(db.Model, UserMixin):
     lastname = db.Column(db.String(40), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-    profile_pic = db.Column(db.String(255), nullable=True, default=None)
+    profile_pic = db.Column(db.String(255), nullable=True, default=defaultColors[randomIdx])
 
     videos = db.relationship('Video', back_populates='user')
     comments = db.relationship('Comment', back_populates='user')
