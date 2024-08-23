@@ -48,13 +48,6 @@
             "index": "pypi",
             "version": "==7.1.2"
         },
-        "ffmpy": {
-            "hashes": [
-                "sha256:757591581eee25b4a50ac9ffb9b58035a2794533db47e0512f53fb2d7b6f9adc"
-            ],
-            "index": "pypi",
-            "version": "==0.3.0"
-        },
         "flask": {
             "hashes": [
                 "sha256:1c4c257b1892aec1398784c63791cbaa43062f1f7aeb555c4da961b20ee68f55",
